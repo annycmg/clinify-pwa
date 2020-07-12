@@ -1,0 +1,92 @@
+.intro-screen, .signup-screen, .forgpassword-screen, .navbar { background: linear-gradient(90deg, rgba(0,95,134,100) 0%, rgba(27,162,255,100)100%); }
+
+.navbar-brand { padding-left: 7px; margin-top: 6px; font-size: x-large; color: white; font-family: 'Josefin Sans', sans-serif; }
+
+.nav-icon { height: 50px; width: 50px; }
+
+.msg-text, .profile-screen, .edit-profile, .medication-screen, .diet-screen, .appointment-screen, .exercise-screen, .home-screen, .stresslevel-screen { background-color: rgb(202, 226, 241); }  
+
+.msg-text { text-align: center; }
+
+.intro-1, .intro-2 { font-weight: 600; }
+
+.intro-3 { background-image: url("https://img.redbull.com/images/q_auto,f_auto/redbullcom/2017/04/07/1331852920362_2/wings-for-life-world-run"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-shadow: 1.5px 1.5px #000000; }
+
+.intro-4 { background-image: url("https://blog.kulikulifoods.com/wp-content/uploads/2020/03/Healthy-Foods-scaled.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 3px;
+    text-shadow: 1.5px 1.5px #000000; }
+
+.intro-5 { background-image: url("https://c1.wallpaperflare.com/preview/937/818/491/stethoscope-doctor-md-medical-health-hospital.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-shadow: 0.9px 0.9px #EEE; }
+
+.shad { color: #333333; }
+
+.lbl, .subtitle, .container1, .fgt-password, .intro-3, .intro-4, .intro-5 { color: whitesmoke; }
+
+.diet-icons { height: 42px; }
+
+.pause, .continue, .finish { font-size: small; }
+
+.container1, .container2, .card-exercise { text-align: center; }
+
+.nav-link { color: white; font-size: 18px;}
+
+.card-body { background-color: whitesmoke; }
+
+.card-title { color: white; font-weight: 700; }
+
+.row-1, .row-2 { margin-top: 15px; margin-bottom: 15px;}
+
+.card-med, .card-vaccine, .card-trip { height: 22rem; }
+
+.diet-subt { font-size: small; font-weight: 500; }
+
+.card-exercise1 { text-align: center; }
+
+.card-img-top { height: 13rem; }
+
+.img-profile { height: 90px; }
+
+.lbl1, .lbl2, .exerc { margin-bottom: -8px; font-weight: 500; }
+
+.datepicker { background: linear-gradient(90deg, rgba(0,95,134,100) 0%, rgba(27,162,255,100)100%); border: 1px solid #555; color: #EEE; }
+
+.th, .lbl2 { font-size: medium; }
+
+.table { text-align: left; }
+
+.nav-exerc{ margin-right: -5px; }
+
+.carousel-control-next, .carousel-control-prev { filter: invert(50%);}
+
+.aster, .lbl2, .lbl3, .badge-exerc{ color: rgb(83, 123, 255) }
+
+.input-email, .alert-info{ font-size: large; font-weight: 500;}
+
+.img-exercise{ height: 19px; }
+
+.rest-time { font-weight: 500; }
+
+.cronom, .calory, .kilometer { font-weight:500; font-size:25px; }
+
+.btn-icon-text{ height: 65px; }
+
+.profile-opt, .lbl1 { color: rgb(97, 97, 97); }
+
+.edit{ float: right; margin-right: 30px; }
+
+.card-txt{ padding-left: 30px; }
+
+.info{ font-size: 19px; margin-left: 30px; }
+
+.distance{ margin-left: 1px; }

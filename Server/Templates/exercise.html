@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Exercício</title>
+    </head>
+    <body class="exercise-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
+                    <a class="nav-link" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container-fluid">
+            <div class="card card-exercise mt-3" id="card-opacity">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc active" data-toggle="tab" href="#run"><img class="img-exercise" src="{% static 'images/run.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc" data-toggle="tab" href="#walk"><img class="img-exercise" src="{% static 'images/walk.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc" data-toggle="tab" href="#cycle"><img class="img-exercise" src="{% static 'images/bike.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc" data-toggle="tab" href="#hike"><img class="img-exercise" src="{% static 'images/hiking.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc" data-toggle="tab" href="#swim"><img class="img-exercise" src="{% static 'images/swim.png' %}"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-exerc" data-toggle="tab" href="#gym"><img class="img-exercise" src="{% static 'images/gym.png' %}"></a>
+                    </li>
+                </ul>
+
+                <div id="carouselExampleFade" class="carousel carousel slide" data-interval="false">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container mt-3">
+                                <h4><span class="badge badge-exerc">Tempo de Duração</span></h4>
+                            </div>
+                            <div class="container mt-4">
+                                <div class="row col-12 distance justify-content-center" id="duration">
+                                    <input id="timerhour" class="ml-2 col-3"><h3 class="mr-2 ml-2">:</h3><input id="timerminute" class="mr-2 col-3">
+                                </div>
+                                <div><p>HH --- MM</p></div>
+                            </div>
+                            <div class="btn btn-exercise btn-outline-info mb-4 col-6 pt-0 pb-0" id="startrun">Iniciar Corrida</div>
+
+                        </div>
+                        <div class="carousel-item">
+                            <div class="container mt-3">
+                                <h4><span class="badge badge-exerc">Treino Intensivo</span></h4>
+                            </div>
+                            <div class="container mt-4">
+                                <div class="container mb-3"><p>Intensifique seu treino com o modo 'Gym'.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="card card-exercise1 mt-3 mb-3" id="card-opacity">
+                <div class="overflow-auto">
+                    <div class="container-fluid mt-3">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in show active" id="run">
+                                <div class="rest-time">Tempo Restante</div>
+                                <div><p class="mb-1 cronom" id="timer-run">00 : 00 : 00</p></div>
+                                <div class="row pt-2">
+                                    <div class="col-6 pl-3"><p class="calory" id="calories-run"><img class="pr-2" src="{% static 'images/calories.png' %}">0</p></div>
+                                    <div class="col-6 pr-4"><p class="kilometer" id="kilometers-run"><img class="pr-2" id="myImage" src="{% static 'images/speed.png' %}">0</p></div>
+                                </div>
+                                <div class="row pt-0">
+                                    <div class="col-6"><p>Calorias</p></div>
+                                    <div class="col-6 pr-4"><p>Km/h</p></div>
+                                </div>
+                                <div class="row mb-4 justify-content-center">
+                                    <button class="btn btn-outline-success pause pt-0 pb-0" id="pause-walk">Pausar</button>
+                                    <span style="width: 15px"></span>
+                                    <button class="btn btn-outline-success continue pt-0 pb-0" id="resume-walk">Continuar</button>
+                                    <span style="width: 15px"></span>
+                                    <button class="btn btn-outline-danger finish pt-0 pb-0" id="finish-walk">Finalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>
+
+<!-- <script src="/Controller/app.js"></script>
+                            <script src="/sw.js"></script> -->
+                            <!--
+                            <script>
+                                //Script run
+                                var timerrun = document.getElementById("timer-run");
+                                var caloryrun = document.getElementById("calories-run");
+                                var kilometerrun = document.getElementById("kilometers-run")
+                                var startrun = document.getElementById("startrun");
+                                var pauserun = document.getElementById("pause-run");
+                                var resumerun = document.getElementById("resume-run");
+                                var finishrun = document.getElementById("finish-run");
+                                var idrun;
+                                var valuerun = "00 : 00 : 00";
+                                var value2run = "0";
+                                var value3run = "0";
+                                
+                                function startTimer(Hrun, Mrun, Srun, Crun=0, Krun) {
+                                    timerrun.textContent = Hrun + " : " + Mrun + " : " + Srun;
+                                    caloryrun.textContent = Math.floor(Crun);
+                                    kilometerrun.textContent = Krun;
+                                    if(Hrun == 0 && Mrun == 0 && Srun == 0){
+                                        finishTimer.clearTimeout();
+                                    }
+                                    Crun = Crun + 0.15; // Calories waste calculus when running.
+                                    Srun --;
+                                    Krun = 7.5;
+                                    if(Srun == -1){
+                                        Srun = 59;
+                                        Mrun--;
+                                        if(Mrun == -1){
+                                            Mrun = 0;
+                                            Hrun--;
+                                        }
+                                    }
+                                    idrun = setTimeout(function () {
+                                        startTimer(Hrun, Mrun, Srun, Crun, Krun)
+                                    }, 1000);
+                                }
+                                function pauseTimer() {
+                                    valuerun = timerrun.textContent;
+                                    value2run = caloryrun.textContent;
+                                    value3run = kilometerrun.textContent;
+                                    clearTimeout(idrun);
+                                }
+                                function resumeTimer() {
+                                    var t = valuerun.split(" : ");
+                                    var c = value2run;
+                                    var k = value3run;
+                                    startTimer(parseInt(t[0], 10), 
+                                    parseInt(t[1], 10), 
+                                    parseInt(t[2], 10), 
+                                    parseInt(c[0], 10),
+                                    parseInt(k[0], 10));
+                                }
+                                startrun.addEventListener("click", function () {
+                                    startTimer(document.getElementById("timerhour").value,
+                                    document.getElementById("timerminute").value,0,
+                                    document.getElementById("calories-run").value2run,
+                                    document.getElementById("kilometers-run").value3run);
+                                }, false);
+                                function finishTimer() {
+                                    valuerun = timerrun.textContent;
+                                    value2run = caloryrun.textContent;
+                                    value3run = kilometerrun.textContent;
+                                    clearTimeout(idrun);
+                                }
+                                pauserun.addEventListener("click", pauseTimer, false);
+                                resumerun.addEventListener("click", resumeTimer, false);
+                                finishrun.addEventListener("click", finishTimer, false);
+                            
+                                //Script walk
+                                var timerwalk = document.getElementById("timer-walk");
+                                var calorywalk = document.getElementById("calories-walk");
+                                var kilometerwalk = document.getElementById("kilometers-walk")
+                                var startwalk = document.getElementById("startwalk");
+                                var pausewalk = document.getElementById("pause-walk");
+                                var resumewalk = document.getElementById("resume-walk");
+                                var finishwalk = document.getElementById("finish-walk");
+                                var idwalk;
+                                var valuewalk = "00 : 00 : 00";
+                                var value2walk = "0";
+                                var value3walk = "0";
+                                
+                                function startTimer(Hwalk, Mwalk, Swalk, Cwalk=0, Kwalk) {
+                                    timerwalk.textContent = Hwalk + " : " + Mwalk + " : " + Swalk;
+                                    calorywalk.textContent = Math.floor(Cwalk);
+                                    kilometerwalk.textContent = Kwalk;
+                                    if(Hwalk == 0 && Mwalk == 0 && Swalk == 0){
+                                        finishTimer.clearTimeout();
+                                    }
+                                    Cwalk = Cwalk + 0.04; // Calories waste calculus when running.
+                                    Swalk --;
+                                    Kwalk = 4.5;
+                                    if(Swalk == -1){
+                                        Swalk = 59;
+                                        Mwalk--;
+                                        if(Mwalk == -1){
+                                            Mwalk = 0;
+                                            Hwalk--;
+                                        }
+                                    }
+                                    idwalk = setTimeout(function () {
+                                        startTimer(Hwalk, Mwalk, Swalk, Cwalk, Kwalk)
+                                    }, 1000);
+                                }
+                                function pauseTimer() {
+                                    valuewalk = timerwalk.textContent;
+                                    value2walk = calorywalk.textContent;
+                                    value3walk = kilometerwalk.textContent;
+                                    clearTimeout(idwalk);
+                                }
+                                function resumeTimer() {
+                                    var t = valuewalk.split(" : ");
+                                    var c = value2walk;
+                                    var k = value3walk;
+                                    startTimer(parseInt(t[0], 10), 
+                                    parseInt(t[1], 10), 
+                                    parseInt(t[2], 10), 
+                                    parseInt(c[0], 10),
+                                    parseInt(k[0], 10));
+                                }
+                                
+                                startwalk.addEventListener("click", 
+                                function () {
+                                    startTimer(document.getElementById("timerhour").value,
+                                    document.getElementById("timerminute").value,0,
+                                    document.getElementById("calories-walk").value2walk,
+                                    document.getElementById("kilometers-walk").value3walk);
+                                }, false);
+                                function finishTimer() {
+                                    valuewalk = timerwalk.textContent;
+                                    value2walk = calorywalk.textContent;
+                                    value3walk = kilometerwalk.textContent;
+                                    clearTimeout(idwalk);
+                                }
+                                pausewalk.addEventListener("click", pauseTimer, false);
+                                resumewalk.addEventListener("click", resumeTimer, false);
+                                finishwalk.addEventListener("click", finishTimer, false);
+                            </script>
+                            -->
+
+                            <!--
+                            <div role="tabpanel" class="tab-pane fade" id="cycle">
+                                <div class="alert alert-info">Ciclismo</div>
+                                <div style="font-weight: 500;">Tempo Restante</div>
+                                <div><p class="pb-0 mb-1" style="font-weight:500; font-size:25px;" id="timer-cycle">00 : 00 : 00</p></div>
+                                <div class="row">
+                                    <div class="col-6 subt-exerc pl-3"><p style="font-weight: 500; font-size: 25px;" id="calories-cycle"><img class="pr-2" src="Images/calories.png">0</p></div>
+                                    <div class="col-6 subt-exerc pr-4"><p style="font-weight: 500; font-size: 25px;" id="kilometers-cycle"><img class="pr-2" id="myImage" src="Images/speed.png">0</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><p>Calorias</p></div>
+                                    <div class="col-6 pr-4"><p>Kilômetros</p></div>
+                                </div>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="pause-cycle">Pausar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="resume-cycle">Continuar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="finish-cycle">Finalizar</button>
+                                <script>
+                                    var timercycle = document.getElementById("timer-cycle");
+                                    var calorycycle = document.getElementById("calories-cycle");
+                                    var kilometercycle = document.getElementById("kilometers-cycle")
+                                    var startcycle = document.getElementById("start");
+                                    var pausecycle = document.getElementById("pause-cycle");
+                                    var resumecycle = document.getElementById("resume-cycle");
+                                    var finishcycle = document.getElementById("finish-cycle");
+                                    var idcycle;
+                                    var valuecycle = "00 : 00 : 00";
+                                    var value2cycle = "0";
+                                    var value3cycle = "0";
+                                    function startTimer(Hcycle, Mcycle, Scycle, Ccycle=0, Kcycle) {
+                                        timercycle.textContent = Hcycle + " : " + Mcycle + " : " + Scycle;
+                                        calorycycle.textContent = Math.floor(Ccycle);
+                                        kilometercycle.textContent = Kcycle;
+                                        if(Hcycle == 0 && Mcycle == 0 && Scycle == 0){
+                                            finishTimer.clearTimeout();
+                                        }
+                                        Ccycle = Ccycle + 0.125; // Calories waste calculus when running.
+                                        Scycle --;
+                                        Kcycle = 12.5;
+                                        if(Scycle == -1){
+                                            Scycle = 59;
+                                            Mcycle--;
+                                            if(Mcycle == -1){
+                                                Mcycle = 0;
+                                                Hcycle--;
+                                            }
+                                        }
+                                        idcycle = setTimeout(function () {
+                                            startTimer(Hcycle, Mcycle, Scycle, Ccycle, Kcycle)
+                                        }, 1000);
+                                    }
+                                    function pauseTimer() {
+                                        valuecycle = timercycle.textContent;
+                                        value2cycle = calorycycle.textContent;
+                                        value3cycle = kilometercycle.textContent;
+                                        clearTimeout(idcycle);
+                                    }
+                                    function resumeTimer() {
+                                        var t = valuecycle.split(" : ");
+                                        var c = value2cycle;
+                                        var k = value3cycle;
+                                        startTimer(parseInt(t[0], 10), 
+                                        parseInt(t[1], 10), 
+                                        parseInt(t[2], 10), 
+                                        parseInt(c[0], 10),
+                                        parseInt(k[0], 10));
+                                    }
+                                    startcycle.addEventListener("click", function () {
+                                        startTimer(document.getElementById("timerhour").value,
+                                        document.getElementById("timerminute").value,0,
+                                        document.getElementById("calories-cycle").value2cycle,
+                                        document.getElementById("kilometers-cycle").value3cycle);
+                                    }, false);
+                                    function finishTimer() {
+                                        valuecycle = timercycle.textContent;
+                                        value2cycle = calorycycle.textContent;
+                                        value3cycle = kilometercycle.textContent;
+                                        clearTimeout(idcycle);
+                                    }
+                                    pausecycle.addEventListener("click", pauseTimer, false);
+                                    resumecycle.addEventListener("click", resumeTimer, false);
+                                    finishcycle.addEventListener("click", finishTimer, false);
+                                </script>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="hike">
+                                <div class="alert alert-info">Trilha</div>
+                                <div style="font-weight: 500;">Tempo Restante</div>
+                                <div><p class="pb-0 mb-1" style="font-weight:500; font-size:25px;" id="timer-hike">00 : 00 : 00</p></div>
+                                <div class="row">
+                                    <div class="col-6 subt-exerc pl-3"><p style="font-weight: 500; font-size: 25px;" id="calories-hike"><img class="pr-2" src="Images/calories.png">0</p></div>
+                                    <div class="col-6 subt-exerc pr-4"><p style="font-weight: 500; font-size: 25px;" id="kilometers-hike"><img class="pr-2" id="myImage" src="Images/speed.png">0</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><p>Calorias</p></div>
+                                    <div class="col-6 pr-4"><p>Kilômetros</p></div>
+                                </div>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="pause-hike">Pausar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="resume-hike">Continuar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="finish-hike">Finalizar</button>
+                                <script>
+                                    var timerhike = document.getElementById("timer-hike");
+                                    var caloryhike = document.getElementById("calories-hike");
+                                    var kilometerhike = document.getElementById("kilometers-hike");
+                                    var starthike = document.getElementById("start");
+                                    var pausehike = document.getElementById("pause-hike");
+                                    var resumehike = document.getElementById("resume-hike");
+                                    var finishhike = document.getElementById("finish-hike");
+                                    var idhike;
+                                    var valuehike = "00 : 00 : 00";
+                                    var value2hike = "0";
+                                    var value3hike = "0";
+                                    function startTimer(Hhike, Mhike, Shike, Chike=0, Khike) {
+                                        timerhike.textContent = Hhike + " : " + Mhike + " : " + Shike;
+                                        caloryhike.textContent = Math.floor(Chike);
+                                        kilometerhike.textContent = Khike;
+                                        if(Hhike == 0 && Mhike == 0 && Shike == 0){
+                                            finishTimer.clearTimeout();
+                                        }
+                                        Chike = Chike + 0.119; // Calories waste calculus when running.
+                                        Shike --;
+                                        Khike = 3.2;
+                                        if(Shike == -1){
+                                            Shike = 59;
+                                            Mhike--;
+                                            if(Mhike == -1){
+                                                Mhike = 0;
+                                                Hhike--;
+                                            }
+                                        }
+                                        idhike = setTimeout(function () {
+                                            startTimer(Hhike, Mhike, Shike, Chike, Khike)
+                                        }, 1000);
+                                    }
+                                    function pauseTimer() {
+                                        valuehike = timerhike.textContent;
+                                        value2hike = caloryhike.textContent;
+                                        value3hike = kilometerhike.textContent;
+                                        clearTimeout(idhike);
+                                    }
+                                    function resumeTimer() {
+                                        var t = valuehike.split(" : ");
+                                        var c = value2hike;
+                                        var k = value3hike;
+                                        startTimer(parseInt(t[0], 10), 
+                                        parseInt(t[1], 10), 
+                                        parseInt(t[2], 10), 
+                                        parseInt(c[0], 10),
+                                        parseInt(k[0], 10));
+                                    }
+                                    starthike.addEventListener("click", function () {
+                                        startTimer(document.getElementById("timerhour").value,
+                                        document.getElementById("timerminute").value,0,
+                                        document.getElementById("calories-hike").value2hike,
+                                        document.getElementById("kilometers-hike").value3hike);
+                                    }, false);
+                                    function finishTimer() {
+                                        valuehike = timerhike.textContent;
+                                        value2hike = caloryhike.textContent;
+                                        value3hike = kilometerhike.textContent;
+                                        clearTimeout(idhike);
+                                    }
+                                    pausehike.addEventListener("click", pauseTimer, false);
+                                    resumehike.addEventListener("click", resumeTimer, false);
+                                    finishhike.addEventListener("click", finishTimer, false);
+                                </script>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="swim">
+                                <div class="alert alert-info">Natação</div>
+                                <div style="font-weight: 500;">Tempo Restante</div>
+                                <div><p class="pb-0 mb-1" style="font-weight:500; font-size:25px;" id="timer-swim">00 : 00 : 00</p></div>
+                                <div class="row">
+                                    <div class="col-6 subt-exerc pl-3"><p style="font-weight: 500; font-size: 25px;" id="calories-swim"><img class="pr-2" src="Images/calories.png">0</p></div>
+                                    <div class="col-6 subt-exerc pr-4"><p style="font-weight: 500; font-size: 25px;" id="kilometers-swim"><img class="pr-2" id="myImage" src="Images/speed.png">0</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><p>Calorias</p></div>
+                                    <div class="col-6 pr-4"><p>Kilômetros</p></div>
+                                </div>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="pause-swim">Pausar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="resume-swim">Continuar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="finish-swim">Finalizar</button>
+                                <script>
+                                    var timerswim = document.getElementById("timer-swim");
+                                    var caloryswim = document.getElementById("calories-swim");
+                                    var kilometerswim = document.getElementById("kilometers-swim")
+                                    var startswim = document.getElementById("start");
+                                    var pauseswim = document.getElementById("pause-swim");
+                                    var resumeswim = document.getElementById("resume-swim");
+                                    var finishswim = document.getElementById("finish-swim");
+                                    var idswim;
+                                    var valueswim = "00 : 00 : 00";
+                                    var value2swim = "0";
+                                    var value3swim = "0";
+                                    function startTimer(Hswim, Mswim, Sswim, Cswim=0, Kswim) {
+                                        timerswim.textContent = Hswim + " : " + Mswim + " : " + Sswim;
+                                        caloryswim.textContent = Math.floor(Cswim);
+                                        kilometerswim.textContent = Kswim;
+                                        if(Hswim == 0 && Mswim == 0 && Sswim == 0){
+                                            finishTimer.clearTimeout();
+                                        }
+                                        Cswim = Cswim + 0.008; // Calories waste calculus when running.
+                                        Sswim --;
+                                        Kswim = 2.5;
+                                        if(Sswim == -1){
+                                            Sswim = 59;
+                                            Mswim--;
+                                            if(Mswim == -1){
+                                                Mswim = 0;
+                                                Hswim--;
+                                            }
+                                        }
+                                        idswim = setTimeout(function () {
+                                            startTimer(Hswim, Mswim, Sswim, Cswim, Kswim)
+                                        }, 1000);
+                                    }
+                                    function pauseTimer() {
+                                        valueswim = timerswim.textContent;
+                                        value2swim = caloryswim.textContent;
+                                        value3swim = kilometerswim.textContent;
+                                        clearTimeout(idswim);
+                                    }
+                                    function resumeTimer() {
+                                        var t = valueswim.split(" : ");
+                                        var c = value2swim;
+                                        var k = value3swim;
+                                        startTimer(parseInt(t[0], 10), 
+                                        parseInt(t[1], 10), 
+                                        parseInt(t[2], 10), 
+                                        parseInt(c[0], 10),
+                                        parseInt(k[0], 10));
+                                    }
+                                    startswim.addEventListener("click", function () {
+                                        startTimer(document.getElementById("timerhour").value,
+                                        document.getElementById("timerminute").value,0,
+                                        document.getElementById("calories-swim").value2swim,
+                                        document.getElementById("kilometers-swim").value3swim);
+                                    }, false);
+                                    function finishTimer() {
+                                        valueswim = timerswim.textContent;
+                                        value2swim = caloryswim.textContent;
+                                        value3swim = kilometerswim.textContent;
+                                        clearTimeout(idswim);
+                                    }
+                                    pauseswim.addEventListener("click", pauseTimer, false);
+                                    resumeswim.addEventListener("click", resumeTimer, false);
+                                    finishswim.addEventListener("click", finishTimer, false);
+                                </script>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="gym">
+                                <div class="alert alert-info">Gym</div>
+                                <div style="font-weight: 500;">Tempo Restante</div>
+                                <div><p class="pb-0 mb-1" style="font-weight:500; font-size:25px;" id="timer-gym">00 : 00 : 00</p></div>
+                                <div class="row">
+                                    <div class="col-6 subt-exerc pl-3"><p style="font-weight: 500; font-size: 25px;" id="calories-gym"><img class="pr-2" src="Images/calories.png">0</p></div>
+                                    <div class="col-6 subt-exerc pr-4"><p style="font-weight: 500; font-size: 25px;" id="kilometers-gym"><img class="pr-2" id="myImage" src="Images/speed.png">0</p></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><p>Calorias</p></div>
+                                    <div class="col-6 pr-4"><p>Kilômetros</p></div>
+                                </div>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="pause-gym">Pausar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="resume-gym">Continuar</button>
+                                <button class="btn btn-outline-success pt-0 pb-0" id="finish-gym">Finalizar</button>
+                                <script>
+                                    var timergym = document.getElementById("timer-gym");
+                                    var calorygym = document.getElementById("calories-gym");
+                                    var kilometergym = document.getElementById("kilometers-gym")
+                                    var startgym = document.getElementById("start");
+                                    var pausegym = document.getElementById("pause-gym");
+                                    var resumegym = document.getElementById("resume-gym");
+                                    var finishgym = document.getElementById("finish-gym");
+                                    var idgym;
+                                    var valuegym = "00 : 00 : 00";
+                                    var value2gym = "0";
+                                    var value3gym = "0";
+                                    function startTimer(Hgym, Mgym, Sgym, Cgym=0, Kgym) {
+                                        timergym.textContent = Hgym + " : " + Mgym + " : " + Sgym;
+                                        calorygym.textContent = Math.floor(Cgym);
+                                        kilometergym.textContent = Kgym;
+                                        if(Hgym == 0 && Mgym == 0 && Sgym == 0){
+                                            finishTimer.clearTimeout();
+                                        }
+                                        Cgym = Cgym + 0.0583; // Calories waste calculus when running.
+                                        Sgym --;
+                                        Kgym = 3.2;
+                                        if(Sgym == -1){
+                                            Sgym = 59;
+                                            Mgym--;
+                                            if(Mgym == -1){
+                                                Mgym = 0;
+                                                Hgym--;
+                                            }
+                                        }
+                                        idgym = setTimeout(function () {
+                                            startTimer(Hgym, Mgym, Sgym, Cgym, Kgym)
+                                        }, 1000);
+                                    }
+                                    function pauseTimer() {
+                                        valuegym = timergym.textContent;
+                                        value2gym = calorygym.textContent;
+                                        value3gym = kilometergym.textContent;
+                                        clearTimeout(idgym);
+                                    }
+                                    function resumeTimer() {
+                                        var t = valuegym.split(" : ");
+                                        var c = value2gym;
+                                        var k = value3gym;
+                                        startTimer(parseInt(t[0], 10), 
+                                        parseInt(t[1], 10), 
+                                        parseInt(t[2], 10), 
+                                        parseInt(c[0], 10),
+                                        parseInt(k[0], 10));
+                                    }
+                                    startgym.addEventListener("click", function () {
+                                        startTimer(document.getElementById("timerhour").value,
+                                        document.getElementById("timerminute").value,0,
+                                        document.getElementById("calories-gym").value2gym,
+                                        document.getElementById("kilometers-gym").value3gym);
+                                    }, false);
+                                    function finishTimer() {
+                                        valuegym = timergym.textContent;
+                                        value2gym = calorygym.textContent;
+                                        value3gym = kilometergym.textContent;
+                                        clearTimeout(idgym);
+                                    }
+                                    pausegym.addEventListener("click", pauseTimer, false);
+                                    resumegym.addEventListener("click", resumeTimer, false);
+                                    finishgym.addEventListener("click", finishTimer, false);
+                                </script>
+                            </div>

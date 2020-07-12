@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Perfil</title>
+    </head>
+    <body class="profile-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand mt-2" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link pl-3" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link pl-3" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container">
+            <div class="col-12 mt-3">
+                <div class="card" id="card-opacity">
+                    <img src="{% static 'images/profile-background.jpg' %}" class="img-profile" alt="...">
+                    <div class="card-body">
+                        <h5 class="name pt-3">Anny Gonçalves<a href="{% url 'temp:editprofile' %}"><img class="edit" src="{% static 'images/edit.png' %}"></a></h5>
+                        <div class="row mt-2 mb-3 col-sm-12 col-lg-6 pt-3 profile-opt">
+                            <form name="form" method="post">
+                                <div class="form-group ">
+                                    <h6 class="age">Idade:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="loc">Localização:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="weight">Peso:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="height">Altura:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="alerg">Alergias:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="desease">Doenças Hereditárias:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="diet">Dieta Específica:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="surgery">Cirurgias:</h6>
+                                </div>
+                                <div class="form-group ">
+                                    <h6 class="exerc">Prática de Exercícios:</h6>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>

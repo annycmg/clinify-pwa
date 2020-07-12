@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Medicamentos</title>
+    </head>
+    <body class="medication-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
+                    <a class="nav-link" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container mt-3">
+            <div class="card" id="card-opacity">
+                <form class="container" action="#">
+                    <div class="form-row mt-3">
+                        <div class="col-8">
+                            <label class="lbl2">Medicamento *</label>
+                            <input type="text" class="form-control" placeholder="Paracetamol" required="">
+                        </div>
+                        <div class="col-4">
+                            <label class="lbl2">Dose *</label>
+                            <input type="text" class="form-control" placeholder="30 mg/l" required="">
+                        </div>
+                    </div>
+                    <div class="form-row mt-3 mb-3">
+                        <div class="col-12">
+                            <label class="lbl2">Data Início *</label>
+                            <input id="datepicker" width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
+                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                        </div>
+                    </div>
+                    <div class="form-row mt-3 mb-3">
+                        <div class="col-12">
+                            <label class="lbl2">Data Fim *</label>
+                            <input id="datepicker1" width="btn-auto" placeholder="MM-DD-AAAA" required=""/>
+                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                        </div>
+                    </div>
+                    <div class="form-row mt-3 mb-3">
+                        <div class="col-12">
+                            <label class="lbl2">Hora *</label>
+                            <input id="timepicker" width="btn-auto" placeholder="HH:MM" required=""/>
+                            <script>$('#timepicker').timepicker({ uiLibrary: 'bootstrap4' });</script>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center mb-3">
+                        <button class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
+                        <span style="width: 25px"></span>
+                        <button class="btn btn-primary col-5 pt-0 pb-0">Reset</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card card-med mt-4 mb-3" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Medicamento</th>
+                                <th>Dose</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">8</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">9</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>

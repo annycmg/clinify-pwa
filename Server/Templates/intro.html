@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify</title>
+    </head>
+</html>
+<body class="intro-screen container-fluid"> 
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+        <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <form class="form-inline" method="POST">
+                {% csrf_token %}
+                <input type="username" class="form-control mr-2 mb-2 mt-2" id="InputUsername" placeholder="Username" name='username' required="">
+                <input type="password" class="form-control mr-2 mb-2 mt-2" id="InputPassword" placeholder="Senha"  name="password" required="">
+                <button type="submit" class="btn btn-outline-light btn-auto">Login</button>
+                <a class="pl-2 fgt-password" href="{% url 'temp:forgpassword' %}" style="font-size: 14px;">Esqueceu a senha?</a>
+            </form>
+        </div>
+    </nav>
+    {% for message in messages %}
+        <p id='messages' style="color: whitesmoke; text-align: right; font-size: smaller;">{{ message }}</p>
+    {% endfor %}
+    <div class="container1">
+        <h3 class="mt-5 pt-43 pb-2 intro-1">Sua saúde em suas mãos.</h3>
+        <a href="{% url 'temp:signup' %}"><button class="btn btn-outline-light mb-4" type="submit">REGISTRE-SE</button></a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 msg-text pt-5 pb-3">
+            <h4 class="intro-2">Defina suas metas de saúde.</h4>
+            <h5>Planeje vários aspectos da sua vida diária contribuindo para seu bem-estar, além de te dar informações sobre suas conquistas.</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 msg-text">
+            <div class="container intro-5 rounded">
+                <h4 class="shad pt-5 pb-3">Gerencie suas Consultas Médicas, Vacinas e Medicamentos.</h4>
+                <h5 class="shad pb-5">Com a Clinify, você pode manter organizada todas as suas informações e receber notificações para não esquecer da sua consulta ou o horário do medicamento.</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-6 msg-text">
+            <div class="container intro-3 rounded">
+                <h4 class="pt-5 pb-3">Seja mais ativo.</h4>
+                <h5 class="pb-5">Seja gentil com você mesmo e cuide do seu corpo. Acompanhe a evolução do seu corpo através do tempo com a Clinify.</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-6 msg-text pb-4">
+            <div class="container intro-4 rounded">
+                <h4 class="pt-5 pb-3">Se estimule a comer melhor.</h4>
+                <h5 class="pb-5">Crie sua dieta saudável semanal e foque em comer bem.</h5>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <!-- <script src="/Controller/app.js"></script>
+    <script src="/Controller/fetch.js"></script>
+    <script src="/Controller/promise.js"></script>
+    <script src="/Controller/feed.js"></script>
+    <script src="/sw.js"></script> -->
+</body>
+

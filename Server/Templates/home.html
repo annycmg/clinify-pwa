@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Home</title>
+    </head>
+    <body class="home-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
+                    <a class="nav-link" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <span class="pr-4" style="color: whitesmoke;">Olá, {{ user.first_name }}</span>
+                    <a data-toggle="modal" data-target="#myModal" href=""><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images\logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'intro' %}">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="container-fluid">
+            <div class="row">
+                <div class="row-1 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Medications Card -->
+                        <div class="thumbnail">
+                            <img src="{% static 'images\medication.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:medication' %}" class="btn btn-primary card-title">Medicamentos</a>
+                                <p class="card-text">Receba uma notificação para não esquecer de tomar seus remédios no horário.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <div class="row-1 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Diet Card -->
+                        <div class="thumbnail"></div>
+                            <img src="{% static 'images/diet.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:diet' %}" class="btn btn-primary card-title pl-5 pr-5">Dieta</a>
+                                <p class="card-text">Registre suas refeições diárias, controle seus hábitos alimentares e coma mais saudável.</p>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row-1 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Exercise Card -->
+                        <div class="thumbnail">
+                            <img src="{% static 'images/exercise.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:exercise' %}" class="btn btn-primary card-title pl-4 pr-4">Exercício</a>
+                                <p class="card-text">Cronometre sua rotina de exercícios e acompanhe suas conquistas gradualmente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-2 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Vaccination Card -->
+                        <div class="thumbnail">
+                            <img src="{% static 'images/vaccine.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:recentvaccine' %}" class="btn btn-primary card-title pl-4 pr-4">Vacinas Recentes</a>
+                                <p class="card-text">Grave quais foram suas vacinas tomadas recentemente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-2 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Recent Trips Card -->
+                        <div class="thumbnail">
+                            <img src="{% static 'images/travel.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:recenttrips' %}" class="btn btn-primary card-title">Viagens Recentes</a>
+                                <p class="card-text">Mantenha registrado quais foram suas viagens mais recentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                <div class="row-2 col-lg-4 col-sm-6">
+                    <div class="card">
+                        <!-- Doctor Appointments Card -->
+                        <div class="thumbnail">
+                            <img src="{% static 'images/doctor.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{% url 'temp:appointment' %}" class="btn btn-primary card-title">Consultas Médicas</a>
+                                <p class="card-text">Não se esqueça de suas consultas médicas agendadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>
