@@ -18,12 +18,17 @@
                     <a class="nav-link" href="#">Conquistas</a>
                 </ul>
                 <form class="form-inline" method="POST">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
                     <span class="pr-4" style="color: whitesmoke;">Olá, {{ user.first_name }}</span>
-                    <a data-toggle="modal" data-target="#myModal" href=""><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images\logout.png' %}"></button></a>
+                    {% else %}
+                    <span class="pr-4" style="color: whitesmoke;">Olá, visitante</span>
+                    {% endif %}
+                    <a type="submit" class="btn btn-outline-light btn-auto" href="{% url 'intro' %}">Sair<img class="pl-2" src="{% static 'images\logout.png' %}"></a>
                 </form>
             </div>
         </nav>
-        <div class="modal" id="myModal">
+        <!-- <div class="modal" id="myModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -39,7 +44,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <section class="container-fluid">
             <div class="row">
