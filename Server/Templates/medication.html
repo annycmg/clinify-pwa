@@ -42,40 +42,40 @@
         </div>
         <section class="container mt-3">
             <div class="card" id="card-opacity">
-                <form class="container" action="#">
-                    <div class="form-row mt-3">
-                        <div class="col-8">
-                            <label class="lbl2">Medicamento *</label>
-                            <input type="text" class="form-control" placeholder="Paracetamol" required="">
+                <div class="container">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row mt-3">
+                            <div class="col-8">
+                                <label class="lbl2">Medicamento *</label>
+                                {{ form.medication_name_med }}
+                            </div>
+                            <div class="col-4">
+                                <label class="lbl2">Dose *</label>
+                                {{ form.dosis_name_med }}
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <label class="lbl2">Dose *</label>
-                            <input type="text" class="form-control" placeholder="30 mg/l" required="">
+                        <div class="form-row mt-3 mb-3">
+                            <div class="col-12">
+                                <label class="lbl2">Data Início *</label>
+                                {{ form.init_date_med }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
-                            <label class="lbl2">Data Início *</label>
-                            <input id="datepicker" width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
-                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                        <div class="form-row mt-3 mb-3">
+                            <div class="col-12">
+                                <label class="lbl2">Data Fim *</label>
+                                {{ form.end_date_med }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
-                            <label class="lbl2">Data Fim *</label>
-                            <input id="datepicker1" width="btn-auto" placeholder="MM-DD-AAAA" required=""/>
-                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap4' });</script>
-                        </div>
-                    </div>
-                    <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
-                            <label class="lbl2">Hora *</label>
-                            <input id="timepicker" width="btn-auto" placeholder="HH:MM" required=""/>
-                            <script>$('#timepicker').timepicker({ uiLibrary: 'bootstrap4' });</script>
+                        <div class="form-row mt-3 mb-3">
+                            <div class="col-12">
+                                <label class="lbl2">Hora *</label>
+                                {{ form.time_med }}
+                            </div>
                         </div>
                     </div>
                     <div class="form-row justify-content-center mb-3">
-                        <button class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
+                        <button type="submit" class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
                         <span style="width: 25px"></span>
                         <button class="btn btn-primary col-5 pt-0 pb-0">Reset</button>
                     </div>

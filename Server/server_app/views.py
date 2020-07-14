@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.forms import inlineformset_factory
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+
 from .forms import SignUpForm
+from .forms import MedicationForm
+
+
 
 # Create your views here.
 def intro(request):
@@ -38,7 +41,6 @@ def signup(request):
             return redirect('intro')
     return render(request, 'signup.html', {'form':form})
 
-
 @login_required
 def home(request):
     return render(request, 'home.html')
@@ -48,7 +50,14 @@ def forgpassword(request):
 
 @login_required
 def medication(request):
-    return render(request, 'medication.html')
+    form = MedicationForm()
+    if request.method == "POST":
+        print(request.POST)
+        form = MedicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('temp:medication')
+    return render(request, 'medication.html', {'form': form})
 
 @login_required
 def diet(request):

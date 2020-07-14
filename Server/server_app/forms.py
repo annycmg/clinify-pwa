@@ -1,6 +1,10 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+
+from .models import UserMedication
+
 
 
 class SignUpForm(UserCreationForm):
@@ -12,4 +16,17 @@ class SignUpForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = '__all__'
+
+class MedicationForm(ModelForm):
+    class Meta:
+        model = UserMedication
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(MedicationForm, self).__init__(*args, **kwargs)
+        self.fields['medication_name_med'].widget.attrs.update({'placeholder': 'Paracetamol', 'class': 'form-control', 'required': ''})
+        self.fields['dosis_name_med'].widget.attrs.update({'placeholder': '30 mg/l', 'class': 'form-control', 'required': ''})
+        self.fields['init_date_med'].widget.attrs.update({'placeholder': 'MM-DD-YYYY', 'class': 'form-control', 'required': ''})
+        self.fields['end_date_med'].widget.attrs.update({'placeholder': 'MM-DD-YYYY', 'class': 'form-control', 'required': ''})
+        self.fields['time_med'].widget.attrs.update({'placeholder': 'HH:MM', 'class': 'form-control', 'required': ''})
