@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -52,11 +53,11 @@ def forgpassword(request):
 def medication(request):
     form = MedicationForm()
     if request.method == "POST":
-        print(request.POST)
         form = MedicationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('temp:medication')
+            print(request.POST)
+            # return redirect('temp:medication')
     return render(request, 'medication.html', {'form': form})
 
 @login_required

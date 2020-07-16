@@ -3,9 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import UserMedication
-
-
+from server_app.models import UserMedication
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -27,6 +25,6 @@ class MedicationForm(ModelForm):
         super(MedicationForm, self).__init__(*args, **kwargs)
         self.fields['medication_name_med'].widget.attrs.update({'placeholder': 'Paracetamol', 'class': 'form-control', 'required': ''})
         self.fields['dosis_name_med'].widget.attrs.update({'placeholder': '30 mg/l', 'class': 'form-control', 'required': ''})
-        self.fields['init_date_med'].widget.attrs.update({'placeholder': 'MM-DD-YYYY', 'class': 'form-control', 'required': ''})
-        self.fields['end_date_med'].widget.attrs.update({'placeholder': 'MM-DD-YYYY', 'class': 'form-control', 'required': ''})
-        self.fields['time_med'].widget.attrs.update({'placeholder': 'HH:MM', 'class': 'form-control', 'required': ''})
+        self.fields['init_date_med'].widget.attrs.update({'placeholder': 'YYYY-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['end_date_med'].widget.attrs.update({'placeholder': 'YYYY-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['time_med'].widget.attrs.update({'placeholder': 'HH:MM:SS', 'class': 'form-control', 'required': ''})
