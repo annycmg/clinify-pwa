@@ -14,7 +14,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
                     <a class="nav-link" href="#">Conquistas</a> 
                 </ul>
@@ -35,33 +35,31 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                        <a class="btn btn-secondary" href="{% url 'logout' %}" type="submit">Sim</a>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="container">
-            <div class="card mt-3 mb-3" id="card-opacity">
-                <form class="container mt-3 mb-3" action="#">
-                    <div class="form-row">
-                        <div class="col-12">
+        <section class="container mt-3">
+            <div class="card" id="card-opacity">
+                <div class="container">
+                    <form method="POST" action="#">
+                        {% csrf_token %}
+                        <div class="form-row col-12 mt-3">
                             <label class="lbl2">Vacina *</label>
-                            <input type="text" class="form-control" placeholder="Yellow Fever" required="">
+                            {{ form.vaccine_name_vac }}
                         </div>
-                    </div>
-                    <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
+                        <div class="form-row col-12 mt-3">
                             <label class="lbl2">Data *</label>
-                            <input id="datepicker" width="btn-auto;" placeholder="DD-MM-AAAA" required=""/>
-                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                            {{ form.vaccine_date_vac }}
                         </div>
-                    </div>
-                    <div class=" form-row justify-content-center mb-3">
-                        <button class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
-                        <span style="width: 25px"></span>
-                        <button class="btn btn-primary col-5 pt-0 pb-0">Limpar</button>
-                    </div>
-                </form>
+                        <div class=" form-row justify-content-center mb-3">
+                            <button type="submit" class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
+                            <span style="width: 25px"></span>
+                            <button class="btn btn-primary col-5 pt-0 pb-0">Limpar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="card card-vaccine mt-3 mb-3" id="card-opacity">

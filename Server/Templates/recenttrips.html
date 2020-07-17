@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-       <title>Clinify | Viagens Recentes</title>
+        <title>Clinify | Viagens Recentes</title>
     </head>
     <body class="stresslevel-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -14,7 +14,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
                     <a class="nav-link" href="#">Conquistas</a>
                 </ul>
@@ -35,137 +35,138 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                        <a class="btn btn-secondary" href="{% url 'logout' %}" type="submit">Sim</a>
                     </div>
                 </div>
             </div>
         </div>
         <section class="container mt-3">
             <div class="card" id="card-opacity">
-                <form class="container" action="#">
+                <form class="container" method="POST" action="#">
+                    {% csrf_token %}
                     <div class="form-row mt-3">
                         <div class="col-12">
                             <label class="lbl2">País(es) *</label>
-                            <input type="text" class="form-control" placeholder="Portugal, Espanha" required="">
+                            {{ form.trip_country_trp }}
+                            <!-- <input type="text" class="form-control" placeholder="Portugal, Espanha" required=""> -->
                         </div>
                     </div>
                     <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
+                        <div class="col-6">
                             <label class="lbl2">Date Início *</label>
-                            <input id="datepicker" width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
-                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                            {{ form.init_date_trp }}
+                            <!-- <input id="datepicker" width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
+                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script> -->
                         </div>
-                    </div>
-                    <div class="form-row mt-3 mb-3">
-                        <div class="col-12">
+                        <div class="col-6">
                             <label class="lbl2">Data Fim *</label>
-                            <input id="datepicker1" width="btn-auto" placeholder="MM-DD-AAAA" required=""/>
-                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                            {{ form.end_date_trp }}
+                            <!-- <input id="datepicker1" width="btn-auto" placeholder="MM-DD-AAAA" required=""/>
+                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap4' });</script> -->
                         </div>
                     </div>
                     <div class=" form-row justify-content-center mb-3">
-                        <button class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
+                        <button type="submit" class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
                         <span style="width: 25px"></span>
                         <button class="btn btn-primary col-5 pt-0 pb-0">Reset</button>
                     </div>
                 </form>
             </div>
 
-                <div class="card card-trip mt-3 mb-4" id="card-opacity">
-                    <div class="overflow-auto">
-                        <table class="table table-striped overflow-auto">
-                            <thead>
-                                <tr>
-                                    <th scope="col-1">#</th>
-                                    <th scope="col-2">País(es)</th>
-                                    <th scope="col-3">Date Início</th>
-                                    <th scope="col-4">Data Fim</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">8</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">9</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">10</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                                </tr>
-                            </tbody>
-                        </table>      
-                    </div>
+            <div class="card card-trip mt-3 mb-4" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th scope="col-1">#</th>
+                                <th scope="col-2">País(es)</th>
+                                <th scope="col-3">Date Início</th>
+                                <th scope="col-4">Data Fim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">8</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">9</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>      
                 </div>
             </div>
         </section>

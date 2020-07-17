@@ -8,7 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 
 from .forms import SignUpForm
 from .forms import MedicationForm
-
+from .forms import VaccineForm
+from .forms import TripForm
 
 
 # Create your views here.
@@ -57,8 +58,19 @@ def medication(request):
         if form.is_valid():
             form.save()
             print(request.POST)
-            # return redirect('temp:medication')
+            return redirect('temp:medication')
     return render(request, 'medication.html', {'form': form})
+
+@login_required
+def recentvaccine(request):
+    form = VaccineForm()
+    if request.method == "POST":
+        form = VaccineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(request.POST)
+            return redirect('temp:recentvaccine')
+    return render(request, 'recentvaccine.html')
 
 @login_required
 def diet(request):
@@ -71,10 +83,6 @@ def exercise(request):
 @login_required
 def recenttrips(request):
     return render(request, 'recenttrips.html')
-
-@login_required
-def recentvaccine(request):
-    return render(request, 'recentvaccine.html')
 
 @login_required
 def appointment(request):

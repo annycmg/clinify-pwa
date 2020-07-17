@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^$', views.intro, name='intro'),
     url(r'^$', views.logoutUser, name='logout'),
     url(r'^home/$', views.home, name='home'),
+    
     url(r'^admin/', admin.site.urls),    
     url(r'^Templates/', include('server_app.urls')),
 
