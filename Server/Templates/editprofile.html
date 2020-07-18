@@ -14,7 +14,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link pl-3" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link pl-3" href="{% url 'home' %}">Home</a>
                 </ul>
                 <form class="form-inline" method="POST">
                     <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
@@ -33,56 +33,64 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                        <a class="btn btn-secondary" href="{% url 'intro' %}" type="submit">Sim</a>
+                        <a class="btn btn-secondary" href="{% url 'logout' %}" type="submit">Sim</a>
                     </div>
                 </div>
             </div>
         </div>
         <section class="container mt-4">
-            <form name="form" method="post">
-                <div class="form-group">
-                    <h6>Nome</h6>
-                    <input type="text" name="name" id="name" class="form-control" required=""/>
-                </div>
+            <form name="form" method="POST" action="">
+                {% csrf_token %}
                 <div class="form-group">
                     <h6>Idade</h6>
-                    <input type="text" name="name" id="name" class="form-control" required=""/>
+                    {{ form.profile_age_prf }}
+                    <!-- <input type="text" name="name" id="name" class="form-control" required=""/> -->
                 </div>
                 <div class="form-group">
                     <h6>Localização</h6>
-                    <input type="password" name="password" id="password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_loc_prf }}
+                    <!-- <input type="password" name="password" id="password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
-                <div class="form-group">
-                    <h6>Peso</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
-                </div>
-                <div class="form-group">
-                    <h6>Altura</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                <div class="form-group form-row">
+                    <div class="col-6">
+                        <h6>Peso</h6>
+                        {{ form.profile_weight_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
+                    </div>
+                    <div class="col-6">
+                        <h6>Altura</h6>
+                        {{ form.profile_height_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
+                    </div>
                 </div>
                 <div class="form-group">
                     <h6>Alergias</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_allergy_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
                 <div class="form-group">
                     <h6>Doenças Hereditárias</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_desease_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
                 <div class="form-group">
                     <h6>Dieta Específica</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_diet_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
                 <div class="form-group">
                     <h6>Cirurgias</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_surgery_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
                 <div class="form-group">
                     <h6>Prática de Exercícios</h6>
-                    <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/>
+                    {{ form.profile_exerc_prf }}
+                    <!-- <input type="password" name="re-password" id="re-password" class="form-control" required title="Insert a 5 caracters password."/> -->
                 </div>
             </form>
             <div class="form-row justify-content-center mb-3">
-                <button class="btn btn-primary col-5">Salvar</button>
+                <button type="submit" class="btn btn-primary col-5">Salvar</button>
                 <span style="width: 35px"></span>
                 <button class="btn btn-primary col-5">Limpar</button>
             </div>

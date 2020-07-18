@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from server_app.models import UserVaccine
 from server_app.models import UserMedication
 from server_app.models import UserTrip
+from server_app.models import UserProfile
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -27,7 +28,6 @@ class TripForm(ModelForm):
         self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
         self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
 
-
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
@@ -48,4 +48,22 @@ class VaccineForm(ModelForm):
         super(VaccineForm, self).__init__(*args, **kwargs)
         self.fields['vaccine_name_vac'].widget.attrs.update({'placeholder': 'Febre Amarela', 'class': 'form-control', 'required': ''})
         self.fields['vaccine_date_vac'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_loc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_weight_prf'].widget.attrs.update({'placeholder': 'Kg', 'class': 'form-control', 'required': ''})
+        self.fields['profile_height_prf'].widget.attrs.update({'placeholder': 'cm', 'class': 'form-control', 'required': ''})
+        self.fields['profile_allergy_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_desease_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_diet_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
+
+
 

@@ -10,9 +10,14 @@ from .forms import SignUpForm
 from .forms import MedicationForm
 from .forms import VaccineForm
 from .forms import TripForm
+from .forms import ProfileForm
 
 
 # Create your views here.
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
 def intro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -42,13 +47,6 @@ def signup(request):
             print('Sign up com sucesso')
             return redirect('intro')
     return render(request, 'signup.html', {'form':form})
-
-@login_required
-def home(request):
-    return render(request, 'home.html')
-
-def forgpassword(request):
-    return render(request, 'forgpassword.html')
 
 @login_required
 def medication(request):
@@ -84,6 +82,21 @@ def recenttrips(request):
     return render(request, 'recenttrips.html', {'form':form})
 
 @login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+@login_required
+def editprofile(request):
+    form = ProfileForm()
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(request.POST)
+            return redirect('temp:profile')
+    return render(request, 'editprofile.html', {'form':form})
+
+@login_required
 def diet(request):
     return render(request, 'diet.html')
 
@@ -95,13 +108,9 @@ def exercise(request):
 def appointment(request):
     return render(request, 'appointment.html')
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+def forgpassword(request):
+    return render(request, 'forgpassword.html')
 
-@login_required
-def editprofile(request):
-    return render(request, 'editprofile.html')
 
 def offline(request):
     return render(request, 'offline.html')
