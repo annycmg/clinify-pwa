@@ -17,6 +17,17 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = '__all__'
 
+class TripForm(ModelForm):
+    class Meta:
+        model = UserTrip
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(TripForm, self).__init__(*args, **kwargs)
+        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina, Uruguai', 'class': 'form-control', 'required': ''})
+        self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+
+
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
@@ -38,12 +49,3 @@ class VaccineForm(ModelForm):
         self.fields['vaccine_name_vac'].widget.attrs.update({'placeholder': 'Febre Amarela', 'class': 'form-control', 'required': ''})
         self.fields['vaccine_date_vac'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
 
-class TripForm(ModelForm):
-    class Meta:
-        model = UserTrip
-        fields = '__all__'
-    def __init__(self, *args, **kwargs):
-        super(TripForm, self).__init__(*args, **kwargs)
-        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina, Uruguai', 'class': 'form-control', 'required': ''})
-        self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
-        self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})

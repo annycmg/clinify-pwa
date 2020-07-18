@@ -46,11 +46,11 @@
                     <form method="POST" action="#">
                         {% csrf_token %}
                         <div class="form-row col-12 mt-3">
-                            <label class="lbl2">Vacina *</label>
+                            <label class="lbl2 mb-1">Vacina *</label>
                             {{ form.vaccine_name_vac }}
                         </div>
-                        <div class="form-row col-12 mt-3">
-                            <label class="lbl2">Data *</label>
+                        <div class="form-row col-12 mt-3 mb-3">
+                            <label class="lbl2 mb-1">Data *</label>
                             {{ form.vaccine_date_vac }}
                         </div>
                         <div class=" form-row justify-content-center mb-3">

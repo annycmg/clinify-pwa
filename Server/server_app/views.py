@@ -70,7 +70,18 @@ def recentvaccine(request):
             form.save()
             print(request.POST)
             return redirect('temp:recentvaccine')
-    return render(request, 'recentvaccine.html')
+    return render(request, 'recentvaccine.html', {'form': form})
+
+@login_required
+def recenttrips(request):
+    form = TripForm()
+    if request.method == "POST":
+        form = TripForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(request.POST)
+            return redirect('temp:recenttrips')
+    return render(request, 'recenttrips.html', {'form':form})
 
 @login_required
 def diet(request):
@@ -79,10 +90,6 @@ def diet(request):
 @login_required
 def exercise(request):
     return render(request, 'exercise.html')
- 
-@login_required
-def recenttrips(request):
-    return render(request, 'recenttrips.html')
 
 @login_required
 def appointment(request):
