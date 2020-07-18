@@ -6,6 +6,7 @@ from server_app.models import UserVaccine
 from server_app.models import UserMedication
 from server_app.models import UserTrip
 from server_app.models import UserProfile
+from server_app.models import UserDiet
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -65,5 +66,14 @@ class ProfileForm(ModelForm):
         self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
         self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
 
-
-
+class DietForm(ModelForm):
+    class Meta:
+        model = UserDiet
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(DietForm, self).__init__(*args, **kwargs)
+        self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea'})
+        # self.fields['diet_breakfast'].widget.attrs.update({'class': 'form-control'})
+        # self.fields['diet_lunch'].widget.attrs.update({'class': 'form-control'})
+        # self.fields['diet_dinner'].widget.attrs.update({'class': 'form-control'})
+        # self.fields['diet_snack'].widget.attrs.update({'class': 'form-control'})

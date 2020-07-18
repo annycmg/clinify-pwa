@@ -27,3 +27,10 @@ class UserProfile(models.Model):
     profile_diet_prf = models.CharField(max_length=200)
     profile_surgery_prf = models.CharField(max_length=200)
     profile_exerc_prf = models.CharField(max_length=200)
+
+class UserDiet(models.Model):
+    diet_include = models.TextField(max_length=500)
+    # diet_breakfast = models.TextField(max_length=500)
+    # diet_lunch = models.TextField(max_length=500)
+    # diet_dinner = models.TextField(max_length=500)
+    # diet_snack = models.TextField(max_length=500)

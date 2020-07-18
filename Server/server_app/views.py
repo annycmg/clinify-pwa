@@ -11,6 +11,7 @@ from .forms import MedicationForm
 from .forms import VaccineForm
 from .forms import TripForm
 from .forms import ProfileForm
+from .forms import DietForm
 
 
 # Create your views here.
@@ -98,6 +99,13 @@ def editprofile(request):
 
 @login_required
 def diet(request):
+    form = DietForm()
+    if request.method == "POST":
+        form = DietForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(request.POST)
+            return redirect('temp:diet')
     return render(request, 'diet.html')
 
 @login_required
@@ -108,9 +116,11 @@ def exercise(request):
 def appointment(request):
     return render(request, 'appointment.html')
 
+
+
+
 def forgpassword(request):
     return render(request, 'forgpassword.html')
-
 
 def offline(request):
     return render(request, 'offline.html')

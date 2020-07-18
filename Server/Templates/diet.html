@@ -59,20 +59,23 @@
                         <div class="diet-subt"><p>Snacks</p></div>
                     </button>
                 </div>
-                <label class="lbl2 mt-2">Inclua a refeição *</label>
-                <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                <div class="form-row justify-content-center mb-3">
-                    <button class="btn btn-primary col-5">Salvar</button>
-                    <span style="width: 15px"></span>
-                    <button class="btn btn-primary col-5">Limpar</button>
-                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label class="lbl2 mt-2">Inclua a refeição *</label>
+                    {{ form.diet_include }}
+                    <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
+                    <div class="form-row justify-content-center mb-3">
+                        <button type="submit" class="btn btn-primary col-5">Salvar</button>
+                        <span style="width: 15px"></span>
+                        <button class="btn btn-primary col-5">Limpar</button>
+                    </div>
+                </form>
             </div>
 
             <div class="card container mt-4 mb-3" id="card-opacity">
                 <div class="form-row mt-3 mb-3">
                     <div class="col-12">
-                        <input id="datepicker" width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
-                        <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap4' });</script>
+                        <input width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
                     </div>
                 </div>
                 <label class="lbl2 mt-2">Café da Manhã *</label>
