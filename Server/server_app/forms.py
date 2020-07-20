@@ -73,7 +73,4 @@ class DietForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(DietForm, self).__init__(*args, **kwargs)
         self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea'})
-        # self.fields['diet_breakfast'].widget.attrs.update({'class': 'form-control'})
-        # self.fields['diet_lunch'].widget.attrs.update({'class': 'form-control'})
-        # self.fields['diet_dinner'].widget.attrs.update({'class': 'form-control'})
-        # self.fields['diet_snack'].widget.attrs.update({'class': 'form-control'})
+        

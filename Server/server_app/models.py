@@ -30,7 +30,3 @@ class UserProfile(models.Model):
 
 class UserDiet(models.Model):
     diet_include = models.TextField(max_length=500)
-    # diet_breakfast = models.TextField(max_length=500)
-    # diet_lunch = models.TextField(max_length=500)
-    # diet_dinner = models.TextField(max_length=500)
-    # diet_snack = models.TextField(max_length=500)
