@@ -17,7 +17,7 @@ class SignUpForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 class TripForm(ModelForm):
     class Meta:
