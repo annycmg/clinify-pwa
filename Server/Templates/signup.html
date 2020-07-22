@@ -16,33 +16,32 @@
         </nav>
         <section class="container-fluid pb-4">
             <h4 class="pt-4 pb-4 subtitle">Registre-se</h4>
-            <form method="POST" action="">
+            <form enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                
                 <div class="form-group">
                     <label class="lbl">Username</label>
-                    {{ form.username }}
+                    {{ form_signup.username }}
                 </div>
                 <div class="form-group">
                     <label class="lbl">Nome</label>
-                    {{ form.first_name }}
+                    {{ form_signup.first_name }}
                 </div>
                 <div class="form-group">
                     <label class="lbl">Sobrenome</label>
-                    {{ form.last_name }}
+                    {{ form_signup.last_name }}
                 </div>
                 <div class="form-group">
                     <label class="lbl">Email</label>
-                    {{ form.email }}
+                    {{ form_signup.email }}
                 </div>
                 <div class="form-group">
                     <label class="lbl">Senha</label>
-                    {{ form.password1 }}
+                    {{ form_signup.password1 }}
                 </div>
                 <div class="form-group">
                     <label class="lbl">Confirme a senha</label>
-                    {{ form.password2 }}
-                    {{ form.errors }}
+                    {{ form_signup.password2 }}
+                    {{ form_signup.errors }}
                 </div> 
                 {{ form.errors }}
                 <button type='submit' class="btn btn-outline-light col-12 mt-2">Registrar</button>

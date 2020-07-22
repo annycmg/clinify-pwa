@@ -43,32 +43,32 @@
         <section class="container mt-3">
             <div class="card" id="card-opacity">
                 <div class="container">
-                    <form action="#" method="POST">
+                    <form enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
                         <div class="form-row mt-3">
                             <div class="col-8">
                                 <label class="lbl2">Medicamento *</label>
-                                {{ form.medication_name_med }}
+                                {{ form_med.medication_name_med }}
                             </div>
                             <div class="col-4">
                                 <label class="lbl2">Dose *</label>
-                                {{ form.dosis_name_med }}
+                                {{ form_med.dosis_name_med }}
                             </div>
                         </div>
                         <div class="form-row mt-3 mb-3">
                             <div class="col-6">
                                 <label class="lbl2">Data Início *</label>
-                                {{ form.init_date_med }}
+                                {{ form_med.init_date_med }}
                             </div>
                             <div class="col-6">
                                 <label class="lbl2">Data Fim *</label>
-                                {{ form.end_date_med }}
+                                {{ form_med.end_date_med }}
                             </div>
                         </div>
                         <div class="form-row mt-3 mb-3">
                             <div class="col-12">
                                 <label class="lbl2">Hora *</label>
-                                {{ form.time_med }}
+                                {{ form_med.time_med }}
                             </div>
                         </div>
                     </div>

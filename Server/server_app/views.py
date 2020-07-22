@@ -46,27 +46,38 @@ def logoutUser(request):
     return redirect('intro')
 
 def signup(request):
-    form = SignUpForm()
+    form_signup = SignUpForm()
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save() 
-            user = form.cleaned_data.get('first_name') 
+        form_signup = SignUpForm(data=request.POST)
+        if form_signup.is_valid():
+            form_signup.save() 
+            user = form_signup.cleaned_data.get('first_name') 
             messages.success(request, user + ", a sua conta foi criada com sucesso! Agora você já pode fazer seu Login.")
             print('Sign up com sucesso')
             return redirect('intro')
-    return render(request, 'signup.html', {'form':form})
+    return render(request, 'signup.html', {'form_signup':form_signup})
 
 @login_required
 def medication(request):
-    form = MedicationForm()
+    form_med = MedicationForm()
     if request.method == "POST":
-        form = MedicationForm(request.POST)
+        form_med = MedicationForm(data=request.POST)
+        print(request.POST)
+        if form_med.is_valid():
+            form_med.save()
+            return redirect('temp:medication')
+    return render(request, 'medication.html', {'form_med': form_med})
+
+@login_required
+def editprofile(request):
+    form = ProfileForm()
+    if request.method == "POST":
+        form = ProfileForm(data=request.POST)
         if form.is_valid():
             form.save()
             print(request.POST)
-            return redirect('temp:medication')
-    return render(request, 'medication.html', {'form': form})
+            return redirect('temp:profile')
+    return render(request, 'editprofile.html', {'form':form})
 
 @login_required
 def recentvaccine(request):
@@ -93,17 +104,6 @@ def recenttrips(request):
 @login_required
 def profile(request):
     return render(request, 'profile.html')
-
-@login_required
-def editprofile(request):
-    form = ProfileForm()
-    if request.method == "POST":
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print(request.POST)
-            return redirect('temp:profile')
-    return render(request, 'editprofile.html', {'form':form})
 
 @login_required
 def diet(request):
