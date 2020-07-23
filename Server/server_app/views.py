@@ -15,9 +15,9 @@ from .forms import TripForm
 from .forms import ProfileForm
 from .forms import DietForm
 
-import datetime
-import pickle
-import os.path
+# import datetime
+# import pickle
+# import os.path
 # from googleapiclient.discovery import build
 # from google_auth_oauthlib.flow import InstalledAppFlow
 # from google.auth.transport.requests import Request
@@ -60,24 +60,40 @@ def signup(request):
 @login_required
 def medication(request):
     form_med = MedicationForm()
+    form_signup = SignUpForm()
     if request.method == "POST":
+        form_signup = SignUpForm(data=request.POST)
         form_med = MedicationForm(data=request.POST)
-        print(request.POST)
-        if form_med.is_valid():
-            form_med.save()
+        if form_med.is_valid() and form_signup.is_valid():
+            user = form_signup.save()
+            user.save()
+            med = form_med.save(commit=False)
+            med.user = user # Switch this function to OneToMANY Relationship
+            med.save()
+            print(request.POST)
             return redirect('temp:medication')
-    return render(request, 'medication.html', {'form_med': form_med})
+        else:
+            print("Something went wrong :(")
+    return render(request, 'medication.html', {'form_med': form_med, 'form_signup':form_signup})
 
 @login_required
 def editprofile(request):
-    form = ProfileForm()
+    form_profile = ProfileForm()
+    form_signup = SignUpForm()
     if request.method == "POST":
-        form = ProfileForm(data=request.POST)
-        if form.is_valid():
-            form.save()
+        form_signup = SignUpForm(data=request.POST)
+        form_profile = ProfileForm(data=request.POST)
+        if form_profile.is_valid() and form_signup.is_valid():
+            user = form_signup.save()
+            prof = form_profile.save(commit=False)
+            prof.user = user
+            prof.save()
+            user.save()
             print(request.POST)
             return redirect('temp:profile')
-    return render(request, 'editprofile.html', {'form':form})
+        else:
+            print("Something went wrong :(")
+    return render(request, 'editprofile.html', {'form_profile':form_profile, 'form_signup':form_signup})
 
 @login_required
 def recentvaccine(request):
