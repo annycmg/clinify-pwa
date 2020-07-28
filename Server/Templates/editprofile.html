@@ -39,19 +39,17 @@
             </div>
         </div>
         <section class="container mt-4">
-            <form name="form" method="POST" action="">
+            <form enctype="multipart/form-data" method="POST" action="">
                 {% csrf_token %}
-                <div class="form-group">
-                    <h6>Email</h6>
-                    {{ form_signup.email }}
-                </div>
-                <div class="form-group">
-                    <h6>Idade</h6>
-                    {{ form_profile.profile_age_prf }}
-                </div>
-                <div class="form-group">
-                    <h6>Localização</h6>
-                    {{ form_profile.profile_loc_prf }}
+                <div class="form-group form-row">
+                    <div class="col-6">
+                        <h6>Idade</h6>
+                        {{ form_profile.profile_age_prf }}
+                    </div>
+                    <div class="col-6">
+                        <h6>Localização</h6>
+                        {{ form_profile.profile_loc_prf }}
+                    </div>
                 </div>
                 <div class="form-group form-row">
                     <div class="col-6">
@@ -83,6 +81,12 @@
                     <h6>Prática de Exercícios</h6>
                     {{ form_profile.profile_exerc_prf }}
                 </div>
+                <div class="form-group">
+                    <h6>Insira o seu Username para salvar suas alterações:</h6>
+                    <h6>Username</h6>
+                    {{ form_signup.username }}
+                </div>
+                {{form_profile.errors}}
                 <div class="form-row justify-content-center mb-3">
                     <button type="submit" class="btn btn-primary col-5">Salvar</button>
                     <span style="width: 35px"></span>

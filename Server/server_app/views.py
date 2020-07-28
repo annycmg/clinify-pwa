@@ -1,18 +1,15 @@
-from __future__ import print_function
-
 from django.shortcuts import render, redirect
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 
 from .forms import SignUpForm
+from .forms import ProfileForm
 from .forms import MedicationForm
 from .forms import VaccineForm
 from .forms import TripForm
-from .forms import ProfileForm
 from .forms import DietForm
 
 # import datetime
@@ -46,16 +43,26 @@ def logoutUser(request):
     return redirect('intro')
 
 def signup(request):
-    form_signup = SignUpForm()
     if request.method == 'POST':
-        form_signup = SignUpForm(data=request.POST)
-        if form_signup.is_valid():
-            form_signup.save() 
-            user = form_signup.cleaned_data.get('first_name') 
-            messages.success(request, user + ", a sua conta foi criada com sucesso! Agora você já pode fazer seu Login.")
+        form_signup = SignUpForm(request.POST)
+        form_profile = ProfileForm(request.POST)
+        if form_signup.is_valid() and form_profile.is_valid():
+            user = form_signup.save() 
+            profile = form_profile.save(commit=False)
+            profile.user = user
+            profile.save()
+            usern = form_signup.cleaned_data.get('username') 
+            messages.success(request, usern + ", a sua conta foi criada com sucesso! Agora você já pode fazer seu Login.")
             print('Sign up com sucesso')
             return redirect('intro')
-    return render(request, 'signup.html', {'form_signup':form_signup})
+        else:
+            print("Something went wrong :(")
+            print(form_profile.errors, form_signup.errors)
+    else:
+        form_signup = SignUpForm()
+        form_profile = ProfileForm()
+    return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
+
 
 @login_required
 def medication(request):
@@ -75,25 +82,6 @@ def medication(request):
         else:
             print("Something went wrong :(")
     return render(request, 'medication.html', {'form_med': form_med, 'form_signup':form_signup})
-
-@login_required
-def editprofile(request):
-    form_profile = ProfileForm()
-    form_signup = SignUpForm()
-    if request.method == "POST":
-        form_signup = SignUpForm(data=request.POST)
-        form_profile = ProfileForm(data=request.POST)
-        if form_profile.is_valid() and form_signup.is_valid():
-            user = form_signup.save()
-            prof = form_profile.save(commit=False)
-            prof.user = user
-            prof.save()
-            user.save()
-            print(request.POST)
-            return redirect('temp:profile')
-        else:
-            print("Something went wrong :(")
-    return render(request, 'editprofile.html', {'form_profile':form_profile, 'form_signup':form_signup})
 
 @login_required
 def recentvaccine(request):
@@ -161,3 +149,7 @@ def offline(request):
 
 def base(request):
     return render(request, 'base.html')
+
+@login_required
+def editprofile(request):
+    return render(request, 'editprofile.html')

@@ -34,6 +34,49 @@
                     <label class="lbl">Email</label>
                     {{ form_signup.email }}
                 </div>
+
+                <div class="form-group form-row">
+                    <div class="col-6">
+                        <h6>Idade</h6>
+                        {{ form_profile.profile_age_prf }}
+                    </div>
+                
+                    <div class="col-6">
+                        <h6>Localização</h6>
+                        {{ form_profile.profile_loc_prf }}
+                    </div>
+                </div>
+                <div class="form-group form-row">
+                    <div class="col-6">
+                        <h6>Peso</h6>
+                        {{ form_profile.profile_weight_prf }}
+                    </div>
+                    <div class="col-6">
+                        <h6>Altura</h6>
+                        {{ form_profile.profile_height_prf }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h6>Alergias</h6>
+                    {{ form_profile.profile_allergy_prf }}
+                </div>
+                <div class="form-group">
+                    <h6>Doenças Hereditárias</h6>
+                    {{ form_profile.profile_desease_prf }}
+                </div>
+                <div class="form-group">
+                    <h6>Dieta Específica</h6>
+                    {{ form_profile.profile_diet_prf }}
+                </div>
+                <div class="form-group">
+                    <h6>Cirurgias</h6>
+                    {{ form_profile.profile_surgery_prf }}
+                </div>
+                <div class="form-group">
+                    <h6>Prática de Exercícios</h6>
+                    {{ form_profile.profile_exerc_prf }}
+                </div>
+
                 <div class="form-group">
                     <label class="lbl">Senha</label>
                     {{ form_signup.password1 }}
