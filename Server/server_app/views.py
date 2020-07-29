@@ -24,6 +24,11 @@ from .forms import DietForm
 def home(request):
     return render(request, 'home.html')
 
+@login_required
+def logoutUser(request):
+    print("Log out com sucesso")
+    return redirect('intro')
+
 def intro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -36,11 +41,6 @@ def intro(request):
         else:
             messages.info(request, 'Username E/OU senha incorretos.')
     return render(request, 'intro.html')
-
-@login_required
-def logoutUser(request):
-    print("Log out com sucesso")
-    return redirect('intro')
 
 def signup(request):
     if request.method == 'POST':
@@ -63,25 +63,23 @@ def signup(request):
         form_profile = ProfileForm()
     return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
 
-
 @login_required
 def medication(request):
-    form_med = MedicationForm()
-    form_signup = SignUpForm()
     if request.method == "POST":
-        form_signup = SignUpForm(data=request.POST)
-        form_med = MedicationForm(data=request.POST)
-        if form_med.is_valid() and form_signup.is_valid():
-            user = form_signup.save()
-            user.save()
+        form_signup = SignUpForm(request.POST)
+        form_med = MedicationForm(request.POST)
+        if form_med.is_valid():
             med = form_med.save(commit=False)
-            med.user = user # Switch this function to OneToMANY Relationship
             med.save()
-            print(request.POST)
+            print('Medicamento inserido com sucesso')
             return redirect('temp:medication')
         else:
             print("Something went wrong :(")
-    return render(request, 'medication.html', {'form_med': form_med, 'form_signup':form_signup})
+            print(form_med.errors)
+    else:
+        form_med = MedicationForm()
+        form_signup = SignUpForm()
+    return render(request, 'medication.html', {'form_med': form_med})
 
 @login_required
 def recentvaccine(request):

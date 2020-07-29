@@ -10,12 +10,12 @@ from server_app.models import UserProfile
 from server_app.models import UserDiet
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
+    username   = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
     first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
-    email = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class':'form-control'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    last_name  = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
+    email      = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class':'form-control'}))
+    password1  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
@@ -36,16 +36,6 @@ class ProfileForm(forms.ModelForm):
         self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
         self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
 
-class TripForm(ModelForm):
-    class Meta:
-        model = UserTrip
-        fields = '__all__'
-    def __init__(self, *args, **kwargs):
-        super(TripForm, self).__init__(*args, **kwargs)
-        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina, Uruguai', 'class': 'form-control', 'required': ''})
-        self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
-        self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
-
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
@@ -57,6 +47,17 @@ class MedicationForm(ModelForm):
         self.fields['init_date_med'].widget.attrs.update({'placeholder': 'YYYY-MM-DD', 'class': 'form-control', 'required': ''})
         self.fields['end_date_med'].widget.attrs.update({'placeholder': 'YYYY-MM-DD', 'class': 'form-control', 'required': ''})
         self.fields['time_med'].widget.attrs.update({'placeholder': 'HH:MM:SS', 'class': 'form-control', 'required': ''})
+
+class TripForm(ModelForm):
+    class Meta:
+        model = UserTrip
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(TripForm, self).__init__(*args, **kwargs)
+        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina, Uruguai', 'class': 'form-control', 'required': ''})
+        self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+
 
 class VaccineForm(ModelForm):
     class Meta:
