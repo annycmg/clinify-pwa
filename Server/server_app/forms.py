@@ -9,6 +9,7 @@ from server_app.models import UserTrip
 from server_app.models import UserProfile
 from server_app.models import UserDiet
 
+# SignupForm: formulário de infos básicas
 class SignUpForm(UserCreationForm):
     username   = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
     first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -20,6 +21,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
+# ProfileForm: formulário de infos extras que extende o SignUpForm
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

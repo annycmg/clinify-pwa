@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 
 from .forms import SignUpForm
@@ -11,6 +11,7 @@ from .forms import MedicationForm
 from .forms import VaccineForm
 from .forms import TripForm
 from .forms import DietForm
+from . import models
 
 # import datetime
 # import pickle
@@ -19,16 +20,7 @@ from .forms import DietForm
 # from google_auth_oauthlib.flow import InstalledAppFlow
 # from google.auth.transport.requests import Request
 
-# Create your views here.
-@login_required
-def home(request):
-    return render(request, 'home.html')
-
-@login_required
-def logoutUser(request):
-    print("Log out com sucesso")
-    return redirect('intro')
-
+# intro: faz autenticação via Username e Senha
 def intro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -42,6 +34,7 @@ def intro(request):
             messages.info(request, 'Username E/OU senha incorretos.')
     return render(request, 'intro.html')
 
+# signup: formulário com infos básicas e infos de perfil para cadastro
 def signup(request):
     if request.method == 'POST':
         form_signup = SignUpForm(request.POST)
@@ -63,13 +56,16 @@ def signup(request):
         form_profile = ProfileForm()
     return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
 
+User = get_user_model()
 @login_required
 def medication(request):
     if request.method == "POST":
         form_signup = SignUpForm(request.POST)
         form_med = MedicationForm(request.POST)
-        if form_med.is_valid():
+        if form_med.is_valid() and form_signup.is_valid():
+            user = form_signup.save() 
             med = form_med.save(commit=False)
+            med.user = user
             med.save()
             print('Medicamento inserido com sucesso')
             return redirect('temp:medication')
@@ -77,9 +73,18 @@ def medication(request):
             print("Something went wrong :(")
             print(form_med.errors)
     else:
-        form_med = MedicationForm()
         form_signup = SignUpForm()
+        form_med = MedicationForm()
     return render(request, 'medication.html', {'form_med': form_med})
+
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+@login_required
+def logoutUser(request):
+    print("Log out com sucesso")
+    return redirect('intro')
 
 @login_required
 def recentvaccine(request):
