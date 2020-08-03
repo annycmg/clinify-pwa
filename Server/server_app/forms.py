@@ -3,11 +3,11 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from server_app.models import UserVaccine
-from server_app.models import UserMedication
-from server_app.models import UserTrip
-from server_app.models import UserProfile
-from server_app.models import UserDiet
+from .models import UserMedication
+from .models import UserTrip
+from .models import UserProfile
+from .models import UserVaccine
+from .models import UserDiet
 
 # SignupForm: formulário de infos básicas
 class SignUpForm(UserCreationForm):

@@ -62,13 +62,10 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label class="lbl2 mt-2">Inclua a refeição *</label>
-                    {{ form.diet_include }}
-                    <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                    <div class="form-row justify-content-center mb-3">
-                        <button type="submit" class="btn btn-primary col-5">Salvar</button>
-                        <span style="width: 15px"></span>
-                        <button class="btn btn-primary col-5">Limpar</button>
-                    </div>
+                    {{ form_diet.diet_include }}
+                    <button type="submit" class="btn btn-primary col-5">Salvar</button>
+                    <span style="width: 15px"></span>
+                    <button class="btn btn-primary col-5">Limpar</button>
                 </form>
             </div>
 
