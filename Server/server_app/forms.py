@@ -21,6 +21,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
+
 # ProfileForm: formulário de infos extras que extende o SignUpForm
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -38,6 +39,7 @@ class ProfileForm(forms.ModelForm):
         self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
         self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
 
+
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
@@ -50,13 +52,14 @@ class MedicationForm(ModelForm):
         self.fields['end_date_med'].widget.attrs.update({'placeholder': 'YYYY-MM-DD', 'class': 'form-control', 'required': ''})
         self.fields['time_med'].widget.attrs.update({'placeholder': 'HH:MM:SS', 'class': 'form-control', 'required': ''})
 
+
 class TripForm(ModelForm):
     class Meta:
         model = UserTrip
         fields = '__all__'
     def __init__(self, *args, **kwargs):
         super(TripForm, self).__init__(*args, **kwargs)
-        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina, Uruguai', 'class': 'form-control', 'required': ''})
+        self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina; Uruguai;', 'class': 'form-control', 'required': ''})
         self.fields['init_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
         self.fields['end_date_trp'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
 
@@ -69,6 +72,7 @@ class VaccineForm(ModelForm):
         super(VaccineForm, self).__init__(*args, **kwargs)
         self.fields['vaccine_name_vac'].widget.attrs.update({'placeholder': 'Febre Amarela', 'class': 'form-control', 'required': ''})
         self.fields['vaccine_date_vac'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+
 
 class DietForm(ModelForm):
     class Meta:

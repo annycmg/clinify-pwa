@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.generic import ListView, CreateView
 
 from .forms import SignUpForm
 from .forms import ProfileForm
@@ -12,7 +13,7 @@ from .forms import MedicationForm
 from .forms import TripForm
 from .forms import VaccineForm
 from .forms import DietForm
-from . import models
+
 from .models import UserMedication
 from .models import UserTrip
 from .models import UserVaccine
@@ -65,13 +66,28 @@ def signup(request):
 
 
 # medication: retorna a lista de todos os medicamentos do usuário, vindos do sqlite
-@login_required
-def medication(request):
-    form_med = MedicationForm()
-    med = UserMedication.objects.all()
-    context = {'form_med':form_med, 'med':med}
-    return render(request, 'medication.html', context)
+# @login_required
+# def medication(request):
+#     form_med = MedicationForm()
+#     med = UserMedication.objects.all()
+#     context = {'form_med':form_med, 'med':med}
+#     return render(request, 'medication.html', context)
+class MedicationListView(ListView):
+    template_name="medication.html"
+    model = UserMedication
+    context_object_name = 'med'
+    def get_context_data(self, **kwargs):
+        context = super(MedicationListView, self).get_context_data(**kwargs)
+        return context
+    def get_queryset(self):
+        queryset = super(MedicationListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
+# class MedicationCreateView(CreateView):
+#     template_name = "medication.html"
+#     form_class = MedicationForm
+#     model = UserMedication
 
 # trips: retorna a lista das últimas viagens do usuário, vindos do sqlite
 @login_required
@@ -82,6 +98,7 @@ def recenttrips(request):
     return render(request, 'recenttrips.html', context)
 
 
+# vaccines: retorna a lista das últimas vacinas do usuário, vindos do sqlite
 @login_required
 def recentvaccine(request):
     form_vac = VaccineForm()
@@ -99,6 +116,10 @@ def diet(request):
 
 
 
+
+@login_required
+def editprofile(request):
+    return render(request, 'editprofile.html')
 
 @login_required
 def home(request):
@@ -140,7 +161,3 @@ def offline(request):
 
 def base(request):
     return render(request, 'base.html')
-
-@login_required
-def editprofile(request):
-    return render(request, 'editprofile.html')

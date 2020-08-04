@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# UserProfile: extensão das infos básicas de User
+# UserProfile: extensão das infos básicas do User
 class UserProfile(models.Model):
     user                 = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     profile_age_prf      = models.IntegerField()
@@ -46,6 +46,7 @@ class UserVaccine(models.Model):
     def __str__(self):
         return self.vaccine_name_vac
     objects = models.Manager() 
+
 
 class UserDiet(models.Model):
     user         = models.ForeignKey(User, on_delete=models.CASCADE)
