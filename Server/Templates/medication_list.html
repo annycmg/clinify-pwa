@@ -40,48 +40,37 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-5">
-            <div class="card" id="card-opacity">
-                <div class="container">
-                    <label class="titles mt-3 mb-3">Inserir Medicamentos</label>
-                    <form enctype="multipart/form-data" method="POST">
-                        {% csrf_token %}
-                        <div class="form-row mt-3 mb-3"> 
-                            <div class="col-8">
-                                <label class="lbl2">Medicamento *</label>
-                                {{ form.medication_name_med }}
-                            </div>
-                            <div class="col-4">
-                                <label class="lbl2">Dose *</label>
-                                {{ form.dosis_name_med }}
-                            </div>
-                        </div>
-                        <div class="form-row mt-4 mb-3">
-                            <div class="col-6">
-                                <label class="lbl2">Data Início *</label>
-                                {{ form.init_date_med }}
-                            </div>
-                            <div class="col-6">
-                                <label class="lbl2">Data Fim *</label>
-                                {{ form.end_date_med }}
-                            </div>
-                        </div>
-                        <div class="form-row mt-4 mb-3">
-                            <div class="col-12">
-                                <label class="lbl2">Hora *</label>
-                                {{ form.time_med }}
-                            </div>
-                        </div>
-                        {{ form_med.errors }}
-                    </div>
-                    <div class="form-row justify-content-center mt-3 mb-4">
-                        <a href="{% url 'temp:medication' %}" type="submit" class="btn btn-success col-5 pt-1 pb-1">Salvar</a>
-                        <span style="width: 25px"></span>
-                        <button class="btn btn-primary col-5 pt-1 pb-1">Limpar</button>
-                    </div>
-                </form>
+        <section class="container mt-3">
+            <div class="card card-med mt-4 mb-3" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th>Medicamento</th>
+                                <th>Dose</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
+                                <th>Hora</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usermed in med %}
+                            <tr>
+                                <td>{{ usermed.medication_name_med }}</td>
+                                <td>{{ usermed.dosis_name_med }}</td>
+                                <td>{{ usermed.init_date_med }}</td>
+                                <td>{{ usermed.end_date_med }}</td>
+                                <td>{{ usermed.time_med }}</td>
+                                <td><img src="{% static 'images/edit.png' %}"></td>
+                                <td><img src="{% static 'images/trash.png' %}"></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>      
+                </div>
             </div>
-            <a href="{% url 'temp:medication_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Meus Medicamentos</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>

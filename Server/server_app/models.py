@@ -29,6 +29,7 @@ class UserMedication(models.Model):
     objects = models.Manager()
 
 
+
 class UserTrip(models.Model):
     user             = models.ForeignKey(User, on_delete=models.CASCADE)
     trip_country_trp = models.CharField(max_length=300)

@@ -47,7 +47,7 @@
 
 .row-1, .row-2 { margin-top: 15px; margin-bottom: 15px;}
 
-.card-med, .card-vaccine, .card-trip { height: 22rem; }
+.card-med, .card-vaccine, .card-trip { height: 32rem; }
 
 .diet-subt { font-size: small; font-weight: 500; }
 
@@ -90,3 +90,5 @@
 .info{ font-size: 19px; margin-left: 30px; }
 
 .distance{ margin-left: 1px; }
+
+.titles{ align-content: center; font-size: 14px; color: rgb(83, 123,255); font-weight: 500; }

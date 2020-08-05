@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
-# ProfileForm: formulário de infos extras que extende o SignUpForm
+# ProfileForm: extende o SignUpForm com infos específicas
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -43,7 +43,7 @@ class ProfileForm(forms.ModelForm):
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
-        fields = '__all__'
+        fields = ['medication_name_med', 'dosis_name_med', 'init_date_med', 'end_date_med', 'time_med']
     def __init__(self, *args, **kwargs):
         super(MedicationForm, self).__init__(*args, **kwargs)
         self.fields['medication_name_med'].widget.attrs.update({'placeholder': 'Paracetamol', 'class': 'form-control', 'required': ''})

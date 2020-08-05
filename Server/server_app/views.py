@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
@@ -27,7 +27,7 @@ from .models import UserDiet
 # from google.auth.transport.requests import Request
 
 
-# intro: faz autenticação via Username e Senha
+# =============================== LOGIN & PASSWORD AUTHETICATION ================================== #
 def intro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -40,8 +40,10 @@ def intro(request):
         else:
             messages.info(request, 'Username E/OU senha incorretos.')
     return render(request, 'intro.html')
+# ================================================================================================== #
 
 
+# ====================================== SIGNUP ==================================================== #
 # signup: formulário com infos básicas e infos de perfil para cadastro
 def signup(request):
     if request.method == 'POST':
@@ -63,20 +65,15 @@ def signup(request):
         form_signup = SignUpForm()
         form_profile = ProfileForm()
     return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
+# =================================================================================================== #
 
-
-# medication: retorna a lista de todos os medicamentos do usuário, vindos do sqlite
-# @login_required
-# def medication(request):
-#     form_med = MedicationForm()
-#     med = UserMedication.objects.all()
-#     context = {'form_med':form_med, 'med':med}
-#     return render(request, 'medication.html', context)
+# ======================================= MEDICATION CRUD =========================================== #
 class MedicationListView(ListView):
-    template_name="medication.html"
+    template_name="medication_list.html"
     model = UserMedication
     context_object_name = 'med'
-    def get_context_data(self, **kwargs):
+    form_class = MedicationForm
+    def get_context_data(self, **kwargs): 
         context = super(MedicationListView, self).get_context_data(**kwargs)
         return context
     def get_queryset(self):
@@ -84,10 +81,16 @@ class MedicationListView(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-# class MedicationCreateView(CreateView):
-#     template_name = "medication.html"
-#     form_class = MedicationForm
-#     model = UserMedication
+class MedicationCreateView(CreateView):
+    template_name = "medication.html"
+    model = UserMedication
+    form_class = MedicationForm
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(MedicationCreateView, self).form_valid(form)
+# =================================================================================================== #
+
 
 # trips: retorna a lista das últimas viagens do usuário, vindos do sqlite
 @login_required
