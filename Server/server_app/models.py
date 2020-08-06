@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # UserProfile: extensão das infos básicas do User
 class UserProfile(models.Model):
     user                 = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -24,6 +25,8 @@ class UserMedication(models.Model):
     init_date_med        = models.DateField()
     end_date_med         = models.DateField()
     time_med             = models.TimeField()
+    # slug                 = models.SlugField(default='slug', editable=False)
+    
     def __str__(self):
         return self.medication_name_med
     objects = models.Manager()

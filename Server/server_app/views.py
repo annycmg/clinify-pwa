@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, reverse
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from .forms import SignUpForm
 from .forms import ProfileForm
@@ -81,14 +82,25 @@ class MedicationListView(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
+@method_decorator(login_required(login_url="intro"), name='dispatch')
 class MedicationCreateView(CreateView):
     template_name = "medication.html"
     model = UserMedication
     form_class = MedicationForm
+    def get_success_url(self):
+        return reverse('medication_detail')
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
         return super(MedicationCreateView, self).form_valid(form)
+
+class MedicationDetailView(DetailView):
+    template_name = "medication_detail.html"
+    model = UserMedication
+    context_object_name = 'single'
+    def get_context_data(self, **kwargs):
+        context = super(MedicationDetailView, self).get_context_data(**kwargs)
+        return context
 # =================================================================================================== #
 
 
