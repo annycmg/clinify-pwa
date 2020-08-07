@@ -75,7 +75,7 @@
                         {{ form_med.errors }}
                     </div>
                     <div class="form-row justify-content-center mt-3 mb-4">
-                        <button href="{% url 'temp:medication_detail' %}" type="submit" class="btn btn-success col-5 pt-1 pb-1">Salvar</button>
+                        <button href="{% url 'temp:medication_detail' pk=self.pk %}" type="submit" class="btn btn-success col-5 pt-1 pb-1">Salvar</button>
                         <span style="width: 25px"></span>
                         <button class="btn btn-primary col-5 pt-1 pb-1">Limpar</button>
                     </div>

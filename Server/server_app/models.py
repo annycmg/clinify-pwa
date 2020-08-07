@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.shortcuts import reverse
+
 
 
 # UserProfile: extensão das infos básicas do User
@@ -26,7 +28,8 @@ class UserMedication(models.Model):
     end_date_med         = models.DateField()
     time_med             = models.TimeField()
     # slug                 = models.SlugField(default='slug', editable=False)
-    
+    # def get_absolute_url(self):
+    #     return reverse('temp:medication_detail', kwargs={"pk":self.pk})
     def __str__(self):
         return self.medication_name_med
     objects = models.Manager()

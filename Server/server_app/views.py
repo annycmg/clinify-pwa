@@ -87,8 +87,9 @@ class MedicationCreateView(CreateView):
     template_name = "medication.html"
     model = UserMedication
     form_class = MedicationForm
-    def get_success_url(self):
-        return reverse('medication_detail')
+    # def get_success_url(self):
+    #     return reverse('medication_detail', kwargs={'pk':self.pk})
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()

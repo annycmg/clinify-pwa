@@ -43,7 +43,7 @@ class ProfileForm(forms.ModelForm):
 class MedicationForm(ModelForm):
     class Meta:
         model = UserMedication
-        fields = ['medication_name_med', 'dosis_name_med', 'init_date_med', 'end_date_med', 'time_med']
+        fields = '__all__'
     def __init__(self, *args, **kwargs):
         super(MedicationForm, self).__init__(*args, **kwargs)
         self.fields['medication_name_med'].widget.attrs.update({'placeholder': 'Paracetamol', 'class': 'form-control', 'required': ''})

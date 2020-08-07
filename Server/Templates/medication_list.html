@@ -58,7 +58,7 @@
                         <tbody>
                             {% for usermed in med %}
                             <tr>
-                                <td>{{ usermed.medication_name_med }}</td>
+                                <td><a href="{% url 'temp:medication_detail' pk=usermed.pk %}">{{ usermed.medication_name_med }}</a></td>
                                 <td>{{ usermed.dosis_name_med }}</td>
                                 <td>{{ usermed.init_date_med }}</td>
                                 <td>{{ usermed.end_date_med }}</td>
