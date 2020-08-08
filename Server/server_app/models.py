@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.shortcuts import reverse
+from django.template.defaultfilters import slugify
 
 
-
-# UserProfile: extensão das infos básicas do User
+# ================================ PROFILE MODEL ========================================== #
 class UserProfile(models.Model):
     user                 = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     profile_age_prf      = models.IntegerField()
@@ -18,8 +17,10 @@ class UserProfile(models.Model):
     profile_exerc_prf    = models.CharField(max_length=200)
     def __str__(self):
         return self.user.username
+# ============================ END PROFILE MODEL ========================================== #
 
 
+# ================================ MEDICATION MODEL ======================================= #
 class UserMedication(models.Model):
     user                 = models.ForeignKey(User, on_delete=models.CASCADE)
     medication_name_med  = models.CharField(max_length=200)
@@ -27,12 +28,16 @@ class UserMedication(models.Model):
     init_date_med        = models.DateField()
     end_date_med         = models.DateField()
     time_med             = models.TimeField()
-    # slug                 = models.SlugField(default='slug', editable=False)
-    # def get_absolute_url(self):
-    #     return reverse('temp:medication_detail', kwargs={"pk":self.pk})
+    slug                 = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.medication_name_med)
+        super(UserMedication, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.medication_name_med
     objects = models.Manager()
+# ================================ END MEDICATION MODEL ================================ #
 
 
 

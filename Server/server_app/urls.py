@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.conf.urls import url, include
 from . import views 
+# from .views import medication
 from .views import MedicationListView, MedicationDetailView, MedicationCreateView
 
 
@@ -9,7 +10,7 @@ app_name = 'temp'
 urlpatterns = [
     url(r'^medication/$', MedicationCreateView.as_view(), name='medication'),
     url(r'^medication/list/$', MedicationListView.as_view(), name='medication_list'),
-    url(r'^medication/detail/(?P<pk>[0-9]+)$', MedicationDetailView.as_view(), name='medication_detail'),
+    url(r'^medication/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', MedicationDetailView.as_view(), name='medication_detail'),
     url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^appointment/$', views.appointment, name='appointment'),

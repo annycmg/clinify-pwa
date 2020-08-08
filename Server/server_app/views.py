@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
+# from django.urls import reverse
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
@@ -6,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import SignUpForm
 from .forms import ProfileForm
@@ -41,7 +42,7 @@ def intro(request):
         else:
             messages.info(request, 'Username E/OU senha incorretos.')
     return render(request, 'intro.html')
-# ================================================================================================== #
+# ================================ END AUTHETICATION ============================================== #
 
 
 # ====================================== SIGNUP ==================================================== #
@@ -66,14 +67,14 @@ def signup(request):
         form_signup = SignUpForm()
         form_profile = ProfileForm()
     return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
-# =================================================================================================== #
+# ======================================== END SIGNUP =============================================== #
+
 
 # ======================================= MEDICATION CRUD =========================================== #
 class MedicationListView(ListView):
     template_name="medication_list.html"
     model = UserMedication
     context_object_name = 'med'
-    form_class = MedicationForm
     def get_context_data(self, **kwargs): 
         context = super(MedicationListView, self).get_context_data(**kwargs)
         return context
@@ -82,19 +83,6 @@ class MedicationListView(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
-class MedicationCreateView(CreateView):
-    template_name = "medication.html"
-    model = UserMedication
-    form_class = MedicationForm
-    # def get_success_url(self):
-    #     return reverse('medication_detail', kwargs={'pk':self.pk})
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.save()
-        return super(MedicationCreateView, self).form_valid(form)
-
 class MedicationDetailView(DetailView):
     template_name = "medication_detail.html"
     model = UserMedication
@@ -102,7 +90,21 @@ class MedicationDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MedicationDetailView, self).get_context_data(**kwargs)
         return context
-# =================================================================================================== #
+
+# @method_decorator(login_required(login_url="intro"), name='dispatch')
+class MedicationCreateView(CreateView):
+    template_name = "medication.html"
+    model = UserMedication
+    form_class = MedicationForm
+#     def get_success_url(self):
+#         return reverse("medication_detail", kwargs={'pk':self.pk, 'slug':self.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(MedicationCreateView, self).form_valid(form)
+
+# ==================================== END MEDICATION CRUD ======================================= #
+
 
 
 # trips: retorna a lista das últimas viagens do usuário, vindos do sqlite
