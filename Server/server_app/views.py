@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# from django.urls import reverse
+from django.urls import reverse
 from django.db import models
 from django.http import HttpResponse
 from django.contrib import messages
@@ -71,6 +71,7 @@ def signup(request):
 
 
 # ======================================= MEDICATION CRUD =========================================== #
+@method_decorator(login_required(login_url="intro"), name='dispatch')
 class MedicationListView(ListView):
     template_name="medication_list.html"
     model = UserMedication
@@ -83,6 +84,7 @@ class MedicationListView(ListView):
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
+@method_decorator(login_required(login_url="intro"), name='dispatch')
 class MedicationDetailView(DetailView):
     template_name = "medication_detail.html"
     model = UserMedication
@@ -91,18 +93,19 @@ class MedicationDetailView(DetailView):
         context = super(MedicationDetailView, self).get_context_data(**kwargs)
         return context
 
-# @method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="intro"), name='dispatch')
 class MedicationCreateView(CreateView):
     template_name = "medication.html"
     model = UserMedication
     form_class = MedicationForm
-#     def get_success_url(self):
-#         return reverse("medication_detail", kwargs={'pk':self.pk, 'slug':self.slug})
+    def get_success_url(self):
+        return reverse("temp:medication_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
+        print("medication saved")
         return super(MedicationCreateView, self).form_valid(form)
-
+    
 # ==================================== END MEDICATION CRUD ======================================= #
 
 

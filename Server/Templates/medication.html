@@ -44,33 +44,39 @@
         <section class="container mt-5">
             <div class="card" id="card-opacity">
                 <div class="container">
-                    <label class="titles mt-3 mb-3">Inserir Medicamentos</label>
+                    <label class="titles mt-3">Inserir Medicamentos</label>
                     <form enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
                         <div class="form-row mt-3 mb-3"> 
                             <div class="col-8">
                                 <label class="lbl2">Medicamento *</label>
+                                {{form.medication_name_med}}
                             </div>
                             <div class="col-4">
                                 <label class="lbl2">Dose *</label>
+                                {{ form.dosis_name_med }}
                             </div>
                         </div>
                         <div class="form-row mt-4 mb-3">
                             <div class="col-6">
                                 <label class="lbl2">Data Início *</label>
+                                {{ form.init_date_med }}
                             </div>
                             <div class="col-6">
                                 <label class="lbl2">Data Fim *</label>
+                                {{ form.end_date_med }}
                             </div>
                         </div>
                         <div class="form-row mt-4 mb-3">
                             <div class="col-12">
                                 <label class="lbl2">Hora *</label>
+                                {{ form.time_med }}
                             </div>
                         </div>
+                        {{form.errors}}
                     </div>
                     <div class="form-row justify-content-center mt-3 mb-4">
-                        <a type="submit" class="btn btn-success col-5 pt-1 pb-1">Salvar</a>
+                        <button class="btn btn-success col-5 pt-1 pb-1" style="color: white;">Salvar</button>
                         <span style="width: 25px"></span>
                         <button class="btn btn-primary col-5 pt-1 pb-1">Limpar</button>
                     </div>
