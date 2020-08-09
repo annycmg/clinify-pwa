@@ -133,11 +133,10 @@ class MedicationDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(reverse(self.success_url))
         else:
             return HttpResponseRedirect(self.success_url)
-
 # ==================================== END MEDICATION CRUD ======================================= #
 
 
-
+# ======================================== TRIPS CRUD ============================================= #
 # trips: retorna a lista das últimas viagens do usuário, vindos do sqlite
 @login_required
 def recenttrips(request):
@@ -145,6 +144,20 @@ def recenttrips(request):
     trip = UserTrip.objects.all()
     context = {'form_trip':form_trip, 'trip':trip}
     return render(request, 'recenttrips.html', context)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class TripListView(ListView): ### RETRIEVE
+    template_name="trip_list.html"
+    model = UserTrip
+    context_object_name = 'trip'
+    def get_context_data(self, **kwargs): 
+        context = super(TripListView, self).get_context_data(**kwargs)
+        return context
+    def get_queryset(self):
+        queryset = super(TripListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+# ======================================== END TRIPS CRUD ========================================== #
 
 
 # vaccines: retorna a lista das últimas vacinas do usuário, vindos do sqlite

@@ -2,12 +2,12 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Medicamento</title>
+        <title>Clinify | Viagens Recentes</title>
     </head>
-    <body class="medication-screen">
+    <body class="stresslevel-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
             <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
-            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <a class="navbar-brand mt-2" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,10 +27,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Sair</h5>
+                        <h5 class="modal-title" style="color: black;">Sair</h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="color: black;">
                         <p>Certeza que deseja sair?</p>
                     </div>
                     <div class="modal-footer">
@@ -40,19 +40,36 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-5">
-            <div class="card container pt-5 pb-5" id="card-opacity">
-                <h6>Medicamento Inserido</h6>
-                {{ single.medication_name_med }}<br>
-                {{ single.dosis_name_med }}<br>
-                {{ single.init_date_med }}<br>
-                {{ single.end_date_med }}<br>
-                {{ single.time_med }}<br>
+        <section class="container mt-3">
+            <div class="card card-trip mt-3 mb-4" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th>País(es)</th>
+                                <th>Data Início</th>
+                                <th>Data Fim</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usertrip in trip %}
+                            <tr>
+                                <td>{{ usertrip.trip_country_trp }}</td>
+                                <td>{{ usertrip.init_date_trp }}</td>
+                                <td>{{ usertrip.end_date_trp }}</td>
+                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>      
+                </div>
             </div>
-            <a href="{% url 'temp:medication_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Meus Medicamentos</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>
         <script src="/sw.js"></script> -->
     </body>
-</html>
+     
