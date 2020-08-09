@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import SignUpForm
 from .forms import ProfileForm
@@ -103,8 +103,21 @@ class MedicationCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
-        print("medication saved")
+        print("medication inserted and saved")
         return super(MedicationCreateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class MedicationUpdateView(UpdateView):
+    template_name = "medication.html"
+    model = UserMedication
+    form_class = MedicationForm
+    def get_success_url(self):
+        return reverse("temp:medication_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("medication updated and saved")
+        return super(MedicationUpdateView, self).form_valid(form)
     
 # ==================================== END MEDICATION CRUD ======================================= #
 
