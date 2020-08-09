@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db import models
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import SignUpForm
 from .forms import ProfileForm
@@ -72,7 +72,7 @@ def signup(request):
 
 # ======================================= MEDICATION CRUD =========================================== #
 @method_decorator(login_required(login_url="intro"), name='dispatch')
-class MedicationListView(ListView):
+class MedicationListView(ListView): ### RETRIEVE
     template_name="medication_list.html"
     model = UserMedication
     context_object_name = 'med'
@@ -85,7 +85,7 @@ class MedicationListView(ListView):
         return queryset
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
-class MedicationDetailView(DetailView):
+class MedicationDetailView(DetailView): ### RETRIEVE
     template_name = "medication_detail.html"
     model = UserMedication
     context_object_name = 'single'
@@ -94,7 +94,7 @@ class MedicationDetailView(DetailView):
         return context
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
-class MedicationCreateView(CreateView):
+class MedicationCreateView(CreateView): ### CREATE
     template_name = "medication.html"
     model = UserMedication
     form_class = MedicationForm
@@ -107,7 +107,7 @@ class MedicationCreateView(CreateView):
         return super(MedicationCreateView, self).form_valid(form)
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
-class MedicationUpdateView(UpdateView):
+class MedicationUpdateView(UpdateView):  ### UPDATE
     template_name = "medication.html"
     model = UserMedication
     form_class = MedicationForm
@@ -119,6 +119,21 @@ class MedicationUpdateView(UpdateView):
         print("medication updated and saved")
         return super(MedicationUpdateView, self).form_valid(form)
     
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class MedicationDeleteView(DeleteView): ### DELETE
+    model = UserMedication
+    success_url = 'temp:medication_list'
+    template_name = 'delete_item.html'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            self.object.delete()
+            print("medication safely deleted")
+            return HttpResponseRedirect(reverse(self.success_url))
+        else:
+            return HttpResponseRedirect(self.success_url)
+
 # ==================================== END MEDICATION CRUD ======================================= #
 
 

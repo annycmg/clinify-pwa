@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Medicamentos</title>
+        <title>Clinify | Lista de Medicamentos</title>
     </head>
     <body class="medication-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -64,7 +64,7 @@
                                 <td>{{ usermed.end_date_med }}</td>
                                 <td>{{ usermed.time_med }}</td>
                                 <td><a href="{% url 'temp:medication' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
-                                <td><img src="{% static 'images/trash.png' %}"></td>
+                                <td><a href="{% url 'temp:delete_item' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

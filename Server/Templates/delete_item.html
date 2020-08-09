@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Medicamento</title>
+        <title>Clinify | Deletar</title>
     </head>
     <body class="medication-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -41,14 +41,15 @@
             </div>
         </div>
         <section class="container mt-5">
-            <div class="card container pt-5 pb-5" id="card-opacity">
-                <h6>Medicamento Inserido</h6>
-                {{ single.medication_name_med }}<br>
-                {{ single.dosis_name_med }}<br>
-                {{ single.init_date_med }}<br>
-                {{ single.end_date_med }}<br>
-                {{ single.time_med }}<br>
-            </div>
+            <form method="POST">
+                <div class="form-row justify-content-center mt-4">
+                    <p class="container">Certeza que deseja excluir este item?</p> 
+                    {% csrf_token %}
+                    <input type='submit' value="Sim" class="btn btn-danger pt-1 pb-1" style="color: white;">
+                    <span style="width: 25px"></span>
+                    <a href="{% url 'temp:medication_list' %}" class="btn btn-primary pt-1 pb-1">Não</a>
+                </div>
+            </form>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>
