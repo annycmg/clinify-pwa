@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Lista de Medicamentos</title>
+        <title>Clinify | Viagens Recentes</title>
     </head>
     <body class="medication-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -40,37 +40,14 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-3">
-            <div class="card card-med mt-4 mb-3" id="card-opacity">
-                <div class="overflow-auto">
-                    <table class="table table-striped overflow-auto">
-                        <thead>
-                            <tr>
-                                <th>Medicamento</th>
-                                <th>Dose</th>
-                                <th>Data Início</th>
-                                <th>Data Fim</th>
-                                <th>Hora</th>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for usermed in med %}
-                            <tr>
-                                <td><a href="{% url 'temp:medication_detail' pk=usermed.pk slug=usermed.slug %}">{{ usermed.medication_name_med }}</a></td>
-                                <td>{{ usermed.dosis_name_med }}</td>
-                                <td>{{ usermed.init_date_med }}</td>
-                                <td>{{ usermed.end_date_med }}</td>
-                                <td>{{ usermed.time_med }}</td>
-                                <td><a href="{% url 'temp:medication' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
-                                <td><a href="{% url 'temp:medication_delete' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>      
-                </div>
+        <section class="container mt-5">
+            <div class="card container pt-5 pb-5" id="card-opacity">
+                <h6>Medicamento Inserido</h6>
+                {{ single_trip.trip_country_trp }}<br>
+                {{ single_trip.init_date_trp }}<br>
+                {{ single_trip.end_date_trp }}<br>
             </div>
+            <a href="{% url 'temp:trip_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Últimas Viagens</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>

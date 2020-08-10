@@ -2,20 +2,24 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from . import views 
 from .views import MedicationListView, MedicationDetailView, MedicationCreateView, MedicationUpdateView, MedicationDeleteView
-from .views import TripListView
+from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView, TripDeleteView
 
 app_name = 'temp'
 
 urlpatterns = [
     url(r'^signup/$', views.signup, name='signup'),
+
     url(r'^medication/$', MedicationCreateView.as_view(), name='medication'),
     url(r'^medication/list/$', MedicationListView.as_view(), name='medication_list'),
     url(r'^medication/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', MedicationUpdateView.as_view(), name='medication'),
     url(r'^medication/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', MedicationDetailView.as_view(), name='medication_detail'),
-    url(r'^medication/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', MedicationDeleteView.as_view(), name='delete_item'),
+    url(r'^medication/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', MedicationDeleteView.as_view(), name='medication_delete'),
 
-    url(r'^recenttrips/$', views.recenttrips, name='recenttrips'),
+    url(r'^recenttrips/$', TripCreateView.as_view(), name='recenttrips'),
     url(r'^recenttrips/list/$', TripListView.as_view(), name='trip_list'),
+    url(r'^recenttrips/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', TripUpdateView.as_view(), name='recenttrips'),
+    url(r'^recenttrips/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', TripDetailView.as_view(), name='trip_detail'),
+    url(r'^recenttrips/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', TripDeleteView.as_view(), name='trip_delete'),
 
     url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
     url(r'^appointment/$', views.appointment, name='appointment'),

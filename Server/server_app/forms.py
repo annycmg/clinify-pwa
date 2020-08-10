@@ -55,7 +55,7 @@ class MedicationForm(ModelForm):
 class TripForm(ModelForm):
     class Meta:
         model = UserTrip
-        fields = '__all__'
+        fields = ['trip_country_trp', 'init_date_trp', 'end_date_trp']
     def __init__(self, *args, **kwargs):
         super(TripForm, self).__init__(*args, **kwargs)
         self.fields['trip_country_trp'].widget.attrs.update({'placeholder': 'Argentina; Uruguai;', 'class': 'form-control', 'required': ''})

@@ -40,15 +40,23 @@ class UserMedication(models.Model):
 # ================================ END MEDICATION MODEL ================================ #
 
 
-
+# ================================ RECENT TRIPS MODEL ======================================= #
 class UserTrip(models.Model):
     user             = models.ForeignKey(User, on_delete=models.CASCADE)
     trip_country_trp = models.CharField(max_length=300)
     init_date_trp    = models.DateField()
     end_date_trp     = models.DateField()
+    slug             = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.trip_country_trp)
+        super(UserTrip, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.trip_country_trp
     objects = models.Manager()
+# ================================ END RECENT TRIPS MODEL ======================================= #
+
 
 
 class UserVaccine(models.Model):

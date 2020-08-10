@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Lista de Medicamentos</title>
+        <title>Clinify | Deletar</title>
     </head>
     <body class="medication-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -40,37 +40,16 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-3">
-            <div class="card card-med mt-4 mb-3" id="card-opacity">
-                <div class="overflow-auto">
-                    <table class="table table-striped overflow-auto">
-                        <thead>
-                            <tr>
-                                <th>Medicamento</th>
-                                <th>Dose</th>
-                                <th>Data Início</th>
-                                <th>Data Fim</th>
-                                <th>Hora</th>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for usermed in med %}
-                            <tr>
-                                <td><a href="{% url 'temp:medication_detail' pk=usermed.pk slug=usermed.slug %}">{{ usermed.medication_name_med }}</a></td>
-                                <td>{{ usermed.dosis_name_med }}</td>
-                                <td>{{ usermed.init_date_med }}</td>
-                                <td>{{ usermed.end_date_med }}</td>
-                                <td>{{ usermed.time_med }}</td>
-                                <td><a href="{% url 'temp:medication' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
-                                <td><a href="{% url 'temp:medication_delete' pk=usermed.pk slug=usermed.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>      
+        <section class="container mt-5">
+            <form method="POST">
+                <div class="form-row justify-content-center mt-4">
+                    <p class="container">Certeza que deseja excluir este item?</p> 
+                    {% csrf_token %}
+                    <input type='submit' value="Sim" class="btn btn-danger pt-1 pb-1" style="color: white;">
+                    <span style="width: 25px"></span>
+                    <a href="{% url 'temp:trip_list' %}" class="btn btn-primary pt-1 pb-1">Não</a>
                 </div>
-            </div>
+            </form>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>

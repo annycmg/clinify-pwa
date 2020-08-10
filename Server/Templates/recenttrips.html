@@ -40,60 +40,35 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-3">
-            <div class="card" id="card-opacity">
-                <form class="container" method="POST" action="#">
+        <section class="container mt-5">
+            <div class="card container" id="card-opacity">
+                <form enctype="multipart/form-data" method="POST">
                     {% csrf_token %}
                     <div class="form-row mt-3">
                         <div class="col-12">
                             <label class="lbl2">País(es) *</label>
-                            {{ form_trip.trip_country_trp }}
+                            {{ form.trip_country_trp }}
                         </div>
                     </div>
                     <div class="form-row mt-3 mb-3">
                         <div class="col-6">
                             <label class="lbl2">Date Início *</label>
-                            {{ form_trip.init_date_trp }}
+                            {{ form.init_date_trp }}
                         </div>
                         <div class="col-6">
                             <label class="lbl2">Data Fim *</label>
-                            {{ form_trip.end_date_trp }}
+                            {{ form.end_date_trp }}
                         </div>
                     </div>
-                    <div class=" form-row justify-content-center mb-3">
-                        <button type="submit" class="btn btn-primary col-5 pt-0 pb-0">Salvar</button>
+                    {{ form.errors }}
+                    <div class=" form-row justify-content-center mt-3 mb-4">
+                        <button class="btn btn-success col-5 pt-0 pb-0">Salvar</button>
                         <span style="width: 25px"></span>
                         <button class="btn btn-primary col-5 pt-0 pb-0">Reset</button>
                     </div>
                 </form>
             </div>
-
-            <div class="card card-trip mt-3 mb-4" id="card-opacity">
-                <div class="overflow-auto">
-                    <table class="table table-striped overflow-auto">
-                        <thead>
-                            <tr>
-                                <th>País(es)</th>
-                                <th>Data Início</th>
-                                <th>Data Fim</th>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for usertrip in trip %}
-                            <tr>
-                                <td>{{ usertrip.trip_country_trp }}</td>
-                                <td>{{ usertrip.init_date_trp }}</td>
-                                <td>{{ usertrip.end_date_trp }}</td>
-                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>      
-                </div>
-            </div>
+            <a href="{% url 'temp:trip_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Minhas Viagens</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>

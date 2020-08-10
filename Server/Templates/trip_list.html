@@ -16,7 +16,7 @@
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
-                    <a class="nav-link" href="#">Conquistas</a>
+                    <a class="nav-link">Conquistas</a>
                 </ul>
                 <form class="form-inline" method="POST">
                     <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
@@ -56,11 +56,11 @@
                         <tbody>
                             {% for usertrip in trip %}
                             <tr>
-                                <td>{{ usertrip.trip_country_trp }}</td>
+                                <td><a href="{% url 'temp:trip_detail' pk=usertrip.pk slug=usertrip.slug %}">{{ usertrip.trip_country_trp }}</a></td>
                                 <td>{{ usertrip.init_date_trp }}</td>
                                 <td>{{ usertrip.end_date_trp }}</td>
-                                <td><a href=""><img src="{% static 'images/edit.png' %}"></a></td>
-                                <td><a href=""><img src="{% static 'images/trash.png' %}"></a></td>
+                                <td><a href="{% url 'temp:recenttrips' pk=usertrip.pk slug=usertrip.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href="{% url 'temp:trip_delete' pk=usertrip.pk slug=usertrip.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
                             </tr>
                             {% endfor %}
                         </tbody>

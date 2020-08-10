@@ -137,14 +137,6 @@ class MedicationDeleteView(DeleteView): ### DELETE
 
 
 # ======================================== TRIPS CRUD ============================================= #
-# trips: retorna a lista das últimas viagens do usuário, vindos do sqlite
-@login_required
-def recenttrips(request):
-    form_trip = TripForm()
-    trip = UserTrip.objects.all()
-    context = {'form_trip':form_trip, 'trip':trip}
-    return render(request, 'recenttrips.html', context)
-
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class TripListView(ListView): ### RETRIEVE
     template_name="trip_list.html"
@@ -157,6 +149,55 @@ class TripListView(ListView): ### RETRIEVE
         queryset = super(TripListView, self).get_queryset()
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class TripDetailView(DetailView): ### RETRIEVE
+    template_name = "trip_detail.html"
+    model = UserTrip
+    context_object_name = 'single_trip'
+    def get_context_data(self, **kwargs):
+        context = super(TripDetailView, self).get_context_data(**kwargs)
+        return context
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class TripCreateView(CreateView): ### CREATE
+    template_name = "recenttrips.html"
+    model = UserTrip
+    form_class = TripForm
+    def get_success_url(self):
+        return reverse("temp:trip_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("trip inserted and saved")
+        return super(TripCreateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class TripUpdateView(UpdateView):  ### UPDATE
+    template_name = "recenttrips.html"
+    model = UserTrip
+    form_class = TripForm
+    def get_success_url(self):
+        return reverse("temp:trip_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("trip updated and saved")
+        return super(TripUpdateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class TripDeleteView(DeleteView): ### DELETE
+    model = UserTrip
+    success_url = 'temp:trip_list'
+    template_name = 'trip_delete.html'
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            self.object.delete()
+            print("trip safely deleted")
+            return HttpResponseRedirect(reverse(self.success_url))
+        else:
+            return HttpResponseRedirect(self.success_url)
 # ======================================== END TRIPS CRUD ========================================== #
 
 
