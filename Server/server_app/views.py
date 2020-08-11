@@ -200,14 +200,79 @@ class TripDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(self.success_url)
 # ======================================== END TRIPS CRUD ========================================== #
 
-
+# ========================================= VACCINE CRUD ============================================ #
 # vaccines: retorna a lista das últimas vacinas do usuário, vindos do sqlite
-@login_required
-def recentvaccine(request):
-    form_vac = VaccineForm()
-    vac = UserVaccine.objects.all()
-    context = {'form_vac':form_vac, 'vac':vac}
-    return render(request, 'recentvaccine.html', context)
+# @login_required
+# def recentvaccine(request):
+#     form_vac = VaccineForm()
+#     vac = UserVaccine.objects.all()
+#     context = {'form_vac':form_vac, 'vac':vac}
+#     return render(request, 'recentvaccine.html', context)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class VaccineListView(ListView): ### RETRIEVE
+    template_name="vaccine_list.html"
+    model = UserVaccine
+    context_object_name = 'vac'
+    def get_context_data(self, **kwargs): 
+        context = super(VaccineListView, self).get_context_data(**kwargs)
+        return context
+    def get_queryset(self):
+        queryset = super(VaccineListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class VaccineDetailView(DetailView): ### RETRIEVE
+    template_name = "vaccine_detail.html"
+    model = UserVaccine
+    context_object_name = 'single_vaccine'
+    def get_context_data(self, **kwargs):
+        context = super(VaccineDetailView, self).get_context_data(**kwargs)
+        return context
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class VaccineCreateView(CreateView): ### CREATE
+    template_name = "recentvaccine.html"
+    model = UserVaccine
+    form_class = VaccineForm
+    def get_success_url(self):
+        return reverse("temp:vaccine_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("vaccine inserted and saved")
+        return super(VaccineCreateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class VaccineUpdateView(UpdateView):  ### UPDATE
+    template_name = "recentvaccine.html"
+    model = UserVaccine
+    form_class = VaccineForm
+    def get_success_url(self):
+        return reverse("temp:vaccine_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("vaccine updated and saved")
+        return super(VaccineUpdateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class VaccineDeleteView(DeleteView): ### DELETE
+    model = UserVaccine
+    success_url = 'temp:vaccine_list'
+    template_name = 'vaccine_delete.html'
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            self.object.delete()
+            print("vaccine safely deleted")
+            return HttpResponseRedirect(reverse(self.success_url))
+        else:
+            return HttpResponseRedirect(self.success_url)
+
+# ======================================== END VACCINE CRUD ========================================= #
+
 
 
 @login_required

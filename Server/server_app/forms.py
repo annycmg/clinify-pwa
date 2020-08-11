@@ -66,7 +66,7 @@ class TripForm(ModelForm):
 class VaccineForm(ModelForm):
     class Meta:
         model = UserVaccine
-        fields = '__all__'
+        fields = ['vaccine_name_vac', 'vaccine_date_vac']
     def __init__(self, *args, **kwargs):
         super(VaccineForm, self).__init__(*args, **kwargs)
         self.fields['vaccine_name_vac'].widget.attrs.update({'placeholder': 'Febre Amarela', 'class': 'form-control', 'required': ''})

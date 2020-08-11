@@ -58,14 +58,21 @@ class UserTrip(models.Model):
 # ================================ END RECENT TRIPS MODEL ======================================= #
 
 
-
+# ================================ RECENT VACCINE MODEL ========================================= #
 class UserVaccine(models.Model):
     user             = models.ForeignKey(User, on_delete=models.CASCADE)
     vaccine_name_vac = models.CharField(max_length=200)
     vaccine_date_vac = models.DateField()
+    slug             = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.vaccine_name_vac)
+        super(UserVaccine, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.vaccine_name_vac
     objects = models.Manager() 
+# ============================== END RECENT VACCINE MODEL ======================================= #
 
 
 class UserDiet(models.Model):

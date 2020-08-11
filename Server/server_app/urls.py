@@ -3,6 +3,7 @@ from django.conf.urls import url, include
 from . import views 
 from .views import MedicationListView, MedicationDetailView, MedicationCreateView, MedicationUpdateView, MedicationDeleteView
 from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView, TripDeleteView
+from .views import VaccineListView, VaccineDetailView, VaccineCreateView, VaccineUpdateView, VaccineDeleteView
 
 app_name = 'temp'
 
@@ -21,6 +22,13 @@ urlpatterns = [
     url(r'^recenttrips/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', TripDetailView.as_view(), name='trip_detail'),
     url(r'^recenttrips/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', TripDeleteView.as_view(), name='trip_delete'),
 
+    url(r'^recentvaccine/$', VaccineCreateView.as_view(), name='recentvaccine'),
+    url(r'^recentvaccine/list/$', VaccineListView.as_view(), name='vaccine_list'),
+    url(r'^recentvaccine/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', VaccineDetailView.as_view(), name='vaccine_detail'),
+    url(r'^recentvaccine/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', VaccineUpdateView.as_view(), name='recentvaccine'),
+    url(r'^recentvaccine/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', VaccineDeleteView.as_view(), name='vaccine_delete'),
+
+
     url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
     url(r'^appointment/$', views.appointment, name='appointment'),
     url(r'^diet.html/$', views.diet, name='diet'),
@@ -28,5 +36,4 @@ urlpatterns = [
     url(r'^exercise/$', views.exercise, name='exercise'),
     url(r'^offline/$', views.offline, name='offline'),
     url(r'^profile/$', views.profile, name='profile'),
-    url(r'^recentvaccine/$', views.recentvaccine, name='recentvaccine'),
     ]  

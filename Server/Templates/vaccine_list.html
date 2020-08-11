@@ -4,7 +4,7 @@
         {% load static %}
         <title>Clinify | Vacinas Recentes</title>
     </head>
-    <body class="medication-screen">
+    <body class="stresslevel-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
             <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
             <a class="navbar-brand mt-2" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
@@ -16,7 +16,7 @@
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
-                    <a class="nav-link" href="#">Conquistas</a> 
+                    <a class="nav-link">Conquistas</a>
                 </ul>
                 <form class="form-inline" method="POST">
                     <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
@@ -40,32 +40,34 @@
                 </div>
             </div>
         </div>
-        <section class="container mt-5">
-            <div class="card" id="card-opacity">
-                <div class="container">
-                    <form method="POST" action="#">
-                        {% csrf_token %}
-                        <div class="form-row col-12 mt-3">
-                            <label class="lbl2 mb-1">Vacina *</label>
-                            {{ form.vaccine_name_vac }}
-                        </div>
-                        <div class="form-row col-12 mt-3 mb-3">
-                            <label class="lbl2 mb-1">Data *</label>
-                            {{ form.vaccine_date_vac }}
-                        </div>
-                        <div class=" form-row justify-content-center mb-3">
-                            <button type="submit" class="btn btn-success col-5 pt-0 pb-0">Salvar</button>
-                            <span style="width: 25px"></span>
-                            <input type="reset" value="Limpar" class="btn btn-primary col-5 pt-0 pb-0">
-                        </div>
-                        {{ form.errors }}
-                    </form>
+        <section class="container mt-3">
+            <div class="card card-vaccine mt-3 mb-3" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th scope="col-3">Vacina</th>
+                                <th scope="col-2">Data</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for uservac in vac %}
+                            <tr>
+                                <td><a href="{% url 'temp:vaccine_detail' pk=uservac.pk slug=uservac.slug %}">{{ uservac.vaccine_name_vac }}</a></td>
+                                <td>{{ uservac.vaccine_date_vac }}</td>
+                                <td><a href="{% url 'temp:recentvaccine' pk=uservac.pk slug=uservac.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href="{% url 'temp:vaccine_delete' pk=uservac.pk slug=uservac.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>      
                 </div>
             </div>
-            <a href="{% url 'temp:vaccine_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Minhas Vacinas</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>
         <script src="/sw.js"></script> -->
     </body>
-</html>
+     
