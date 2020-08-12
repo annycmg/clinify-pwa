@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Fengyuan Chen's Datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
         <title>Clinify | Vacinas Recentes</title>
     </head>
     <body class="medication-screen">
@@ -51,6 +57,13 @@
                         </div>
                         <div class="form-row col-12 mt-3 mb-3">
                             <label class="lbl2 mb-1">Data *</label>
+                            <script>
+                                $(function () {
+                                    $("#datepicker4").datepicker({
+                                        format:'yyyy-mm-dd',
+                                    });
+                                });
+                            </script>
                             {{ form.vaccine_date_vac }}
                         </div>
                         <div class=" form-row justify-content-center mb-3">
