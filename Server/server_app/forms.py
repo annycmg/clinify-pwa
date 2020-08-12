@@ -76,8 +76,8 @@ class VaccineForm(ModelForm):
 class DietForm(ModelForm):
     class Meta:
         model = UserDiet
-        fields = '__all__'
+        fields = ['diet_include', 'diet_date_diet']
     def __init__(self, *args, **kwargs):
         super(DietForm, self).__init__(*args, **kwargs)
         self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea'})
-        
+        self.fields['diet_date_diet'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker5', 'required': ''})

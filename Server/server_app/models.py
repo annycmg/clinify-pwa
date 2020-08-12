@@ -76,8 +76,15 @@ class UserVaccine(models.Model):
 
 
 class UserDiet(models.Model):
-    user         = models.ForeignKey(User, on_delete=models.CASCADE)
-    diet_include = models.TextField(max_length=500)
+    user           = models.ForeignKey(User, on_delete=models.CASCADE)
+    diet_include   = models.TextField(max_length=500)
+    diet_date_diet = models.DateField()
+    slug           = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.diet_include)
+        super(UserDiet, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.diet_include
     objects = models.Manager()

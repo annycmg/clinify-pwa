@@ -59,8 +59,6 @@
 
 .lbl1, .lbl2, .exerc { margin-bottom: -8px; font-weight: 500; }
 
-/* .datepicker { background: linear-gradient(90deg, rgba(0,95,134,100) 0%, rgba(27,162,255,100)100%); border: 1px solid #555; color: #EEE; } */
-
 .th, .lbl2 { font-size: medium; }
 
 .table { text-align: left; }

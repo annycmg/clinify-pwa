@@ -274,13 +274,14 @@ class VaccineDeleteView(DeleteView): ### DELETE
 # ======================================== END VACCINE CRUD ========================================= #
 
 
-
+# =========================================== DIET CRUD ============================================= #
 @login_required
 def diet(request):
     form_diet = DietForm()
     diet = UserDiet.objects.all()
     context = {'form_diet':form_diet, 'diet':diet}
     return render(request, 'diet.html', context)
+# ========================================== END DIET CRUD =========================================== #
 
 
 

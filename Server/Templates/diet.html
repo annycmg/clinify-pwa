@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Fengyuan Chen's Datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
         <title>Clinify | Dieta</title>
     </head>
     <body class="diet-screen">
@@ -61,20 +67,27 @@
                 </div>
                 <form method="POST">
                     {% csrf_token %}
+                    <label class="lbl2">Data *</label>
+                    <script>
+                        $(function () {
+                        $("#datepicker5").datepicker({
+                            format:'yyyy-mm-dd',
+                            });
+                        });
+                    </script>
+                    {{ form_diet.diet_date_diet }}
                     <label class="lbl2 mt-2">Inclua a refeição *</label>
                     {{ form_diet.diet_include }}
-                    <button type="submit" class="btn btn-primary col-5">Salvar</button>
-                    <span style="width: 15px"></span>
-                    <button class="btn btn-primary col-5">Limpar</button>
+                    <div class="mt-4 mb-4 form-row justify-content-center">
+                        <button type="submit" class="btn btn-success col-5">Salvar</button>
+                        <span style="width: 15px"></span>
+                        <input type="reset" value="Limpar" class="btn btn-primary col-5">
+                    </div>
                 </form>
             </div>
 
             <div class="card container mt-4 mb-3" id="card-opacity">
-                <div class="form-row mt-3 mb-3">
-                    <div class="col-12">
-                        <input width="btn-auto;" placeholder="MM-DD-AAAA" required=""/>
-                    </div>
-                </div>
+                
                 <label class="lbl2 mt-2">Café da Manhã *</label>
                 <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
                 <label class="lbl2 mt-2">Almoço *</label>
