@@ -47,26 +47,35 @@
         </div>
         <section class="container-fluid">
             <div class="card container mt-3">
-                <div class="row mt-3 justify-content-center">
-                    <button class="btn">
-                        <img class="diet-icons" src="{% static 'images\breakfast.png' %}">
-                        <div class="diet-subt"><p>Café</p></div>
-                    </button>
-                    <button class="btn">
-                        <img class="diet-icons" src="{% static 'images\lunch.png' %}">
-                        <div class="diet-subt"><p>Almoço</p></div>
-                    </button>
-                    <button class="btn">
-                        <img class="diet-icons" src="{% static 'images\dinner.png' %}">
-                        <div class="diet-subt"><p>Jantar</p></div>
-                    </button>
-                    <button class="btn">
-                        <img class="diet-icons" src="{% static 'images\nut.png' %}">
-                        <div class="diet-subt"><p>Snacks</p></div>
-                    </button>
-                </div>
                 <form method="POST">
                     {% csrf_token %}
+                    <div class="row mt-3 justify-content-center">
+                        <button class="btn">     
+                            <input type="radio" name="meal">
+                                <img class="diet-icons" src="{% static 'images\breakfast.png' %}">
+                                <div class="diet-subt"><p>Café</p></div>
+                            </input>
+                        </button>
+                        <button class="btn">
+                            <input type="radio" name="meal">
+                                <img class="diet-icons" src="{% static 'images\lunch.png' %}">
+                                <div class="diet-subt"><p>Almoço</p></div>
+                            </input>
+                        </button>
+                        <button class="btn">
+                            <input type="radio" name="meal">
+                                <img class="diet-icons" src="{% static 'images\dinner.png' %}">
+                                <div class="diet-subt"><p>Jantar</p></div>
+                            </input>
+                        </button>
+                        <button class="btn">
+                            <input type="radio" name="meal">
+                                <img class="diet-icons" src="{% static 'images\nut.png' %}">
+                                <div class="diet-subt"><p>Snacks</p></div>
+                            </input>
+                        </button>
+                    </div>
+                
                     <label class="lbl2">Data *</label>
                     <script>
                         $(function () {
@@ -78,6 +87,8 @@
                     {{ form_diet.diet_date_diet }}
                     <label class="lbl2 mt-2">Inclua a refeição *</label>
                     {{ form_diet.diet_include }}
+                    {{ form_diet.errors }}
+
                     <div class="mt-4 mb-4 form-row justify-content-center">
                         <button type="submit" class="btn btn-success col-5">Salvar</button>
                         <span style="width: 15px"></span>
