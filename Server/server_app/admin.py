@@ -22,7 +22,7 @@ class AdminVaccine(admin.ModelAdmin):
         model = UserVaccine
 
 class AdminDiet(admin.ModelAdmin):
-    list_display = ['user', 'diet_include']
+    list_display = ['user', 'meal', 'diet_include', 'diet_date_diet']
     class Meta:
         model = UserDiet
 

@@ -75,7 +75,9 @@
                             </input>
                         </button>
                     </div>
-                
+                    <!-- {% for cmd in form.meal %}
+                        {{ cmd.choice_label }}
+                    {% endfor %} -->
                     <label class="lbl2">Data *</label>
                     <script>
                         $(function () {
@@ -84,10 +86,10 @@
                             });
                         });
                     </script>
-                    {{ form_diet.diet_date_diet }}
+                    {{ form.diet_date_diet }}
                     <label class="lbl2 mt-2">Inclua a refeição *</label>
-                    {{ form_diet.diet_include }}
-                    {{ form_diet.errors }}
+                    {{ form.diet_include }}
+                    {{ form.errors }}
 
                     <div class="mt-4 mb-4 form-row justify-content-center">
                         <button type="submit" class="btn btn-success col-5">Salvar</button>
@@ -98,7 +100,6 @@
             </div>
 
             <div class="card container mt-4 mb-3" id="card-opacity">
-                
                 <label class="lbl2 mt-2">Café da Manhã *</label>
                 <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
                 <label class="lbl2 mt-2">Almoço *</label>

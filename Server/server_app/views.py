@@ -275,12 +275,25 @@ class VaccineDeleteView(DeleteView): ### DELETE
 
 
 # =========================================== DIET CRUD ============================================= #
-@login_required
-def diet(request):
-    form_diet = DietForm()
-    diet = UserDiet.objects.all()
-    context = {'form_diet':form_diet, 'diet':diet}
-    return render(request, 'diet.html', context)
+# @login_required
+# def diet(request):
+#     form_diet = DietForm()
+#     diet = UserDiet.objects.all()
+#     context = {'form_diet':form_diet, 'diet':diet}
+#     return render(request, 'diet.html', context)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class DietCreateView(CreateView): ### CREATE
+    template_name = "diet.html"
+    model = UserDiet
+    form_class = DietForm
+    # def get_success_url(self):
+    #     return reverse("temp:vaccine_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("meal inserted and saved")
+        return super(DietCreateView, self).form_valid(form)
 # ========================================== END DIET CRUD =========================================== #
 
 

@@ -81,7 +81,7 @@ class UserDiet(models.Model):
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     diet_include    = models.TextField(max_length=500)
     diet_date_diet  = models.DateField()
-    meal            = models.CharField(null=True, max_length=1,default=None, choices=CHOICE)
+    meal            = models.CharField(null=False, max_length=1, default=None, choices=CHOICE)
     slug            = models.SlugField(default='slug')
 
     def save(self, *args, **kwargs):
