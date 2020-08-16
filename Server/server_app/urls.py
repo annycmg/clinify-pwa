@@ -4,7 +4,7 @@ from . import views
 from .views import MedicationListView, MedicationDetailView, MedicationCreateView, MedicationUpdateView, MedicationDeleteView
 from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView, TripDeleteView
 from .views import VaccineListView, VaccineDetailView, VaccineCreateView, VaccineUpdateView, VaccineDeleteView
-from .views import DietCreateView
+from .views import DietCreateView, DietDetailView, DietListView, DietUpdateView, DietDeleteView
 
 app_name = 'temp'
 
@@ -29,7 +29,11 @@ urlpatterns = [
     url(r'^recentvaccine/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', VaccineUpdateView.as_view(), name='recentvaccine'),
     url(r'^recentvaccine/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', VaccineDeleteView.as_view(), name='vaccine_delete'),
 
-    url(r'^diet.html/$', DietCreateView.as_view(), name='diet'),
+    url(r'^diet/$', DietCreateView.as_view(), name='diet'),
+    url(r'^diet/list/$', DietListView.as_view(), name='diet_list'),
+    url(r'^diet/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietDetailView.as_view(), name='diet_detail'),
+    url(r'^diet/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietUpdateView.as_view(), name='diet'),
+    url(r'^diet/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietDeleteView.as_view(), name='diet_delete'),
 
 
     url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),

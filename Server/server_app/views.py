@@ -273,14 +273,27 @@ class VaccineDeleteView(DeleteView): ### DELETE
 #     diet = UserDiet.objects.all()
 #     context = {'form_diet':form_diet, 'diet':diet}
 #     return render(request, 'diet.html', context)
-# @method_decorator(login_required(login_url="intro"), name='dispatch')
-# class DietDetailView(DetailView): ### RETRIEVE
-#     template_name = "diet_detail.html"
-#     model = UserDiet
-#     context_object_name = 'single_vaccine'
-#     def get_context_data(self, **kwargs):
-#         context = super(VaccineDetailView, self).get_context_data(**kwargs)
-#         return context
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class DietListView(ListView): ### RETRIEVE
+    template_name="diet_list.html"
+    model = UserDiet
+    context_object_name = 'diet'
+    def get_context_data(self, **kwargs): 
+        context = super(DietListView, self).get_context_data(**kwargs)
+        return context
+    def get_queryset(self):
+        queryset = super(DietListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class DietDetailView(DetailView): ### RETRIEVE
+    template_name = "diet_detail.html"
+    model = UserDiet
+    context_object_name = 'single_diet'
+    def get_context_data(self, **kwargs):
+        context = super(DietDetailView, self).get_context_data(**kwargs)
+        return context
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class DietCreateView(CreateView): ### CREATE
@@ -288,12 +301,39 @@ class DietCreateView(CreateView): ### CREATE
     model = UserDiet
     form_class = DietForm
     def get_success_url(self):
-        return reverse("temp:diet") #, kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+        return reverse("temp:diet_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
         print("meal inserted and saved")
         return super(DietCreateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class DietUpdateView(UpdateView):  ### UPDATE
+    template_name = "diet.html"
+    model = UserDiet
+    form_class = DietForm
+    def get_success_url(self):
+        return reverse("temp:diet_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("meal updated and saved")
+        return super(DietUpdateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class DietDeleteView(DeleteView): ### DELETE
+    model = UserDiet
+    success_url = 'temp:diet_list'
+    template_name = 'diet_delete.html'
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            self.object.delete()
+            print("meal safely deleted")
+            return HttpResponseRedirect(reverse(self.success_url))
+        else:
+            return HttpResponseRedirect(self.success_url)
 # ========================================== END DIET CRUD =========================================== #
 
 

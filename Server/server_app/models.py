@@ -37,7 +37,7 @@ class UserMedication(models.Model):
     def __str__(self):
         return self.medication_name_med
     objects = models.Manager()
-# ================================ END MEDICATION MODEL ================================ #
+# ================================== END MEDICATION MODEL ================================== #
 
 
 # ================================ RECENT TRIPS MODEL ======================================= #
@@ -75,13 +75,14 @@ class UserVaccine(models.Model):
 # ============================== END RECENT VACCINE MODEL ======================================= #
 
 
+# ===================================  DIET MODEL ================================================ #
 class UserDiet(models.Model):
     CHOICE = (('0', 'Café'), ('1', 'Almoço'), ('2', 'Jantar'), ('3', 'Snacks'))  
 
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     diet_include    = models.TextField(max_length=500)
     diet_date_diet  = models.DateField()
-    meal            = models.CharField(null=False, max_length=1, default=None, choices=CHOICE)
+    meal            = models.CharField(null=False, max_length=10, default=None, choices=CHOICE)
     slug            = models.SlugField(default='slug')
 
     def save(self, *args, **kwargs):
@@ -91,3 +92,4 @@ class UserDiet(models.Model):
     def __str__(self):
         return self.diet_include
     objects = models.Manager()
+# ======================================= END DIET MODEL =========================================== #

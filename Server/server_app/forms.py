@@ -80,5 +80,5 @@ class DietForm(forms.ModelForm):
         widgets = {'meal': forms.RadioSelect}
     def __init__(self, *args, **kwargs):
         super(DietForm, self).__init__(*args, **kwargs)
-        self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea', 'rows':9})
+        self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea', 'rows':6})
         self.fields['diet_date_diet'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker5', 'required': ''})

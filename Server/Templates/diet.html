@@ -88,20 +88,9 @@
                     </div>
                 </form>
             </div>
-
-            <!-- <div class="card container mt-4 mb-3" id="card-opacity">
-                <label class="lbl2 mt-2">Café da Manhã *</label>
-                <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                <label class="lbl2 mt-2">Almoço *</label>
-                <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                <label class="lbl2 mt-2">Jantar *</label>
-                <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                <label class="lbl2 mt-2">Snacks *</label>
-                <textarea class="form-control input-break mt-2 mb-2" aria-label="With textarea"></textarea>
-                <div class="form-row justify-content-center mb-3">
-                    <button class="btn btn-primary col-11">Deletar Tudo</button>
-                </div>
-            </div> -->
+            <div class="container">
+                <a href="{% url 'temp:diet_list' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Minhas Refeições</a>
+            </div>
         </section>
     {% endblock %}
     <!-- <script src="/Controller/app.js"></script>
