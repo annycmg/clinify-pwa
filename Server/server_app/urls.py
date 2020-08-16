@@ -35,11 +35,12 @@ urlpatterns = [
     url(r'^diet/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietUpdateView.as_view(), name='diet'),
     url(r'^diet/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietDeleteView.as_view(), name='diet_delete'),
 
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^editprofile/$', views.editprofile, name='editprofile'),
 
     url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
+
     url(r'^appointment/$', views.appointment, name='appointment'),
-    url(r'^editprofile/$', views.editprofile, name='editprofile'),
     url(r'^exercise/$', views.exercise, name='exercise'),
     url(r'^offline/$', views.offline, name='offline'),
-    url(r'^profile/$', views.profile, name='profile'),
     ]  

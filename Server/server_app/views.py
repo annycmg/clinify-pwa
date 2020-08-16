@@ -267,12 +267,6 @@ class VaccineDeleteView(DeleteView): ### DELETE
 
 
 # =========================================== DIET CRUD ============================================= #
-# @login_required
-# def diet(request):
-#     form_diet = DietForm()
-#     diet = UserDiet.objects.all()
-#     context = {'form_diet':form_diet, 'diet':diet}
-#     return render(request, 'diet.html', context)
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class DietListView(ListView): ### RETRIEVE
     template_name="diet_list.html"
@@ -337,7 +331,25 @@ class DietDeleteView(DeleteView): ### DELETE
 # ========================================== END DIET CRUD =========================================== #
 
 
+# ===================================== GOOGLE CALENDAR APPOINTMENTS ================================== #
+@login_required
+def appointment(request):
+#     SCOPES = ['https://www.googleapis.com/auth/calendar']
+#     creds = None
+#     if not creds or not creds.valid:
+#         if creds and creds.expired and creds.refresh_token:
+#             creds.refresh(Request())
+#         else:
+#             flow = InstalledAppFlow.from_client_secrets_file('server_app/client_secret.json', SCOPES)
+#             creds = flow.run_local_server(port=0)
+#     service = build('calendar', 'v3', credentials=creds)
+    return render(request, 'appointment.html')
+# ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
 
 @login_required
 def editprofile(request):
@@ -353,27 +365,8 @@ def logoutUser(request):
     return redirect('intro')
 
 @login_required
-def profile(request):
-    return render(request, 'profile.html')
-
-@login_required
 def exercise(request):
     return render(request, 'exercise.html')
-
-@login_required
-def appointment(request):
-
-    # SCOPES = ['https://www.googleapis.com/auth/calendar']
-    # creds = None
-    # if not creds or not creds.valid:
-    #     if creds and creds.expired and creds.refresh_token:
-    #         creds.refresh(Request())
-    #     else:
-    #         flow = InstalledAppFlow.from_client_secrets_file('server_app/client_secret.json', SCOPES)
-    #         creds = flow.run_local_server(port=0)
-    # service = build('calendar', 'v3', credentials=creds)
-
-    return render(request, 'appointment.html')
 
 def forgpassword(request):
     return render(request, 'forgpassword.html')
