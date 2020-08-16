@@ -201,14 +201,6 @@ class TripDeleteView(DeleteView): ### DELETE
 # ======================================== END TRIPS CRUD ========================================== #
 
 # ========================================= VACCINE CRUD ============================================ #
-# vaccines: retorna a lista das últimas vacinas do usuário, vindos do sqlite
-# @login_required
-# def recentvaccine(request):
-#     form_vac = VaccineForm()
-#     vac = UserVaccine.objects.all()
-#     context = {'form_vac':form_vac, 'vac':vac}
-#     return render(request, 'recentvaccine.html', context)
-
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class VaccineListView(ListView): ### RETRIEVE
     template_name="vaccine_list.html"
@@ -281,14 +273,22 @@ class VaccineDeleteView(DeleteView): ### DELETE
 #     diet = UserDiet.objects.all()
 #     context = {'form_diet':form_diet, 'diet':diet}
 #     return render(request, 'diet.html', context)
+# @method_decorator(login_required(login_url="intro"), name='dispatch')
+# class DietDetailView(DetailView): ### RETRIEVE
+#     template_name = "diet_detail.html"
+#     model = UserDiet
+#     context_object_name = 'single_vaccine'
+#     def get_context_data(self, **kwargs):
+#         context = super(VaccineDetailView, self).get_context_data(**kwargs)
+#         return context
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class DietCreateView(CreateView): ### CREATE
     template_name = "diet.html"
     model = UserDiet
     form_class = DietForm
-    # def get_success_url(self):
-    #     return reverse("temp:vaccine_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def get_success_url(self):
+        return reverse("temp:diet") #, kwargs={'pk':self.object.pk, 'slug':self.object.slug})
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()

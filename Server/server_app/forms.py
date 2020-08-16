@@ -73,12 +73,12 @@ class VaccineForm(ModelForm):
         self.fields['vaccine_date_vac'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker4', 'required': ''})
 
 
-class DietForm(ModelForm):
+class DietForm(forms.ModelForm):
     class Meta:
         model = UserDiet
         fields = ['diet_include', 'diet_date_diet', 'meal']
+        widgets = {'meal': forms.RadioSelect}
     def __init__(self, *args, **kwargs):
         super(DietForm, self).__init__(*args, **kwargs)
-        self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea'})
+        self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea', 'rows':9})
         self.fields['diet_date_diet'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker5', 'required': ''})
-        self.fields['meal'].widget.attrs.update({'meal': forms.RadioSelect})

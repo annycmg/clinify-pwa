@@ -76,7 +76,7 @@ class UserVaccine(models.Model):
 
 
 class UserDiet(models.Model):
-    CHOICE = ((1, 'Café'), (2, 'Almoço'), (3, 'Jantar'), (4, 'Lanche'))  
+    CHOICE = (('0', 'Café'), ('1', 'Almoço'), ('2', 'Jantar'), ('3', 'Snacks'))  
 
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     diet_include    = models.TextField(max_length=500)
