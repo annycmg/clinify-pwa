@@ -38,7 +38,8 @@ urlpatterns = [
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^editprofile/$', views.editprofile, name='editprofile'),
 
-    url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
+    # url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
+    
 
     url(r'^appointment/$', views.appointment, name='appointment'),
     url(r'^exercise/$', views.exercise, name='exercise'),
