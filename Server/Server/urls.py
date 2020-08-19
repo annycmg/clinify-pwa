@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^admin/password_reset/done/$', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     url(r'^admin/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     url(r'^admin/reset/done/$', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-
+    
     url(r'^Templates/', include('server_app.urls')),
 
 ]

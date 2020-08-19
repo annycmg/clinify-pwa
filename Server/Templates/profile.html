@@ -47,38 +47,38 @@
                         {% csrf_token %}
                         {% if user.is_authenticated %}
                         <h5 class="name pt-3">{{ user.first_name }} {{ user.last_name }}<a href="{% url 'temp:editprofile' %}"><img class="edit" src="{% static 'images/edit.png' %}"></a></h5> 
-                        <div class="row mt-5 col-sm-12 col-lg-6 profile-opt">
-                            <form name="form" method="post">
+                        {% endif %}
+                        <div class="row mt-3 col-sm-12 col-lg-6 profile-opt">
+                            <form name="form" method="POST">
                                 <div class="form-group ">
-                                    <h6 class="age">Idade:</h6>
+                                    <h6 class="age">Idade:  {{userprof.profile_age_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="loc">Localização:</h6>
+                                    <h6 class="loc">Localização:  {{userprof.profile_loc_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="weight">Peso:</h6>
+                                    <h6 class="weight">Peso:   {{userprof.profile_weight_prf}} Kg</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="height">Altura:</h6>
+                                    <h6 class="height">Altura:   {{userprof.profile_height_prf}} cm</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="alerg">Alergias:</h6>
+                                    <h6 class="alerg">Alergias:   {{userprof.profile_allergy_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="desease">Doenças Hereditárias:</h6>
+                                    <h6 class="desease">Doenças Hereditárias:   {{userprof.profile_desease_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="diet">Dieta Específica:</h6>
+                                    <h6 class="diet">Dieta Específica:   {{userprof.profile_diet_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="surgery">Cirurgias:</h6>
+                                    <h6 class="surgery">Cirurgias:   {{userprof.profile_surgery_prf}}</h6>
                                 </div>
                                 <div class="form-group ">
-                                    <h6 class="exerc">Prática de Exercícios:</h6>
+                                    <h6 class="exerc">Prática de Exercícios:   {{userprof.profile_exerc_prf}}</h6>
                                 </div>
                             </form>
                         </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     profile_diet_prf     = models.CharField(max_length=200)
     profile_surgery_prf  = models.CharField(max_length=200)
     profile_exerc_prf    = models.CharField(max_length=200)
+
     def __str__(self):
         return self.user.username
 # ============================ END PROFILE MODEL ========================================== #

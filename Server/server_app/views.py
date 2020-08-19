@@ -20,6 +20,7 @@ from .models import UserMedication
 from .models import UserTrip
 from .models import UserVaccine
 from .models import UserDiet
+from .models import UserProfile
 
 # import datetime
 # import pickle
@@ -347,13 +348,20 @@ def appointment(request):
 # ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+# ======================================== PROFILE DISPLAY/UPDATE ====================================== #
+class ProfileListView(ListView):
+    template_name = 'profile.html'
+    model = UserProfile
+    context_object_name = 'profile'
+    def get_context_data(self, **kwargs):
+        context = super(ProfileListView, self).get_context_data(**kwargs)
+        context['userprof'] = UserProfile.objects.get(user=self.request.user)
+        return context
 
 @login_required
 def editprofile(request):
     return render(request, 'editprofile.html')
+# ===================================== END PROFILE DISPLAY/UPDATE ===================================== #
 
 @login_required
 def home(request):

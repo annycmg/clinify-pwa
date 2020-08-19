@@ -5,7 +5,7 @@ from .views import MedicationListView, MedicationDetailView, MedicationCreateVie
 from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView, TripDeleteView
 from .views import VaccineListView, VaccineDetailView, VaccineCreateView, VaccineUpdateView, VaccineDeleteView
 from .views import DietCreateView, DietDetailView, DietListView, DietUpdateView, DietDeleteView
-
+from .views import ProfileListView
 app_name = 'temp'
 
 urlpatterns = [
@@ -35,10 +35,8 @@ urlpatterns = [
     url(r'^diet/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietUpdateView.as_view(), name='diet'),
     url(r'^diet/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietDeleteView.as_view(), name='diet_delete'),
 
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/$', ProfileListView.as_view(), name='profile'),
     url(r'^editprofile/$', views.editprofile, name='editprofile'),
-
-    # url(r'^forgpassword/$', views.forgpassword, name='forgpassword'),
     
 
     url(r'^appointment/$', views.appointment, name='appointment'),
