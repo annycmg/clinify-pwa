@@ -25,7 +25,7 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = '__all__'
+        fields = ['profile_age_prf','profile_loc_prf','profile_weight_prf','profile_height_prf','profile_allergy_prf','profile_desease_prf','profile_diet_prf','profile_surgery_prf','profile_exerc_prf']
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})

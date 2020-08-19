@@ -15,6 +15,11 @@ class UserProfile(models.Model):
     profile_diet_prf     = models.CharField(max_length=200)
     profile_surgery_prf  = models.CharField(max_length=200)
     profile_exerc_prf    = models.CharField(max_length=200)
+    slug                 = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username

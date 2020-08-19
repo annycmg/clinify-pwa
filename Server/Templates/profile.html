@@ -46,7 +46,7 @@
                     <div class="card-body">
                         {% csrf_token %}
                         {% if user.is_authenticated %}
-                        <h5 class="name pt-3">{{ user.first_name }} {{ user.last_name }}<a href="{% url 'temp:editprofile' %}"><img class="edit" src="{% static 'images/edit.png' %}"></a></h5> 
+                        <h5 class="name pt-3">{{ user.first_name }} {{ user.last_name }}<a href="{% url 'temp:editprofile' pk=userprof.pk slug=userprof.slug %}"><img class="edit" src="{% static 'images/edit.png' %}"></a></h5> 
                         {% endif %}
                         <div class="row mt-3 col-sm-12 col-lg-6 profile-opt">
                             <form name="form" method="POST">

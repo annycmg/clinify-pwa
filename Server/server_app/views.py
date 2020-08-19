@@ -349,6 +349,7 @@ def appointment(request):
 
 
 # ======================================== PROFILE DISPLAY/UPDATE ====================================== #
+@method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileListView(ListView):
     template_name = 'profile.html'
     model = UserProfile
@@ -358,9 +359,18 @@ class ProfileListView(ListView):
         context['userprof'] = UserProfile.objects.get(user=self.request.user)
         return context
 
-@login_required
-def editprofile(request):
-    return render(request, 'editprofile.html')
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class ProfileUpdateView(UpdateView):  ### UPDATE
+    template_name = "editprofile.html"
+    model = UserProfile
+    form_class = ProfileForm
+    def get_success_url(self):
+        return reverse("temp:profile")
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("profile updated and saved")
+        return super(ProfileUpdateView, self).form_valid(form)
 # ===================================== END PROFILE DISPLAY/UPDATE ===================================== #
 
 @login_required
