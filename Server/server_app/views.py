@@ -29,6 +29,20 @@ from .models import UserProfile
 # from google_auth_oauthlib.flow import InstalledAppFlow
 # from google.auth.transport.requests import Request
 
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+@login_required
+def logoutUser(request):
+    print("Log out com sucesso")
+    return redirect('intro')
+
+def offline(request):
+    return render(request, 'offline.html')
+
+def base(request):
+    return render(request, 'base.html')
 
 # =============================== LOGIN & PASSWORD AUTHETICATION ================================== #
 def intro(request):
@@ -332,22 +346,6 @@ class DietDeleteView(DeleteView): ### DELETE
 # ========================================== END DIET CRUD =========================================== #
 
 
-# ===================================== GOOGLE CALENDAR APPOINTMENTS ================================== #
-@login_required
-def appointment(request):
-#     SCOPES = ['https://www.googleapis.com/auth/calendar']
-#     creds = None
-#     if not creds or not creds.valid:
-#         if creds and creds.expired and creds.refresh_token:
-#             creds.refresh(Request())
-#         else:
-#             flow = InstalledAppFlow.from_client_secrets_file('server_app/client_secret.json', SCOPES)
-#             creds = flow.run_local_server(port=0)
-#     service = build('calendar', 'v3', credentials=creds)
-    return render(request, 'appointment.html')
-# ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
-
-
 # ======================================== PROFILE DISPLAY/UPDATE ====================================== #
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileListView(ListView):
@@ -373,24 +371,41 @@ class ProfileUpdateView(UpdateView):  ### UPDATE
         return super(ProfileUpdateView, self).form_valid(form)
 # ===================================== END PROFILE DISPLAY/UPDATE ===================================== #
 
-@login_required
-def home(request):
-    return render(request, 'home.html')
 
-@login_required
-def logoutUser(request):
-    print("Log out com sucesso")
-    return redirect('intro')
 
+
+
+
+
+
+
+# ========================================== DO!!! EXERCISE CRUD ====================================== #
 @login_required
 def exercise(request):
     return render(request, 'exercise.html')
+# ====================================== DO!!! END EXERCISE CRUD ======================================== #
 
-def forgpassword(request):
-    return render(request, 'forgpassword.html')
 
-def offline(request):
-    return render(request, 'offline.html')
+# ================================== DO!!! GOOGLE CALENDAR APPOINTMENTS ================================== #
+@login_required
+def appointment(request):
+#     SCOPES = ['https://www.googleapis.com/auth/calendar']
+#     creds = None
+#     if not creds or not creds.valid:
+#         if creds and creds.expired and creds.refresh_token:
+#             creds.refresh(Request())
+#         else:
+#             flow = InstalledAppFlow.from_client_secrets_file('server_app/client_secret.json', SCOPES)
+#             creds = flow.run_local_server(port=0)
+#     service = build('calendar', 'v3', credentials=creds)
+    return render(request, 'appointment.html')
+# ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
-def base(request):
-    return render(request, 'base.html')
+
+# ===================================== DO!!! DISPLAY ACHIEVIMENTS ==================================== #
+
+
+# ========================================== DO!!! BASIC PWA ========================================== #
+
+
+# ======================================= DO!!! DEPLOY ON WEB ========================================== #

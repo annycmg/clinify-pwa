@@ -36,7 +36,6 @@ urlpatterns = [
     url(r'^diet/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', DietDeleteView.as_view(), name='diet_delete'),
 
     url(r'^profile/$', ProfileListView.as_view(), name='profile'),
-    # url(r'^editprofile/$', views.editprofile, name='editprofile'),
     url(r'^profile/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', ProfileUpdateView.as_view(), name='editprofile'),
 
 
