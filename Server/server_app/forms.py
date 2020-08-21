@@ -8,6 +8,7 @@ from .models import UserTrip
 from .models import UserProfile
 from .models import UserVaccine
 from .models import UserDiet
+from .models import UserAppoint
 
 # SignupForm: formulário de infos básicas
 class SignUpForm(UserCreationForm):
@@ -82,3 +83,15 @@ class DietForm(forms.ModelForm):
         super(DietForm, self).__init__(*args, **kwargs)
         self.fields['diet_include'].widget.attrs.update({'class': 'form-control', 'required': '', 'aria-label': 'With textarea', 'rows':6})
         self.fields['diet_date_diet'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker5', 'required': ''})
+
+
+class AppointForm(forms.ModelForm):
+    class Meta:
+        model = UserAppoint
+        fields = ['appoint_espec_apt','appoint_date_apt','appoint_time_apt','appoint_nmed_apt']
+    def __init__(self, *args, **kwargs):
+        super(AppointForm, self).__init__(*args, **kwargs)
+        self.fields['appoint_espec_apt'].widget.attrs.update({'placeholder': 'Oftalmologista', 'class': 'form-control', 'required': ''})
+        self.fields['appoint_date_apt'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['appoint_time_apt'].widget.attrs.update({'placeholder': 'HH:MM:SS', 'class': 'form-control', 'required': ''})
+        self.fields['appoint_nmed_apt'].widget.attrs.update({'class': 'form-control', 'required': ''})

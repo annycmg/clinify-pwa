@@ -4,6 +4,7 @@ from .models import UserTrip
 from .models import UserProfile
 from .models import UserVaccine
 from .models import UserDiet
+from .models import UserAppoint
 
 # Register your models here.
 class AdminMedication(admin.ModelAdmin):
@@ -26,8 +27,14 @@ class AdminDiet(admin.ModelAdmin):
     class Meta:
         model = UserDiet
 
+class AdminAppoint(admin.ModelAdmin):
+    list_display = ['user', 'appoint_espec_apt', 'appoint_nmed_apt', 'appoint_date_apt', 'appoint_time_apt']
+    class Meta:
+        model = UserAppoint
+
 admin.site.register(UserMedication, AdminMedication)
 admin.site.register(UserTrip, AdminTrip)
 admin.site.register(UserVaccine, AdminVaccine)
 admin.site.register(UserDiet, AdminDiet)
 admin.site.register(UserProfile)
+admin.site.register(UserAppoint)

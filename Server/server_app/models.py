@@ -43,7 +43,7 @@ class UserMedication(models.Model):
     def __str__(self):
         return self.medication_name_med
     objects = models.Manager()
-# ================================== END MEDICATION MODEL ================================== #
+# ============================== END MEDICATION MODEL ===================================== #
 
 
 # ================================ RECENT TRIPS MODEL ======================================= #
@@ -99,3 +99,22 @@ class UserDiet(models.Model):
         return self.diet_include
     objects = models.Manager()
 # ======================================= END DIET MODEL =========================================== #
+
+
+# ===================================== APPOINTMENTS MODEL ========================================= #
+class UserAppoint(models.Model):
+    user              = models.ForeignKey(User, on_delete=models.CASCADE)
+    appoint_espec_apt = models.CharField(max_length=50)
+    appoint_date_apt  = models.DateField()
+    appoint_time_apt  = models.TimeField()
+    appoint_nmed_apt  = models.CharField(max_length=50)
+    slug              = models.SlugField(default='slug')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(UserAppoint, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.user.username
+    objects = models.Manager()
+# ==================================== END APPOINTMENTS MODEL ======================================= #
