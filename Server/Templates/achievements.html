@@ -2,7 +2,13 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <title>Clinify | Deletar</title>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Fengyuan Chen's Datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
+        <title>Clinify | Medicamentos</title>
     </head>
     <body class="medication-screen">
         <nav class="navbar navbar-expand-md navbar-dark">
@@ -16,7 +22,6 @@
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
-                    <a class="nav-link" href="{% url 'temp:achievements' %}">Conquistas</a>
                 </ul>
                 <form class="form-inline" method="POST">
                     <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
@@ -40,19 +45,12 @@
                 </div>
             </div>
         </div>
+
         <section class="container mt-5">
-            <form method="POST">
-                <div class="form-row justify-content-center mt-4">
-                    <p class="container">Certeza que deseja excluir este item?</p> 
-                    {% csrf_token %}
-                    <input type='submit' value="Sim" class="btn btn-danger pt-1 pb-1" style="color: white;">
-                    <span style="width: 25px"></span>
-                    <a href="{% url 'temp:diet_list' %}" class="btn btn-primary pt-1 pb-1">Não</a>
-                </div>
-            </form>
+
         </section>
-        {% endblock %}
-        <!-- <script src="/Controller/app.js"></script>
-        <script src="/sw.js"></script> -->
+    {% endblock %}
+    <!-- <script src="/Controller/app.js"></script>
+    <script src="/sw.js"></script> -->
     </body>
 </html>

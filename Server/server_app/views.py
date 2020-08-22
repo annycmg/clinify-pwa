@@ -371,20 +371,6 @@ class ProfileUpdateView(UpdateView):  ### UPDATE
 # ===================================== END PROFILE DISPLAY/UPDATE ===================================== #
 
 
-
-
-
-
-
-
-
-# ========================================== DO!!! EXERCISE CRUD ====================================== #
-@login_required
-def exercise(request):
-    return render(request, 'exercise.html')
-# ====================================== DO!!! END EXERCISE CRUD ======================================== #
-
-
 # ================================== DO!!! GOOGLE CALENDAR APPOINTMENTS ================================== #
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class AppointCalendarListView(ListView): ### RETRIEVE
@@ -449,6 +435,20 @@ class AppointDeleteView(DeleteView): ### DELETE
         else:
             return HttpResponseRedirect(self.success_url)
 # ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
+
+
+# ========================================== DO!!! EXERCISE CRUD ====================================== #
+@login_required
+def exercise(request):
+    return render(request, 'exercise.html')
+# ====================================== DO!!! END EXERCISE CRUD ======================================== #
+
+
+# ========================================== DO!!! ACHIEVEMENTS ======================================== #
+@login_required
+def achievements(request):
+    return render(request, 'achievements.html')
+# ====================================== DO!!! END ACHIEVEMENTS ======================================== #
 
 
 # ===================================== DO!!! DISPLAY ACHIEVIMENTS ==================================== #
