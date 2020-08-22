@@ -448,7 +448,6 @@ class AppointDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(reverse(self.success_url))
         else:
             return HttpResponseRedirect(self.success_url)
-
 # ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
 

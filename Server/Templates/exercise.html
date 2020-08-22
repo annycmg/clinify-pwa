@@ -14,7 +14,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="{% url 'temp:home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
                     <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
                     <a class="nav-link" href="#">Conquistas</a>
                 </ul>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <section class="container-fluid">
-            <div class="card card-exercise mt-3" id="card-opacity">
+            <div class="card card-exercise mt-4" id="card-opacity">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link nav-exerc active" data-toggle="tab" href="#run"><img class="img-exercise" src="{% static 'images/run.png' %}"></a>
@@ -63,40 +63,22 @@
                     </li>
                 </ul>
 
-                <div id="carouselExampleFade" class="carousel carousel slide" data-interval="false">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="container mt-3">
-                                <h4><span class="badge badge-exerc">Tempo de Duração</span></h4>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="row col-12 distance justify-content-center" id="duration">
-                                    <input id="timerhour" class="ml-2 col-3"><h3 class="mr-2 ml-2">:</h3><input id="timerminute" class="mr-2 col-3">
-                                </div>
-                                <div><p>HH --- MM</p></div>
-                            </div>
-                            <div class="btn btn-exercise btn-outline-info mb-4 col-6 pt-0 pb-0" id="startrun">Iniciar Corrida</div>
-
-                        </div>
-                        <div class="carousel-item">
-                            <div class="container mt-3">
-                                <h4><span class="badge badge-exerc">Treino Intensivo</span></h4>
-                            </div>
-                            <div class="container mt-4">
-                                <div class="container mb-3"><p>Intensifique seu treino com o modo 'Gym'.</p></div>
-                            </div>
-                        </div>
+                
+                <div class="container mt-3">
+                    <h4><span class="badge badge-exerc">Tempo de Duração</span></h4>
+                </div>
+                <div class="container mt-2">
+                    <div class="row col-12 justify-content-center" id="duration">
+                        <input id="timerhour" class="ml-4 col-3"><h3 class="mr-2 ml-2">:</h3><input id="timerminute" class="mr-1 col-3">
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </a>
+                    <div><p>HH --- MM</p></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="btn btn-outline-info mb-4 col-6 pt-0 pb-0" id="startrun">Iniciar Corrida</div>
                 </div>
             </div>
-
-            <div class="card card-exercise1 mt-3 mb-3" id="card-opacity">
+                        
+            <div class="card card-exercise1 mt-4 mb-3" id="card-opacity">
                 <div class="overflow-auto">
                     <div class="container-fluid mt-3">
                         <div class="tab-content">
