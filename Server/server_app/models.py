@@ -103,18 +103,19 @@ class UserDiet(models.Model):
 
 # ===================================== APPOINTMENTS MODEL ========================================= #
 class UserAppoint(models.Model):
-    user              = models.ForeignKey(User, on_delete=models.CASCADE)
-    appoint_espec_apt = models.CharField(max_length=50)
-    appoint_date_apt  = models.DateField()
-    appoint_time_apt  = models.TimeField()
-    appoint_nmed_apt  = models.CharField(max_length=50)
-    slug              = models.SlugField(default='slug')
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
+    appoint_espec_apt   = models.CharField(max_length=50)
+    appoint_date_apt    = models.DateField()
+    appoint_time_apt    = models.TimeField()
+    appoint_nmed_apt    = models.CharField(max_length=50)
+    appoint_credenc_apt = models.CharField(max_length=20)
+    slug                = models.SlugField(default='slug')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.user.username)
+        self.slug = slugify(self.appoint_espec_apt)
         super(UserAppoint, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.user.username
+        return self.appoint_espec_apt
     objects = models.Manager()
 # ==================================== END APPOINTMENTS MODEL ======================================= #

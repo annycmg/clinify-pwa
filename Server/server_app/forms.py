@@ -88,10 +88,11 @@ class DietForm(forms.ModelForm):
 class AppointForm(forms.ModelForm):
     class Meta:
         model = UserAppoint
-        fields = ['appoint_espec_apt','appoint_date_apt','appoint_time_apt','appoint_nmed_apt']
+        fields = ['appoint_espec_apt','appoint_date_apt','appoint_time_apt','appoint_nmed_apt','appoint_credenc_apt']
     def __init__(self, *args, **kwargs):
         super(AppointForm, self).__init__(*args, **kwargs)
         self.fields['appoint_espec_apt'].widget.attrs.update({'placeholder': 'Oftalmologista', 'class': 'form-control', 'required': ''})
-        self.fields['appoint_date_apt'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': ''})
+        self.fields['appoint_date_apt'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'required': '', 'id': 'datepicker6'})
         self.fields['appoint_time_apt'].widget.attrs.update({'placeholder': 'HH:MM:SS', 'class': 'form-control', 'required': ''})
         self.fields['appoint_nmed_apt'].widget.attrs.update({'class': 'form-control', 'required': ''})
+        self.fields['appoint_credenc_apt'].widget.attrs.update({'placeholder': 'CRM/CRO/CRP/CRN','class': 'form-control'})

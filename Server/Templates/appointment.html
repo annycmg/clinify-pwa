@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Fengyuan Chen's Datepicker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
         <title>Clinify | Consultas</title>
     </head>
     <body class="appointment-screen">
@@ -40,18 +46,56 @@
                 </div>
             </div>
         </div>
-        <section class="container-fluid">
-            <!-- <iframe src="https://calendar.google.com/calendar/embed?height=400&amp;
-            wkst=1&amp;
-            bgcolor=%23ffffff&amp;
-            ctz=America%2FSao_Paulo&amp;
-            src=OHFydjZicWJrNnRtcGs0ODEwNzFqNGhmMmtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;
-            src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;
-            src=ZW4uZHV0Y2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;
-            color=%23C0CA33&amp;color=%23000000&amp;
-            color=%23000000&amp;
-            showTz=1&amp;
-            showCalendars=1" style="border:solid 1px #777" width="330" height="380" frameborder="0" scrolling="no"></iframe> -->
+        <section class="container mt-3">
+            <div class="card" id="card-opacity">
+                <div class="container">
+                    <form enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row mt-3 mb-3"> 
+                            <div class="col-12">
+                                <label class="lbl2">Nome do Profissional *</label>
+                                {{form.appoint_nmed_apt}}
+                            </div>
+                        </div>
+                        <div class="form-row mt-3 mb-3"> 
+                            <div class="col-12">
+                                <label class="lbl2">Especialidade *</label>
+                                {{form.appoint_espec_apt}}
+                            </div>
+                        </div>
+                        <div class="form-row mt-3 mb-3"> 
+                            <div class="col-12">
+                                <label class="lbl2">Credencial</label>
+                                {{form.appoint_credenc_apt}}
+                            </div>
+                        </div>
+                        <div class="form-row mt-4 mb-3">
+                            <div class="col-6">
+                                <label class="lbl2">Data *</label>
+                                <script>
+                                    $(function () {
+                                      $("#datepicker6").datepicker({
+                                        format:'yyyy-mm-dd',
+                                      });
+                                    });
+                                </script>
+                                {{ form.appoint_date_apt }}
+                            </div>
+                            <div class="col-6">
+                                <label class="lbl2">Horário *</label>
+                                {{ form.appoint_time_apt }}
+                            </div>
+                        </div>
+                        {{form.errors}}
+                    </div>
+                    <div class="form-row justify-content-center mt-3 mb-4">
+                        <button class="btn btn-success col-5 pt-0 pb-0" style="color: white;">Salvar</button>
+                        <span style="width: 25px"></span>
+                        <input type="reset" value="Limpar" class="btn btn-primary col-5 pt-0 pb-0">
+                    </div>
+                </form>
+            </div>
+            <a href="{% url 'temp:appoint_calendar' %}" type="submit" class="btn btn-primary col-12 mt-4 pb-1">Minhas Consultas</a>
         </section>
         {% endblock %}
         <!-- <script src="/Controller/app.js"></script>

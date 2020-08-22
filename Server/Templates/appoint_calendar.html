@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Consultas</title>
+    </head>
+    <body class="medication-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
+                    <a class="nav-link" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'logout' %}" type="submit">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container mt-4">
+            <!-- <a class="btn btn-info right mr-2" href="{% url 'temp:appoint_calendar' %}{{ next_month }} "> Next Month >> </a>
+            <a class="btn btn-info right mr-2" href="{% url 'temp:appoint_calendar' %}{{ prev_month }}"> << Previous Month </a> -->
+            <div class="card card-med mt-4 mb-3" id="card-opacity">
+                <div class="overflow-auto">
+                    <table class="table table-striped overflow-auto">
+                        <thead>
+                            <tr>
+                                <th>Consulta</th>
+                                <th>Nome</th>
+                                <th>Credencial</th>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for userappoint in appoint %}
+                            <tr>
+                                <td><a href="{% url 'temp:appoint_detail' pk=userappoint.pk slug=userappoint.slug %}">{{ userappoint.appoint_espec_apt }}</a></td>
+                                <td>{{ userappoint.appoint_nmed_apt }}</td>
+                                <td>{{ userappoint.appoint_credenc_apt }}</td>
+                                <td>{{ userappoint.appoint_date_apt }}</td>
+                                <td>{{ userappoint.appoint_time_apt }}</td>
+                                <td><a href="{% url 'temp:appointment' pk=userappoint.pk slug=userappoint.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
+                                <td><a href="{% url 'temp:appoint_delete' pk=userappoint.pk slug=userappoint.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>      
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>

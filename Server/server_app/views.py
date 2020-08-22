@@ -1,5 +1,9 @@
+import calendar
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from datetime import datetime, date
+from django.utils.safestring import mark_safe
+from datetime import timedelta
 from django.db import models
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
@@ -15,19 +19,14 @@ from .forms import MedicationForm
 from .forms import TripForm
 from .forms import VaccineForm
 from .forms import DietForm
+from .forms import AppointForm
 
 from .models import UserMedication
 from .models import UserTrip
 from .models import UserVaccine
 from .models import UserDiet
 from .models import UserProfile
-
-# import datetime
-# import pickle
-# import os.path
-# from googleapiclient.discovery import build
-# from google_auth_oauthlib.flow import InstalledAppFlow
-# from google.auth.transport.requests import Request
+from .models import UserAppoint
 
 @login_required
 def home(request):
@@ -387,18 +386,69 @@ def exercise(request):
 
 
 # ================================== DO!!! GOOGLE CALENDAR APPOINTMENTS ================================== #
-@login_required
-def appointment(request):
-#     SCOPES = ['https://www.googleapis.com/auth/calendar']
-#     creds = None
-#     if not creds or not creds.valid:
-#         if creds and creds.expired and creds.refresh_token:
-#             creds.refresh(Request())
-#         else:
-#             flow = InstalledAppFlow.from_client_secrets_file('server_app/client_secret.json', SCOPES)
-#             creds = flow.run_local_server(port=0)
-#     service = build('calendar', 'v3', credentials=creds)
-    return render(request, 'appointment.html')
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class AppointCalendarListView(ListView): ### RETRIEVE
+    template_name="appoint_calendar.html"
+    model = UserAppoint
+    context_object_name = 'appoint'
+    def get_context_data(self, **kwargs): 
+        context = super(AppointCalendarListView, self).get_context_data(**kwargs)
+        return context
+    def get_queryset(self):
+        queryset = super(AppointCalendarListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class AppointDetailView(DetailView): ### RETRIEVE
+    template_name = "appointment_detail.html"
+    model = UserAppoint
+    context_object_name = 'single_appoint'
+    def get_context_data(self, **kwargs):
+        context = super(AppointDetailView, self).get_context_data(**kwargs)
+        return context
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class AppointCreateView(CreateView): ### CREATE
+    template_name = "appointment.html"
+    model = UserAppoint
+    form_class = AppointForm
+    def get_success_url(self):
+        return reverse("temp:appoint_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("appointment inserted and saved")
+        return super(AppointCreateView, self).form_valid(form)
+
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class AppointUpdateView(UpdateView):  ### UPDATE
+    template_name = "appointment.html"
+    model = UserAppoint
+    form_class = AppointForm
+    def get_success_url(self):
+        return reverse("temp:appoint_detail", kwargs={'pk':self.object.pk, 'slug':self.object.slug})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        print("appointment updated and saved")
+        return super(AppointUpdateView, self).form_valid(form)
+
+@method_decorator(login_required(login_url="intro"), name='dispatch')
+class AppointDeleteView(DeleteView): ### DELETE
+    model = UserAppoint
+    success_url = 'temp:appoint_calendar'
+    template_name = 'appointment_delete.html'
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user == request.user:
+            self.object.delete()
+            print("appointment safely deleted")
+            return HttpResponseRedirect(reverse(self.success_url))
+        else:
+            return HttpResponseRedirect(self.success_url)
+
 # ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
 

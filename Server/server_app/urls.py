@@ -6,6 +6,7 @@ from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView,
 from .views import VaccineListView, VaccineDetailView, VaccineCreateView, VaccineUpdateView, VaccineDeleteView
 from .views import DietCreateView, DietDetailView, DietListView, DietUpdateView, DietDeleteView
 from .views import ProfileListView, ProfileUpdateView
+from .views import AppointCreateView, AppointDetailView, AppointCalendarListView, AppointDeleteView, AppointUpdateView
 app_name = 'temp'
 
 urlpatterns = [
@@ -38,8 +39,12 @@ urlpatterns = [
     url(r'^profile/$', ProfileListView.as_view(), name='profile'),
     url(r'^profile/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', ProfileUpdateView.as_view(), name='editprofile'),
 
+    url(r'^appointment/$', AppointCreateView.as_view(), name='appointment'),
+    url(r'^appointment/calendar/$', AppointCalendarListView.as_view(), name='appoint_calendar'),
+    url(r'^appointment/detail/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', AppointDetailView.as_view(), name='appoint_detail'),
+    url(r'^appointment/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', AppointUpdateView.as_view(), name='appointment'),
+    url(r'^appointment/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', AppointDeleteView.as_view(), name='appoint_delete'),
 
-    url(r'^appointment/$', views.appointment, name='appointment'),
     url(r'^exercise/$', views.exercise, name='exercise'),
     url(r'^offline/$', views.offline, name='offline'),
     ]  

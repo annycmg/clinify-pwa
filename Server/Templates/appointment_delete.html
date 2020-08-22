@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+    {% block content %}
+        {% load static %}
+        <title>Clinify | Deletar</title>
+    </head>
+    <body class="medication-screen">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <img class="nav-icon" src="{% static 'images\heartbeat-logo-144.png' %}">
+            <a class="navbar-brand" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap" rel="stylesheet">Clinify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'temp:profile' %}">Perfil</a>
+                    <a class="nav-link" href="#">Conquistas</a>
+                </ul>
+                <form class="form-inline" method="POST">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class="btn btn-outline-light btn-auto">Sair<img class="pl-2" src="{% static 'images/logout.png' %}"></button></a>
+                </form>
+            </div>
+        </nav>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sair</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Certeza que deseja sair?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                        <a class="btn btn-secondary" href="{% url 'logout' %}" type="submit">Sim</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="container mt-5">
+            <form method="POST">
+                <div class="form-row justify-content-center mt-4">
+                    <p class="container">Certeza que deseja excluir este item?</p> 
+                    {% csrf_token %}
+                    <input type='submit' value="Sim" class="btn btn-danger pt-1 pb-1" style="color: white;">
+                    <span style="width: 25px"></span>
+                    <a href="{% url 'temp:appoint_calendar' %}" class="btn btn-primary pt-1 pb-1">Não</a>
+                </div>
+            </form>
+        </section>
+        {% endblock %}
+        <!-- <script src="/Controller/app.js"></script>
+        <script src="/sw.js"></script> -->
+    </body>
+</html>
