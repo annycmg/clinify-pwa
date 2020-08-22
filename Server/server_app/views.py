@@ -276,7 +276,6 @@ class VaccineDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(reverse(self.success_url))
         else:
             return HttpResponseRedirect(self.success_url)
-
 # ======================================== END VACCINE CRUD ========================================= #
 
 
@@ -349,8 +348,9 @@ class DietDeleteView(DeleteView): ### DELETE
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileListView(ListView):
     template_name = 'profile.html'
-    model = UserProfile
-    context_object_name = 'profile'
+    model = UserMedication
+    context_object_name = 'med'
+
     def get_context_data(self, **kwargs):
         context = super(ProfileListView, self).get_context_data(**kwargs)
         context['userprof'] = UserProfile.objects.get(user=self.request.user)
@@ -444,14 +444,14 @@ def exercise(request):
 # ====================================== DO!!! END EXERCISE CRUD ======================================== #
 
 
-# ========================================== DO!!! ACHIEVEMENTS ======================================== #
-@login_required
-def achievements(request):
-    return render(request, 'achievements.html')
-# ====================================== DO!!! END ACHIEVEMENTS ======================================== #
 
 
-# ===================================== DO!!! DISPLAY ACHIEVIMENTS ==================================== #
+
+
+
+
+
+
 
 
 # ========================================== DO!!! BASIC PWA ========================================== #

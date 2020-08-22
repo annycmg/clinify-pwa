@@ -46,8 +46,6 @@ urlpatterns = [
     url(r'^appointment/delete/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', AppointDeleteView.as_view(), name='appoint_delete'),
 
     url(r'^exercise/$', views.exercise, name='exercise'),
-    url(r'^achievements/$', views.achievements, name='achievements'),
-
 
     url(r'^offline/$', views.offline, name='offline'),
     ]  
