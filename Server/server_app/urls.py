@@ -38,6 +38,8 @@ urlpatterns = [
 
     url(r'^profile/$', ProfileListView.as_view(), name='profile'),
     url(r'^profile/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', ProfileUpdateView.as_view(), name='editprofile'),
+    # url(r'^profile/$', DietDisplayListView.as_view(), name='profile'),
+
 
     url(r'^appointment/$', AppointCreateView.as_view(), name='appointment'),
     url(r'^appointment/calendar/$', AppointCalendarListView.as_view(), name='appoint_calendar'),

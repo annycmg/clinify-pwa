@@ -276,6 +276,7 @@ class VaccineDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(reverse(self.success_url))
         else:
             return HttpResponseRedirect(self.success_url)
+
 # ======================================== END VACCINE CRUD ========================================= #
 
 
@@ -349,11 +350,17 @@ class DietDeleteView(DeleteView): ### DELETE
 class ProfileListView(ListView):
     template_name = 'profile.html'
     model = UserMedication
-    context_object_name = 'med'
+    context_object_name = 'med'   
+
+    def get_queryset(self):
+        queryset = super(ProfileListView, self).get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset 
 
     def get_context_data(self, **kwargs):
         context = super(ProfileListView, self).get_context_data(**kwargs)
         context['userprof'] = UserProfile.objects.get(user=self.request.user)
+        # context['trip'] = UserTrip.objects.get(user=self.request.user)
         return context
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
@@ -447,6 +454,18 @@ def exercise(request):
 
 
 
+
+
+
+
+
+
+
+
+# ========================================== DO!!! ACHIEVEMENTS ======================================== #
+
+
+# ====================================== DO!!! END ACHIEVEMENTS ======================================== #
 
 
 

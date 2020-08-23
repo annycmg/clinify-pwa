@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="overflow-auto">
-                        <table class="table table-striped overflow-auto">
+                        <table class="table table-striped overflow-auto mt-4">
                             <thead>
                                 <tr>
                                     <th>Medicamento</th>
@@ -112,20 +112,81 @@
                                     <th>Tipo</th>
                                     <th>Refeição</th>
                                     <th>Data</th>
-                                    <th> </th>
-                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- {% for userdiet in diet %}
+                                {% for userdiet in diet %}
                                 <tr>
                                     <td><a href="{% url 'temp:diet_detail' pk=userdiet.pk slug=userdiet.slug %}">{{ userdiet.meal }}</a></td>
                                     <td>{{ userdiet.diet_include }}</td>
                                     <td>{{ userdiet.diet_date_diet }}</td>
-                                    <td><a href="{% url 'temp:diet' pk=userdiet.pk slug=userdiet.slug %}"><img src="{% static 'images/edit.png' %}"></a></td>
-                                    <td><a href="{% url 'temp:diet_delete' pk=userdiet.pk slug=userdiet.slug %}"><img src="{% static 'images/trash.png' %}"></a></td>
                                 </tr>
-                                {% endfor %} -->
+                                {% endfor %}
+                            </tbody>
+                        </table>      
+                    </div>
+
+                    <div class="overflow-auto">
+                        <table class="table table-striped overflow-auto mt-4">
+                            <thead>
+                                <tr>
+                                    <th>País(es)</th>
+                                    <th>Data Início</th>
+                                    <th>Data Fim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usertrip in trip %}
+                                <tr>
+                                    <td><a href="{% url 'temp:trip_detail' pk=usertrip.pk slug=usertrip.slug %}">{{ usertrip.trip_country_trp }}</a></td>
+                                    <td>{{ usertrip.init_date_trp }}</td>
+                                    <td>{{ usertrip.end_date_trp }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>      
+                    </div>
+
+                    <div class="overflow-auto">
+                        <table class="table table-striped overflow-auto mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Consulta</th>
+                                    <th>Nome</th>
+                                    <th>Credencial</th>
+                                    <th>Data</th>
+                                    <th>Horário</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for userappoint in appoint %}
+                                <tr>
+                                    <td><a href="{% url 'temp:appoint_detail' pk=userappoint.pk slug=userappoint.slug %}">{{ userappoint.appoint_espec_apt }}</a></td>
+                                    <td>{{ userappoint.appoint_nmed_apt }}</td>
+                                    <td>{{ userappoint.appoint_credenc_apt }}</td>
+                                    <td>{{ userappoint.appoint_date_apt }}</td>
+                                    <td>{{ userappoint.appoint_time_apt }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>      
+                    </div>
+
+                    <div class="overflow-auto">
+                        <table class="table table-striped overflow-auto mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col-3">Vacina</th>
+                                    <th scope="col-2">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for uservac in vac %}
+                                <tr>
+                                    <td><a href="{% url 'temp:vaccine_detail' pk=uservac.pk slug=uservac.slug %}">{{ uservac.vaccine_name_vac }}</a></td>
+                                    <td>{{ uservac.vaccine_date_vac }}</td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>      
                     </div>
