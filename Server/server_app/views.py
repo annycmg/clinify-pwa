@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import SignUpForm
@@ -358,10 +359,12 @@ class ProfileListView(ListView):
         return queryset 
 
     def get_context_data(self, **kwargs):
-        context = super(ProfileListView, self).get_context_data(**kwargs)
-        context['userprof'] = UserProfile.objects.get(user=self.request.user)
-        # context['trip'] = UserTrip.objects.get(user=self.request.user)
-        return context
+        kwargs['userprof'] = UserProfile.objects.get(user=self.request.user)
+        kwargs['trip'] = UserTrip.objects.all()
+        kwargs['vac'] = UserVaccine.objects.all()
+        kwargs['appoint'] = UserAppoint.objects.all()
+        kwargs['diet'] = UserDiet.objects.all()
+        return super(ProfileListView, self).get_context_data(**kwargs)
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileUpdateView(UpdateView):  ### UPDATE
