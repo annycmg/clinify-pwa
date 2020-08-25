@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.conf.urls import url, include
 from . import views 
+from .views import DownloadPDF
 from .views import MedicationListView, MedicationDetailView, MedicationCreateView, MedicationUpdateView, MedicationDeleteView
 from .views import TripCreateView, TripDetailView, TripListView, TripUpdateView, TripDeleteView
 from .views import VaccineListView, VaccineDetailView, VaccineCreateView, VaccineUpdateView, VaccineDeleteView
@@ -38,6 +39,7 @@ urlpatterns = [
 
     url(r'^profile/$', ProfileListView.as_view(), name='profile'),
     url(r'^profile/update/(?P<pk>[0-9]+)/(?P<slug>[-\w\d]+)/$', ProfileUpdateView.as_view(), name='editprofile'),
+    url(r'^pdf_download/$', DownloadPDF.as_view(), name='pdf_download'),
 
     url(r'^appointment/$', AppointCreateView.as_view(), name='appointment'),
     url(r'^appointment/calendar/$', AppointCalendarListView.as_view(), name='appoint_calendar'),

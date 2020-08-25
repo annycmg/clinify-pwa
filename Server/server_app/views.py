@@ -12,6 +12,12 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from io import BytesIO
+from django.template.loader import get_template
+from django.views import View
+import xhtml2pdf
+from xhtml2pdf import pisa
+
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import SignUpForm
@@ -44,7 +50,14 @@ def offline(request):
 def base(request):
     return render(request, 'base.html')
 
-# =============================== LOGIN & PASSWORD AUTHETICATION ================================== #
+# ========================================== DO!!! EXERCISE CRUD ====================================== #
+@login_required
+def exercise(request):
+    return render(request, 'exercise.html')
+# ====================================== DO!!! END EXERCISE CRUD ======================================== #
+
+
+# =================================== LOGIN & PASSWORD AUTHETICATION ================================== #
 def intro(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -57,10 +70,10 @@ def intro(request):
         else:
             messages.info(request, 'Username E/OU senha incorretos.')
     return render(request, 'intro.html')
-# ================================ END AUTHETICATION ============================================== #
+# ==================================== END AUTHETICATION ============================================== #
 
 
-# ====================================== SIGNUP ==================================================== #
+# ========================================= SIGNUP ==================================================== #
 # signup: formulário com infos básicas e infos de perfil para cadastro
 def signup(request):
     if request.method == 'POST':
@@ -366,6 +379,26 @@ class ProfileListView(ListView):
         kwargs['diet'] = UserDiet.objects.all()
         return super(ProfileListView, self).get_context_data(**kwargs)
 
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+class DownloadPDF(View):
+    def get(self, request, *args, **kwargs):
+        pdf = render_to_pdf('profile.html')
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = 'achievements.pdf'
+        content = "attachment; filename='%s'"%(filename)
+        response['Content-Disposition'] = content
+        return response
+
+
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileUpdateView(UpdateView):  ### UPDATE
     template_name = "editprofile.html"
@@ -447,11 +480,6 @@ class AppointDeleteView(DeleteView): ### DELETE
 # ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
 
 
-# ========================================== DO!!! EXERCISE CRUD ====================================== #
-@login_required
-def exercise(request):
-    return render(request, 'exercise.html')
-# ====================================== DO!!! END EXERCISE CRUD ======================================== #
 
 
 
@@ -464,16 +492,7 @@ def exercise(request):
 
 
 
-
-# ========================================== DO!!! ACHIEVEMENTS ======================================== #
-
-
-# ====================================== DO!!! END ACHIEVEMENTS ======================================== #
-
-
-
-
-
+# ========================================== DO!!! PDF EXPORTER ======================================== #
 
 
 # ========================================== DO!!! BASIC PWA ========================================== #
