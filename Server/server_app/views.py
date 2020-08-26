@@ -376,11 +376,10 @@ class ProfileListView(ListView):
 
 def render_to_pdf(request):
     # Use False instead of output path to save pdf to a variable
-    pdf = pdfkit.from_file('Templates\\profile.html', False)
+    pdf = pdfkit.from_url('https://github.com/annycmg/clinify-pwa', False)
     response = HttpResponse(pdf,content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="gktcs.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="progresso.pdf"'
     return response
-
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileUpdateView(UpdateView):  ### UPDATE
