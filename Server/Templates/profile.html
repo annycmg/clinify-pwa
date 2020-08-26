@@ -43,7 +43,7 @@
                 <div class="card" id="card-opacity">
                     <img src="{% static 'images/profile-background.jpg' %}" class="img-profile" alt="...">
                     <div class="card-body">
-                        {% csrf_token %}
+                        <!-- {% csrf_token %} -->
                         {% if user.is_authenticated %}
                         <h5 class="name pt-3">{{ user.first_name }} {{ user.last_name }}<a href="{% url 'temp:editprofile' pk=userprof.pk slug=userprof.slug %}"><img class="edit" src="{% static 'images/edit.png' %}"></a></h5> 
                         {% endif %}

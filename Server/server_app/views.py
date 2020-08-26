@@ -11,12 +11,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
-from io import BytesIO
-from django.template.loader import get_template
-from django.views import View
-import xhtml2pdf
-from xhtml2pdf import pisa
+import pdfkit
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -379,24 +374,12 @@ class ProfileListView(ListView):
         kwargs['diet'] = UserDiet.objects.all()
         return super(ProfileListView, self).get_context_data(**kwargs)
 
-
-def render_to_pdf(template_src, context_dict={}):
-    template = get_template(template_src)
-    html = template.render(context_dict)
-    result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
-    return None
-
-class DownloadPDF(View):
-    def get(self, request, *args, **kwargs):
-        pdf = render_to_pdf('profile.html')
-        response = HttpResponse(pdf, content_type='application/pdf')
-        filename = 'achievements.pdf'
-        content = "attachment; filename='%s'"%(filename)
-        response['Content-Disposition'] = content
-        return response
+def render_to_pdf(request):
+    # Use False instead of output path to save pdf to a variable
+    pdf = pdfkit.from_file('Templates\\profile.html', False)
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="gktcs.pdf"'
+    return response
 
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
