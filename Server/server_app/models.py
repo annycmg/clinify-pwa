@@ -83,7 +83,7 @@ class UserVaccine(models.Model):
 
 # ===================================  DIET MODEL ================================================ #
 class UserDiet(models.Model):
-    CHOICE = (('0', 'Café'), ('1', 'Almoço'), ('2', 'Jantar'), ('3', 'Snacks'))  
+    CHOICE = (('Café', 'Café'), ('Almoço', 'Almoço'), ('Jantar', 'Jantar'), ('Snacks', 'Snacks'))  
 
     user            = models.ForeignKey(User, on_delete=models.CASCADE)
     diet_include    = models.TextField(max_length=500)
@@ -116,6 +116,6 @@ class UserAppoint(models.Model):
         super(UserAppoint, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.appoint_espec_apt
+        return self.user.username
     objects = models.Manager()
 # ==================================== END APPOINTMENTS MODEL ======================================= #

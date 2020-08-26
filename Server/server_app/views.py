@@ -368,15 +368,15 @@ class ProfileListView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['userprof'] = UserProfile.objects.get(user=self.request.user)
-        kwargs['trip'] = UserTrip.objects.all()
-        kwargs['vac'] = UserVaccine.objects.all()
-        kwargs['appoint'] = UserAppoint.objects.all()
-        kwargs['diet'] = UserDiet.objects.all()
+        kwargs['trip'] = UserTrip.objects.filter(user=self.request.user)
+        kwargs['vac'] = UserVaccine.objects.filter(user=self.request.user)
+        kwargs['appoint'] = UserAppoint.objects.filter(user=self.request.user)
+        kwargs['diet'] = UserDiet.objects.filter(user=self.request.user)
         return super(ProfileListView, self).get_context_data(**kwargs)
 
 def render_to_pdf(request):
     # Use False instead of output path to save pdf to a variable
-    pdf = pdfkit.from_url('https://github.com/annycmg/clinify-pwa', False)
+    pdf = pdfkit.from_url('https://github.com/annycmg/clinify-pwa', False) # Change for clinify website page
     response = HttpResponse(pdf,content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="progresso.pdf"'
     return response
