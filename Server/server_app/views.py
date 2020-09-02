@@ -432,7 +432,6 @@ class AppointCreateView(CreateView): ### CREATE
         print("appointment inserted and saved")
         return super(AppointCreateView, self).form_valid(form)
 
-
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class AppointUpdateView(UpdateView):  ### UPDATE
     template_name = "appointment.html"
