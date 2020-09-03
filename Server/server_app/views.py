@@ -376,7 +376,7 @@ class ProfileListView(ListView):
 
 def render_to_pdf(request):
     # Use False instead of output path to save pdf to a variable
-    pdf = pdfkit.from_url('https://github.com/annycmg/clinify-pwa', False) # Change for clinify website page
+    pdf = pdfkit.from_url('https://github.com/annycmg', False) # Change for clinify website page
     response = HttpResponse(pdf,content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="progresso.pdf"'
     return response
