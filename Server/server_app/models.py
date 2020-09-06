@@ -5,12 +5,15 @@ from django.template.defaultfilters import slugify
 
 # ================================ PROFILE MODEL ========================================== #
 class UserProfile(models.Model):
+    CHOICE = (('O-', 'O-'), ('O+', 'O+'), ('A-', 'A-'), ('A+', 'A+'), ('B-', 'B-'), ('B+', 'B+'), ('AB-', 'AB-'), ('AB+', 'AB+'))  
+
     user                 = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     profile_age_prf      = models.IntegerField()
     profile_loc_prf      = models.CharField(max_length=150)
     profile_weight_prf   = models.FloatField()
     profile_height_prf   = models.IntegerField()
     profile_allergy_prf  = models.CharField(max_length=200)
+    profile_blood_prf    = models.CharField(null=True, max_length=10, default=None, choices=CHOICE)
     profile_desease_prf  = models.CharField(max_length=200)
     profile_diet_prf     = models.CharField(max_length=200)
     profile_surgery_prf  = models.CharField(max_length=200)
