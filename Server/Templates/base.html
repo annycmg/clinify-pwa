@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="eng">
-    {% load static %}
     {% load pwa %}
-
+    {% load static %}
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -39,20 +38,7 @@
 
         <!-- ---------------------------------- PWA Metatags -------------------------------------------- -->
         <link rel="manifest" href="{% static 'js/manifest.json' %}">
+        <!-- <script src="/serviceworker.js"></script> -->
         {% progressive_web_app_meta %}
-
-        
-        <!-- ------------------------------Meta tags for WepApps in Safari-------------------------------------- -->
-        <!-- <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="Clinify">
-        <link rel="apple-touch-icon" href="/View/Images/heartbeat-logo-144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="/View/Images/heartbeat-logo-256.png" sizes="256x256"> -->
-
-        <!-- -------------------------Meta thags for WebApps in Internet Explorer------------------------------- -->
-        <!-- <meta name="msapplication-TileImage" content="/View/Images/heartbeat-logo-144.png" sizes="144x144">
-        <meta name="msapplication-TileColor" content="#cae2f1">
-        <meta name="theme-color" content="#cae2f1"> -->
-
         {% block content %}
         {% endblock %}

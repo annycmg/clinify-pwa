@@ -15,9 +15,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "Templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-# PWA SETTINGS
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -125,3 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ STATIC_DIR  ] 
 LOGIN_URL = ""
+
+# PWA SETTINGS
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
