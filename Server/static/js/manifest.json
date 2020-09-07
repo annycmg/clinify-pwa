@@ -1,8 +1,8 @@
 {
     "name": "Clinify",
     "short_name": "Clinify",
+    "start_url": "/",
     "scope": "/",
-    "start_url": "/Templates/intro.html",
     "display": "standalone",
     "description": "Clinify",
     "lang": "Portuguese",
@@ -14,7 +14,7 @@
         "src": "/static/images/heartbeat-icon-home-144.png",
         "type": "image/png",
         "sizes": "144x144"
-     }]
- }
+    }]
+}
 
  

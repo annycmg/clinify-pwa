@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^admin/reset/done/$', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     url(r'^Templates/', include('server_app.urls')),
+    url(r'', include('pwa.urls')),
+
 ]

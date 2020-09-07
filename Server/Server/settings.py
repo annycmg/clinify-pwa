@@ -15,6 +15,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "Templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
+# PWA SETTINGS
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -38,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'server_app']
+    'server_app',
+    'pwa',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

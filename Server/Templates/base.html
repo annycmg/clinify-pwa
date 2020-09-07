@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="eng">
+    {% load static %}
+    {% load pwa %}
+
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -35,7 +37,11 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-        <link rel="manifest" href="/static/js/manifest.json">
+        <!-- ---------------------------------- PWA Metatags -------------------------------------------- -->
+        <link rel="manifest" href="{% static 'js/manifest.json' %}">
+        {% progressive_web_app_meta %}
+
+        
         <!-- ------------------------------Meta tags for WepApps in Safari-------------------------------------- -->
         <!-- <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -50,5 +56,3 @@
 
         {% block content %}
         {% endblock %}
-    </body>
-</html>
