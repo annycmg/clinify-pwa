@@ -45,6 +45,7 @@ def offline(request):
 def base(request):
     return render(request, 'base.html')
 
+
 # ========================================== DO!!! EXERCISE CRUD ====================================== #
 @login_required
 def exercise(request):

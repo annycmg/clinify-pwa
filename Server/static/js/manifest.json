@@ -1,7 +1,7 @@
 {
     "name": "Clinify",
     "short_name": "Clinify",
-    "start_url": "",
+    "start_url": "/",
     "scope": "/",
     "display": "standalone",
     "description": "Clinify",
@@ -15,6 +15,11 @@
         "type": "image/png",
         "sizes": "144x144",
         "purpose": "any maskable"
+    },
+    {
+        "src": "/static/images/heartbeat-logo-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
     }]
 }
 
