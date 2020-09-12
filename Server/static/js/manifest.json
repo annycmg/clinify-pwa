@@ -4,7 +4,7 @@
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
-    "description": "Clinify",
+    "description": "A PWA Application",
     "lang": "Portuguese",
     "orientation": "any",
     "dir": "ltr",
@@ -14,7 +14,7 @@
         "src": "/static/images/heartbeat-icon-home-144.png",
         "type": "image/png",
         "sizes": "144x144",
-        "purpose": "any maskable"
+        "purpose": "maskable"
     },
     {
         "src": "/static/images/heartbeat-logo-512.png",
@@ -22,5 +22,3 @@
         "sizes": "512x512"
     }]
 }
-
- 
