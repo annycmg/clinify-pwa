@@ -397,7 +397,7 @@ class ProfileUpdateView(UpdateView):  ### UPDATE
 # ===================================== END PROFILE DISPLAY/UPDATE ===================================== #
 
 
-# ================================== DO!!! GOOGLE CALENDAR APPOINTMENTS ================================== #
+# ================================== DO!!! CALENDAR APPOINTMENTS ================================== #
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class AppointCalendarListView(ListView): ### RETRIEVE
     template_name="appoint_calendar.html"
@@ -459,7 +459,7 @@ class AppointDeleteView(DeleteView): ### DELETE
             return HttpResponseRedirect(reverse(self.success_url))
         else:
             return HttpResponseRedirect(self.success_url)
-# ================================= END GOOGLE CALENDAR APPOINTMENTS ================================== #
+# ================================= END CALENDAR APPOINTMENTS ================================== #
 
 
 

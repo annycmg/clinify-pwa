@@ -9,3 +9,7 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function(event) {
     console.log('[Service Worker] Fetching Service Worker ...', event);
 });
+
+// self.addEventListener('push', () => {
+//     console.log("Push Received.");
+// })
