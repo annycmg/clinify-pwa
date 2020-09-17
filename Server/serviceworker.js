@@ -38,15 +38,13 @@ var STATIC_FILES = ['/', '/Templates/offline', '/static/js/manifest.json',
 '/static/images/logout.png',
 '/static/images/vaccine.jpg',
 '/static/images/walk.png',
-// '/static/images/logout.png',
 ]
 
 self.addEventListener('install', function (event) {
     console.log('[Service Worker] Installing Service Worker ...', event);
-    event.waitUntil(
-      caches.open(staticCacheName).then(function (cache) {
-          console.log('[Service Worker] Precaching App Shell');
-          cache.addAll(STATIC_FILES);
+    event.waitUntil(caches.open(staticCacheName).then(function (cache) {
+            console.log('[Service Worker] Precaching App Shell');
+            cache.addAll(STATIC_FILES);
         })
         .catch(err => console.log(err))
     );
@@ -54,14 +52,12 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('activate', function (event) {
     console.log('[Service Worker] Activating Service Worker ...', event);
-    event.waitUntil(caches.keys()
-        .then(function (keyList) {
-            return Promise.all(keyList.map(function (key) {
-                if (key !== staticCacheName && key !== dynamicCacheName) {
-                    console.log('[Service Worker] Removing old cache.', key);
-                    return caches.delete(key);
-                }
-            }));
+    event.waitUntil(caches.keys().then(function (keyList) {
+        return Promise.all(keyList.map(function (key) {
+            if (key !== staticCacheName && key !== dynamicCacheName) {
+                console.log('[Service Worker] Removing old cache.', key);
+                return caches.delete(key);
+            }}));
         })
     );
     return self.clients.claim();
@@ -73,25 +69,17 @@ self.addEventListener('fetch', function(event) {
         if (response) {
             return response;
         } else {
-            return fetch(event.request)
-            .then(function(res) {
-                return caches.open(dynamicCacheName)
-                .then(function(cache) {
+            return fetch(event.request).then(function(res) {
+                return caches.open(dynamicCacheName).then(function(cache) {
                     cache.put(event.request.url, res.clone());
                     return res;
                 })
             })
             .catch(function(err) {
-                return caches.open(staticCacheName)
-                .then(function(cache) {
+                return caches.open(staticCacheName).then(function(cache) {
                     return cache.match('/Templates/offline.html');
                 });
             });
         }
-        })
-    );
+    }));
 });
-
-// self.addEventListener('push', () => {
-//     console.log("Push Received.");
-// })
