@@ -4,6 +4,7 @@
         {% load static %}
 
         <script src="{% static 'js/push.js' %}"></script>
+        <script scr="{% static 'js/print.js' %}"></script>
         <title>Clinify | Perfil</title>
     </head>
     <body class="profile-screen">
@@ -200,12 +201,11 @@
                             </tbody>
                         </table>      
                     </div>
-                    <a href="{% url 'temp:pdf_download' %}" type="submit" class="btn btn-success col-12 mt-4 pb-1">Exportar PDF</a>
+                    <a href="javascript:window.print();" class="btn btn-success col-12 mt-4 pb-1">Exportar PDF</a>
                 </div>
             </div>
         </section>
         {% endblock %}
-        <!-- <script src="/Controller/app.js"></script>
-        <script src="/sw.js"></script> -->
+ 
     </body>
 </html>

@@ -11,7 +11,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-import pdfkit
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -374,12 +373,6 @@ class ProfileListView(ListView):
         kwargs['appoint'] = UserAppoint.objects.filter(user=self.request.user)
         kwargs['diet'] = UserDiet.objects.filter(user=self.request.user)
         return super(ProfileListView, self).get_context_data(**kwargs)
-
-def render_to_pdf(request):
-    pdf = pdfkit.from_url('https://www.google.com', False) # Change for clinify website page
-    response = HttpResponse(pdf,content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="progresso.pdf"'
-    return response
 
 @method_decorator(login_required(login_url="intro"), name='dispatch')
 class ProfileUpdateView(UpdateView):  ### UPDATE
