@@ -21,10 +21,10 @@
                     {% csrf_token %}
                     {% if user.is_authenticated %}
                     <span class="pr-4" style="color: whitesmoke;">Olá, {{ user.first_name }}</span>
-                    {% else %}
-                    <span class="pr-4" style="color: whitesmoke;">Olá, visitante</span>
+                        {% else %}
+                        <span class="pr-4" style="color: whitesmoke;">Olá, visitante</span>
                     {% endif %}
-                    <a type="submit" class="btn btn-outline-light btn-auto" href="{% url 'intro' %}">Sair<img class="pl-2" src="{% static 'images\logout.png' %}"></a>
+                    <a type="submit" class="btn btn-outline-light btn-auto" href="{% url 'logout' %}">Sair<img class="pl-2" src="{% static 'images\logout.png' %}"></a>
                 </form>
             </div>
         </nav>

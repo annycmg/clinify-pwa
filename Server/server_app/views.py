@@ -29,14 +29,14 @@ from .models import UserDiet
 from .models import UserProfile
 from .models import UserAppoint
 
-@login_required
+@login_required(login_url="/logout/")
 def home(request):
     return render(request, 'home.html')
 
-@login_required
-def logoutUser(request):
+def logout_user(request):
+    logout(request)
     print("Log out com sucesso")
-    return redirect('intro')
+    return render(request, 'intro.html')
 
 def offline(request):
     return render(request, 'offline.html')
@@ -44,9 +44,8 @@ def offline(request):
 def base(request):
     return render(request, 'base.html')
 
-
 # ========================================== DO!!! EXERCISE CRUD ====================================== #
-@login_required
+@login_required(login_url="/logout/")
 def exercise(request):
     return render(request, 'exercise.html')
 # ====================================== DO!!! END EXERCISE CRUD ======================================== #
@@ -75,7 +74,8 @@ def signup(request):
         form_signup = SignUpForm(request.POST)
         form_profile = ProfileForm(request.POST)
         if form_signup.is_valid() and form_profile.is_valid():
-            user = form_signup.save() 
+            user = form_signup.save()
+            form_signup.save() 
             profile = form_profile.save(commit=False)
             profile.user = user
             profile.save()
@@ -90,11 +90,12 @@ def signup(request):
         form_signup = SignUpForm()
         form_profile = ProfileForm()
     return render(request, 'signup.html', {'form_signup':form_signup, 'form_profile':form_profile})
+
 # ======================================== END SIGNUP =============================================== #
 
 
 # ======================================= MEDICATION CRUD =========================================== #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class MedicationListView(ListView): ### RETRIEVE
     template_name="medication_list.html"
     model = UserMedication
@@ -107,7 +108,7 @@ class MedicationListView(ListView): ### RETRIEVE
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class MedicationDetailView(DetailView): ### RETRIEVE
     template_name = "medication_detail.html"
     model = UserMedication
@@ -116,7 +117,7 @@ class MedicationDetailView(DetailView): ### RETRIEVE
         context = super(MedicationDetailView, self).get_context_data(**kwargs)
         return context
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class MedicationCreateView(CreateView): ### CREATE
     template_name = "medication.html"
     model = UserMedication
@@ -129,7 +130,7 @@ class MedicationCreateView(CreateView): ### CREATE
         print("medication inserted and saved")
         return super(MedicationCreateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class MedicationUpdateView(UpdateView):  ### UPDATE
     template_name = "medication.html"
     model = UserMedication
@@ -142,7 +143,7 @@ class MedicationUpdateView(UpdateView):  ### UPDATE
         print("medication updated and saved")
         return super(MedicationUpdateView, self).form_valid(form)
     
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class MedicationDeleteView(DeleteView): ### DELETE
     model = UserMedication
     success_url = 'temp:medication_list'
@@ -160,7 +161,7 @@ class MedicationDeleteView(DeleteView): ### DELETE
 
 
 # ======================================== TRIPS CRUD ============================================= #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class TripListView(ListView): ### RETRIEVE
     template_name="trip_list.html"
     model = UserTrip
@@ -173,7 +174,7 @@ class TripListView(ListView): ### RETRIEVE
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class TripDetailView(DetailView): ### RETRIEVE
     template_name = "trip_detail.html"
     model = UserTrip
@@ -182,7 +183,7 @@ class TripDetailView(DetailView): ### RETRIEVE
         context = super(TripDetailView, self).get_context_data(**kwargs)
         return context
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class TripCreateView(CreateView): ### CREATE
     template_name = "recenttrips.html"
     model = UserTrip
@@ -195,7 +196,7 @@ class TripCreateView(CreateView): ### CREATE
         print("trip inserted and saved")
         return super(TripCreateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class TripUpdateView(UpdateView):  ### UPDATE
     template_name = "recenttrips.html"
     model = UserTrip
@@ -208,7 +209,7 @@ class TripUpdateView(UpdateView):  ### UPDATE
         print("trip updated and saved")
         return super(TripUpdateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class TripDeleteView(DeleteView): ### DELETE
     model = UserTrip
     success_url = 'temp:trip_list'
@@ -224,7 +225,7 @@ class TripDeleteView(DeleteView): ### DELETE
 # ======================================== END TRIPS CRUD ========================================== #
 
 # ========================================= VACCINE CRUD ============================================ #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class VaccineListView(ListView): ### RETRIEVE
     template_name="vaccine_list.html"
     model = UserVaccine
@@ -237,7 +238,7 @@ class VaccineListView(ListView): ### RETRIEVE
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class VaccineDetailView(DetailView): ### RETRIEVE
     template_name = "vaccine_detail.html"
     model = UserVaccine
@@ -246,7 +247,7 @@ class VaccineDetailView(DetailView): ### RETRIEVE
         context = super(VaccineDetailView, self).get_context_data(**kwargs)
         return context
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class VaccineCreateView(CreateView): ### CREATE
     template_name = "recentvaccine.html"
     model = UserVaccine
@@ -259,7 +260,7 @@ class VaccineCreateView(CreateView): ### CREATE
         print("vaccine inserted and saved")
         return super(VaccineCreateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class VaccineUpdateView(UpdateView):  ### UPDATE
     template_name = "recentvaccine.html"
     model = UserVaccine
@@ -272,7 +273,7 @@ class VaccineUpdateView(UpdateView):  ### UPDATE
         print("vaccine updated and saved")
         return super(VaccineUpdateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class VaccineDeleteView(DeleteView): ### DELETE
     model = UserVaccine
     success_url = 'temp:vaccine_list'
@@ -290,7 +291,7 @@ class VaccineDeleteView(DeleteView): ### DELETE
 
 
 # =========================================== DIET CRUD ============================================= #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class DietListView(ListView): ### RETRIEVE
     template_name="diet_list.html"
     model = UserDiet
@@ -303,7 +304,7 @@ class DietListView(ListView): ### RETRIEVE
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class DietDetailView(DetailView): ### RETRIEVE
     template_name = "diet_detail.html"
     model = UserDiet
@@ -312,7 +313,7 @@ class DietDetailView(DetailView): ### RETRIEVE
         context = super(DietDetailView, self).get_context_data(**kwargs)
         return context
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class DietCreateView(CreateView): ### CREATE
     template_name = "diet.html"
     model = UserDiet
@@ -325,7 +326,7 @@ class DietCreateView(CreateView): ### CREATE
         print("meal inserted and saved")
         return super(DietCreateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class DietUpdateView(UpdateView):  ### UPDATE
     template_name = "diet.html"
     model = UserDiet
@@ -338,7 +339,7 @@ class DietUpdateView(UpdateView):  ### UPDATE
         print("meal updated and saved")
         return super(DietUpdateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class DietDeleteView(DeleteView): ### DELETE
     model = UserDiet
     success_url = 'temp:diet_list'
@@ -355,7 +356,7 @@ class DietDeleteView(DeleteView): ### DELETE
 
 
 # ======================================== PROFILE DISPLAY/UPDATE ====================================== #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class ProfileListView(ListView):
     template_name = 'profile.html'
     model = UserMedication
@@ -374,7 +375,7 @@ class ProfileListView(ListView):
         kwargs['diet'] = UserDiet.objects.filter(user=self.request.user)
         return super(ProfileListView, self).get_context_data(**kwargs)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class ProfileUpdateView(UpdateView):  ### UPDATE
     template_name = "editprofile.html"
     model = UserProfile
@@ -390,7 +391,7 @@ class ProfileUpdateView(UpdateView):  ### UPDATE
 
 
 # ================================== DO!!! CALENDAR APPOINTMENTS ================================== #
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class AppointCalendarListView(ListView): ### RETRIEVE
     template_name="appoint_calendar.html"
     model = UserAppoint
@@ -403,7 +404,7 @@ class AppointCalendarListView(ListView): ### RETRIEVE
         queryset = queryset.filter(user=self.request.user)
         return queryset
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class AppointDetailView(DetailView): ### RETRIEVE
     template_name = "appointment_detail.html"
     model = UserAppoint
@@ -412,7 +413,7 @@ class AppointDetailView(DetailView): ### RETRIEVE
         context = super(AppointDetailView, self).get_context_data(**kwargs)
         return context
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class AppointCreateView(CreateView): ### CREATE
     template_name = "appointment.html"
     model = UserAppoint
@@ -425,7 +426,7 @@ class AppointCreateView(CreateView): ### CREATE
         print("appointment inserted and saved")
         return super(AppointCreateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class AppointUpdateView(UpdateView):  ### UPDATE
     template_name = "appointment.html"
     model = UserAppoint
@@ -438,7 +439,7 @@ class AppointUpdateView(UpdateView):  ### UPDATE
         print("appointment updated and saved")
         return super(AppointUpdateView, self).form_valid(form)
 
-@method_decorator(login_required(login_url="intro"), name='dispatch')
+@method_decorator(login_required(login_url="/logout/"), name='dispatch')
 class AppointDeleteView(DeleteView): ### DELETE
     model = UserAppoint
     success_url = 'temp:appoint_calendar'

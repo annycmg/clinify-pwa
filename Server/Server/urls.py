@@ -17,9 +17,10 @@ from django.conf.urls import url, include
 from server_app import views
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     url(r'^$', views.intro, name='intro'),
-    url(r'^$', views.logoutUser, name='logout'),
+    url(r'^logout/$', views.logout_user, name='logout'),
     url(r'^home/$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),    
 

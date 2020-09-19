@@ -30,16 +30,15 @@ class ProfileForm(forms.ModelForm):
         fields = ['profile_age_prf','profile_loc_prf','profile_weight_prf','profile_height_prf','profile_allergy_prf', 'profile_blood_prf', 'profile_desease_prf','profile_diet_prf','profile_surgery_prf','profile_exerc_prf']
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_loc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_weight_prf'].widget.attrs.update({'placeholder': 'Kg', 'class': 'form-control', 'required': ''})
-        self.fields['profile_height_prf'].widget.attrs.update({'placeholder': 'cm', 'class': 'form-control', 'required': ''})
-        self.fields['profile_allergy_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_desease_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_diet_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control', 'required': ''})
-        self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control', 'required': ''}) 
-
+        self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_loc_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_weight_prf'].widget.attrs.update({'placeholder': 'Kg', 'class': 'form-control'})
+        self.fields['profile_height_prf'].widget.attrs.update({'placeholder': 'cm', 'class': 'form-control'})
+        self.fields['profile_allergy_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_desease_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_diet_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_surgery_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_exerc_prf'].widget.attrs.update({'class': 'form-control'}) 
 
 class MedicationForm(ModelForm):
     class Meta:
