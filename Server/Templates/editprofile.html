@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
+        <script src="{% static 'js/geoloc.js' %}"></script>
         <title>Clinify | Editar Perfil</title>
     </head>
     <body class="profile-screen">
@@ -42,15 +43,9 @@
         <section class="container mt-4">
             <form enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
-                <div class="form-group form-row">
-                    <div class="col-6">
-                        <h6>Idade</h6>
-                        {{ form.profile_age_prf }}
-                    </div>
-                    <div class="col-6">
-                        <h6>Localização</h6>
-                        {{ form.profile_loc_prf }}
-                    </div>
+                <div class="form-group">
+                    <h6>Idade</h6>
+                    {{ form.profile_age_prf }}
                 </div>
                 <div class="form-group form-row">
                     <div class="col-6">
@@ -66,17 +61,29 @@
                     <h6>Alergias</h6>
                     {{ form.profile_allergy_prf }}
                 </div>
-                <div class="form-group">
-                    <h6>Tipo Sanguíneo</h6>
-                    {{ form.profile_blood_prf }}
+                <h6>Localização</h6>
+                <div class="form-group form-row" id='location-input'>
+                    <div class="col-8">
+                        {{ form.profile_loc_prf }}
+                    </div>
+                    <div class="col-4 btn btn-primary" id="location-btn">
+                        <a>Localizar</a>
+                    </div>
+                    <!-- <div class="mdl-spinner mdl-js-spinner is-active" id="location-loader"></div> -->
                 </div>
                 <div class="form-group">
                     <h6>Doenças Hereditárias</h6>
                     {{ form.profile_desease_prf }}
                 </div>
-                <div class="form-group">
-                    <h6>Dieta Específica</h6>
-                    {{ form.profile_diet_prf }}
+                <div class="form-group form-row">
+                    <div class="col-8">
+                        <h6>Dieta Específica</h6>
+                        {{ form.profile_diet_prf }}
+                    </div>
+                    <div class="col-4">
+                        <h6>Tipo Sanguíneo</h6>
+                        {{ form.profile_blood_prf }}
+                    </div>
                 </div>
                 <div class="form-group">
                     <h6>Cirurgias</h6>
@@ -88,7 +95,7 @@
                 </div>
                 {{form.errors}}
                 <div class="form-row justify-content-center mb-3">
-                    <button type="submit" class="btn btn-primary col-5">Salvar</button>
+                    <button type="submit" class="btn btn-success col-5">Salvar</button>
                     <span style="width: 35px"></span>
                     <button type='reset' class="btn btn-primary col-5">Limpar</button>
                 </div>
