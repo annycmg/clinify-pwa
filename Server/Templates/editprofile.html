@@ -2,7 +2,6 @@
 {% extends 'base.html' %}
     {% block content %}
         {% load static %}
-        <script src="{% static 'js/geoloc.js' %}"></script>
         <title>Clinify | Editar Perfil</title>
     </head>
     <body class="profile-screen">
@@ -62,14 +61,15 @@
                     {{ form.profile_allergy_prf }}
                 </div>
                 <h6>Localização</h6>
-                <div class="form-group form-row" id='location-input'>
-                    <div class="col-8">
+                <div class="form-group form-row">
+                    <div class="col-8" id="location-field">
                         {{ form.profile_loc_prf }}
                     </div>
                     <div class="col-4 btn btn-primary" id="location-btn">
-                        <a>Localizar</a>
+                        <a onclick="getLocation()">Localizar</a>
                     </div>
-                    <!-- <div class="mdl-spinner mdl-js-spinner is-active" id="location-loader"></div> -->
+                    <script defer src="http://maps.google.com/maps/api/js?key=AIzaSyDrnelWLeaRJ-RIy1W8RRxAovVur1CZ5BE"></script>
+                    <script type='text/javascript' src="{% static 'js/geoloc.js' %}"></script>
                 </div>
                 <div class="form-group">
                     <h6>Doenças Hereditárias</h6>

@@ -31,7 +31,7 @@ class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control'})
-        self.fields['profile_loc_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_loc_prf'].widget.attrs.update({'value':'', 'class': 'form-control'})
         self.fields['profile_weight_prf'].widget.attrs.update({'placeholder': 'Kg', 'class': 'form-control'})
         self.fields['profile_height_prf'].widget.attrs.update({'placeholder': 'cm', 'class': 'form-control'})
         self.fields['profile_allergy_prf'].widget.attrs.update({'class': 'form-control'})
