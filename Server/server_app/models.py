@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
-
 # ================================ PROFILE MODEL ========================================== #
 class UserProfile(models.Model):
     CHOICE = (('O-', 'O-'), ('O+', 'O+'), ('A-', 'A-'), ('A+', 'A+'), ('B-', 'B-'), ('B+', 'B+'), ('AB-', 'AB-'), ('AB+', 'AB+'))  
@@ -44,7 +43,7 @@ class UserMedication(models.Model):
         super(UserMedication, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.medication_name_med
+        return self.user.username
     objects = models.Manager()
 # ============================== END MEDICATION MODEL ===================================== #
 
@@ -62,7 +61,7 @@ class UserTrip(models.Model):
         super(UserTrip, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.trip_country_trp
+        return self.user.username
     objects = models.Manager()
 # ================================ END RECENT TRIPS MODEL ======================================= #
 
@@ -79,7 +78,7 @@ class UserVaccine(models.Model):
         super(UserVaccine, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.vaccine_name_vac
+        return self.user.username
     objects = models.Manager() 
 # ============================== END RECENT VACCINE MODEL ======================================= #
 
@@ -95,11 +94,11 @@ class UserDiet(models.Model):
     slug            = models.SlugField(default='slug')
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.diet_include)
+        self.slug = slugify(self.meal)
         super(UserDiet, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.diet_include
+        return self.user.username
     objects = models.Manager()
 # ======================================= END DIET MODEL =========================================== #
 

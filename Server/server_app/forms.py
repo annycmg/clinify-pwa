@@ -85,6 +85,7 @@ class DietForm(forms.ModelForm):
         self.fields['diet_date_diet'].widget.attrs.update({'placeholder': 'AAAA-MM-DD', 'class': 'form-control', 'id': 'datepicker5', 'required': ''})
 
 
+
 class AppointForm(forms.ModelForm):
     class Meta:
         model = UserAppoint
