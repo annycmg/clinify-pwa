@@ -24,12 +24,12 @@ SECRET_KEY = '@n&=7a2w0ye-m$@b$kg#57qqtto*m_h$ri2%kv)t4^@ht^2s&r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
- 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

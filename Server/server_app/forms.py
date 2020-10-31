@@ -12,12 +12,12 @@ from .models import UserAppoint
 
 # SignupForm: formulário de infos básicas
 class SignUpForm(UserCreationForm):
-    username   = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control'}))
-    first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name  = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
-    email      = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class':'form-control'}))
-    password1  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    username   = forms.CharField(max_length=10, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'máx. 10 caracteres', 'required': ''}))
+    first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control', 'required': ''}))
+    last_name  = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class':'form-control', 'required': ''}))
+    email      = forms.EmailField(max_length=200, widget=forms.EmailInput(attrs={'class':'form-control', 'required': ''}))
+    password1  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'mín. 8 caracteres entre letras e números', 'required': ''}))
+    password2  = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'mín. 8 caracteres entre letras e números', 'required': ''}))
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
@@ -30,7 +30,7 @@ class ProfileForm(forms.ModelForm):
         fields = ['profile_age_prf','profile_loc_prf','profile_weight_prf','profile_height_prf','profile_allergy_prf', 'profile_blood_prf', 'profile_desease_prf','profile_diet_prf','profile_surgery_prf','profile_exerc_prf']
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_age_prf'].widget.attrs.update({'class': 'form-control', 'required':''})
         self.fields['profile_loc_prf'].widget.attrs.update({'value':'', 'class': 'form-control'})
         self.fields['profile_weight_prf'].widget.attrs.update({'placeholder': 'Kg', 'class': 'form-control'})
         self.fields['profile_height_prf'].widget.attrs.update({'placeholder': 'cm', 'class': 'form-control'})
