@@ -1,1 +1,2 @@
-# clinify-pwa
+## Clinify Project
+For specific explanation and the project visualiaztion, please visit my Medium page on the following link: https://anny-cmgoncalves.medium.com/clinify-project-9a3e45aca1ff
